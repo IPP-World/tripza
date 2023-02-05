@@ -1,0 +1,126 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  position: sticky;
+  top: 0;
+}
+.navbar-logo {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  left: 30px;
+  top: 53px;
+}
+.search-bar {
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  width: 479px;
+  height: 39px;
+  left: 192px;
+  top: 47px;
+
+  background: #ffffff;
+
+  border: 1px solid #0f4c5c;
+  border-radius: 24px;
+  box-shadow: 0 1px 2px rgb(0 0 0 /15%), 0 4px 12px rgb(0 0 0 /15%);
+}
+.search-bar:hover {
+  box-shadow: 0 1px 2px rgb(0 0 0 /8%), 0 4px 12px rgb(0 0 0 /5%);
+  transition: all 0.2s;
+  cursor: text;
+}
+.search-bar-text {
+  display: flex;
+  position: relative;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: lighter;
+  font-size: 21px;
+  line-height: 32px;
+  width: 407px;
+  height: 32px;
+  left: 20px;
+  top: 3px;
+  color: #0f4c5c;
+  padding: 1px;
+}
+.search-button {
+  position: relative;
+  display: flex;
+  padding: 5px;
+  left: 442px;
+  top: -29px;
+  border-radius: 24px;
+  background-color: #0f4c5c;
+  box-shadow: 0 1px 2px rgb(0 0 0 /20%), 0 4px 12px rgb(0 0 0 /20%);
+}
+.search-button:hover {
+  box-shadow: 0 1px 2px rgb(0 0 0 /50%), 0 4px 12px rgb(0 0 0 /50%);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.agencies {
+  position: absolute;
+  width: 97px;
+  height: 32px;
+  left: 768px;
+  top: 50px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 32px;
+
+  color: #0f4c5c;
+}
+.hotels {
+  position: absolute;
+  width: 65px;
+  height: 32px;
+  left: 934px;
+  top: 51px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 32px;
+
+  color: #0f4c5c;
+}
+.contribute {
+  position: absolute;
+  width: 113px;
+  height: 32px;
+  left: 1074px;
+  top: 50px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 32px;
+
+  color: #0f4c5c;
+}
+.nav-profile {
+  position: absolute;
+  width: 139px;
+  height: 32px;
+  left: 1240px;
+  top: 50px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 32px;
+
+  color: #280003;
+}

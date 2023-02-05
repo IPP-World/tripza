@@ -1,0 +1,171 @@
+.box{
+    position: absolute;
+width: 582px;
+height: 1020px;
+left: 349px;
+top: 22px;
+
+background: #D9D9D9;
+border-radius: 7px;
+}
+.welcome{
+    position: absolute;
+    width: 441px;
+    height: 93px;
+    left: 419px;
+    top: 377px;
+    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 96px;
+    text-align: center;
+    
+    /* Green */
+    
+    color: #255957; 
+}
+.glad{
+position: absolute;
+width: 363px;
+height: 47px;
+left: 458px;
+top: 461px;
+
+/* Regular */
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 32px;
+text-align: center;
+
+/* Green */
+
+color: #255957;}
+.input{
+    
+position: absolute;
+width: 430px;
+height: 67px;
+left: 425px;
+top: 529px;
+
+background: #F0EDED;
+opacity: 0.5;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 7px;
+}
+.name{
+    position: absolute;
+    width: 112px;
+    height: 61px;
+    left: 584px;
+    top: 536px;
+    
+    /* Heading 2 */
+    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 51px;
+    
+    /* Green */
+    
+    color: #255957;
+    
+    opacity: 0.8;
+}
+.password{
+    position: absolute;
+width: 168px;
+height: 59px;
+left: 556px;
+top: 627px;
+
+/* Heading 2 */
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 34px;
+line-height: 51px;
+
+/* Green */
+
+color: #255957;
+
+opacity: 0.8;
+}
+.loginwith{
+    position: absolute;
+width: 97px;
+height: 46px;
+left: 591px;
+top: 721px;
+
+/* Heading 2 */
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 34px;
+line-height: 51px;
+color: #EEEBD3;
+position: absolute;
+width: 430px;
+height: 67px;
+left: 425px;
+top: 711px;
+background: #0F4C5C;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+.or{
+    position: absolute;
+width: 22px;
+height: 23px;
+left: 630px;
+top: 784px;
+}
+.loginwith{
+    position: absolute;
+width: 103px;
+height: 36px;
+left: 588px;
+top: 802px;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 32px;
+color: #0F4C5C;
+}
+.google{
+    position: absolute;
+width: 177px;
+height: 39px;
+left: 551px;
+top: 837px;
+background: #0F4C5C;
+border-radius: 7px;
+}
+.noacc{
+    position: absolute;
+width: 341px;
+height: 36px;
+left: 469px;
+top: 901px;
+color: black;
+}
+.span{
+    position: absolute;
+    width: 341px;
+    height: 36px;
+    left: 469px;
+    top: 901px;
+    color: #0F4C5C;
+}

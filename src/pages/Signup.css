@@ -1,0 +1,97 @@
+.form{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 51px;
+    color: #255957;
+    opacity: 0.8;
+    }
+    .name{
+        position: absolute;
+    width: 195px;
+    height: 61px;
+    left: 133px;
+    top: 365px;
+    }
+    .phone{
+        position: absolute;
+    width: 292px;
+    height: 61px;
+    left: 133px;
+    top: 514px;
+    }
+    .password{
+        position: absolute;
+    width: 292px;
+    height: 61px;
+    left: 133px;
+    top: 668px;
+    }
+    .birthdate{
+        position: absolute;
+    width: 497px;
+    height: 61px;
+    left: 133px;
+    top: 822px;
+    }
+    .signup{
+        position: absolute;
+    width: 292px;
+    height: 61px;
+    left: 704px;
+    top: 365px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 51px;
+    color: #255957;
+    opacity: 0.8;
+    }
+    .general{
+        position: absolute;
+    width: 455px;
+    height: 275px;
+    left: 691px;
+    top: 419px;
+    background: #FB8B24;
+    opacity: 0.7;
+    border-radius: 7px;
+    }
+    .generaluser{
+        position: absolute;
+        width: 218px;
+        height: 51px;
+        left: 809px;
+        top: 438px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 34px;
+        line-height: 51px;
+        color: #0F4C5C;
+    }
+    .signup-btn{
+    box-sizing: border-box;
+    position: absolute;
+    width: 430px;
+    height: 67px;
+    left: 703px;
+    top: 507px;
+    background: #0F4C5C;
+    border: 2px solid #0F4C5C;
+    box-shadow: 0px 4px 4px #0F4C5C;
+    border-radius: 7px;
+    position: absolute;
+    width: 127px;
+    height: 51px;
+    left: 854px;
+    top: 515px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 51px;
+    color: #FFFFFF;
+    }

@@ -1,0 +1,18 @@
+.trending-bar{
+
+position: absolute;
+width: 1275px;
+height: 243px;
+left: 76px;
+top: 150px;
+
+
+background: #0F4C5C;
+border-radius: 7px;
+}
+.trending-name{
+    font: large;
+}
+.trending-images{
+    display: flex;
+}

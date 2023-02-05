@@ -1,0 +1,24 @@
+.Explore-name{
+    position: absolute;
+width: 133px;
+height: 32px;
+left: 102px;
+top: 418px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 21px;
+line-height: 32px;
+
+color: #280003;
+
+}
+.Explore-images{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    top: 426px;
+}

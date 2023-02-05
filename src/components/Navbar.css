@@ -1,0 +1,13 @@
+.nav-container{
+  display: flex;
+  margin: 0 1em;
+  justify-content: space-around;
+  font-size: x-large;
+}
+.logo{
+  margin-left: 3em;
+  padding: 0.1em 1em;
+  min-width: 25em;
+  border-radius: 10em;
+  text-align: center;
+}
