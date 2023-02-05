@@ -1,3 +1,4 @@
 export default function Hotels({}){
-    return <div>Contribute</div>
+    return <div>Contribute here
+    </div>
 }
