@@ -1,4 +1,5 @@
 import React from "react";
+import khaltiLogo from "../assets/khaltiLogo.png"
 //import "./Signup.css";
 function Signup() {
   return (
@@ -7,10 +8,10 @@ function Signup() {
         <img src=""></img>
         <div className="Createtext">Create your Tripza Account</div>
         <form method="#">
-          <input type="text" className="name" />
-          <input type="text" className="phone" />
-          <input type="text" className="password" />
-          <input type="text" className="birthdate" />
+          <input  className = "signup--name" type="text" />
+          <input  className = "signup--phone" type="text"/>
+          <input  className = "signup--password" type="text" />
+          <input  className = "signup--birthdate" type="text" />
           {/* Date of birth<span>(YYYY-MM-DD)AD</span> */}
         </form>
       </div>
@@ -22,12 +23,13 @@ function Signup() {
             Sign up
           </button>
         </div>
-        <div className="Subscribed">
-          <h1 className="Hotel">Hotel Agency</h1>
-          <h1 className="Subscribe-via">
-            Subscribe via <img src="./logos/khalti.png" alt=""></img>{" "}
+        <div className="signup--subscribed">
+          <h1 className="signup--hotel">Hotel Agency</h1>
+          <h1 className="subscribe-via">
+            Subscribe via 
           </h1>
-          <h1 className="Money">Rs.999/Month</h1>
+          <img src={khaltiLogo} alt=""></img>
+          <h1 className="signup--price">Rs.999/Month</h1>
         </div>
       </div>
     </div>
