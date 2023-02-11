@@ -1,24 +1,36 @@
-.Explore-name{
-    position: absolute;
-width: 133px;
-height: 32px;
-left: 102px;
-top: 418px;
-
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 400;
-font-size: 21px;
-line-height: 32px;
-
-color: #280003;
-
-}
-.Explore-images{
-    position: relative;
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .explore--places{
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    top: 426px;
-}
+    flex-direction: row;
+    font-family: Poppins;
+  }
+  
+  .explore--image{
+      height: 175px;
+      width: 250px;
+      border-radius: 7px;
+      margin-left: 15px;
+  }
+  .explore--details{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #0f4c5c;
+  }
+  .explore--name{
+      font-size: 1.2em;
+      font-weight: 500;
+  }
+  .explore--location{
+      margin-top: -1px;
+      font-weight: 400;
+      font-size: 0.8em;
+  }
+  
+  
+  
