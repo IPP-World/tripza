@@ -29,7 +29,7 @@ export default function Contribute() {
       <div className="left-part">
         <p className="contribute-text">Contribute a Place</p>
         <div className="places-container">
-          <ul className="images">
+          <ul>
             <li>
               <img src="/vite.svg"></img>
             </li>
@@ -45,8 +45,8 @@ export default function Contribute() {
       <div className="right-part">
         <div className="place-info">
           <form method="#">
-            <input type="text" placeholder="Name of the place" />
-            <input type="text" placeholder="Description of the place" />
+            <input className="place-name" type="text" placeholder="Name of the place" />
+            <input className="place-name" type="text" placeholder="Description of the place" />
             <p>What this place offers</p>
             <div className="place-offers"></div>
             <p>Your review of the place</p>
@@ -66,13 +66,14 @@ export default function Contribute() {
               <span>
                 <AiOutlineStar />
               </span>
+              </div>
               <input type="text" placeholder="Review Here" />
               <label>
                 <input type="checkbox" />
                 The information I submitted here is legit.
               </label>
               <br />
-            </div>
+           
 
             <button onClick={submitHandler}>Submit </button>
             {showModal && <Popup/>}

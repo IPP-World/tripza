@@ -1,18 +1,33 @@
-.trending-bar{
-
-position: absolute;
-width: 1275px;
-height: 243px;
-left: 76px;
-top: 150px;
-
-
-background: #0F4C5C;
-border-radius: 7px;
+* {
+  padding: 0;
+  margin: 0;
 }
-.trending-name{
-    font: large;
+
+.trending--places{
+  display: flex;
+  flex-direction: row;
+  font-family: Poppins;
 }
-.trending-images{
+
+.trending--image{
+    height: 175px;
+    width: 250px;
+    border-radius: 7px;
+    margin-left: 15px;
+}
+.trending--details{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
+.trending--name{
+    font-size: 1.2em;
+}
+.trending--location{
+    margin-top: -1px;
+    font-weight: 300;
+    font-size: 0.8em;
+}
+

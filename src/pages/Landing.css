@@ -1,0 +1,59 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+
+
+  .trending--box{
+    margin: 30px 0px 0px 70px;
+    height: 49vh;
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #0f4c5c;
+    font-family: Poppins;
+    border-radius: 7px;
+    
+  }
+  
+  .trending--text{
+    padding:20px;
+    color:rgb(255, 255, 255);
+    padding: 10px 15px;
+    font-weight: 400;
+    font-size: 1.5rem;
+    
+}
+.trending--cardlist{
+    padding-right: 15px;
+    display: flex;
+    flex-direction: row;
+    height: 41vh;
+    gap: 20px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .explore--box{
+    margin: 30px 0px 0px 70px;
+    width: 85vw;
+    font-family: Poppins;
+    
+  }
+  
+  .explore--text{
+    margin-top: -15px;
+    padding:20px;
+    color:#0f4c5c;
+    padding: 10px 15px;
+    font-weight: 400;
+    font-size: 1.5rem;
+    
+}
+.explore--cardlist{
+    display: flex;
+    flex-direction: row;
+    height: 40vh;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
