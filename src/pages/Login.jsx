@@ -1,9 +1,18 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './Login.css';
+
 import {FcGoogle} from 'react-icons/fc'
 import khalti from '../assets/khaltiLogo.png'
 function Login(){
+    const[credentials,setCredentials]=useState({
+        name:"",
+        password:""
+    });
+    const handleChange=(e)=>{
+        setCredentials({...credentials,[e.target.name]:e.target.value});
+    }
     return(
+        
         <div className='loginpage'>
             <div className='box'>
                 <img src={khalti}>
@@ -11,8 +20,8 @@ function Login(){
                 <h1>Welcome</h1>
                 <p>We are glad to see you.</p>
                 <form method="#">
-                    <input type="text" className='name' placeholder='name'/>
-                    <input type="text" className='password' placeholder='password'/>
+                    <input type="text" className='name' name="name" value={credentials.name} placeholder='name' onChange={handleChange}/>
+                    <input type="text" className='password' name="password" value={credentials.password} placeholder='password' onChange={handleChange}/>
                 </form>
                 <button type="submit" className='login-btn'>Login</button>
                     <div className='or'>or</div>
