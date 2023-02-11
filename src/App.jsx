@@ -12,7 +12,9 @@ import {
   Hotels,
   Contribute,
 } from "./pages";
+import { useState } from "react";
 function App() {
+
   return (
     <>
       <Router>

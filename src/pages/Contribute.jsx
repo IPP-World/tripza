@@ -4,8 +4,26 @@ import { AiOutlineStar } from "react-icons/Ai";
 import React, { useState } from "react";
 import "./Contribute.css";
 
+
 export default function Contribute() {
-   
+   const [showModal, setShowModal] =useState(false);
+   const Popup =() =>{
+    return(<>
+    <div className="reward-wrapper"> </div>
+      <div className="reward-container">
+    <button className="reward--close-btnn" onClick={()=>setShowModal(false)}>close</button>
+        <p>Congratulations<br/>You contributed a place</p>
+        <div className="reward-points">
+        </div>
+        </div>
+    </>
+    );
+  }
+  const submitHandler = (e)=>{
+      e.preventDefault();
+      setShowModal(true)
+  }
+ 
   return (
     <div className="contribute-container">
       <div className="left-part">
@@ -56,14 +74,12 @@ export default function Contribute() {
               <br />
             </div>
 
-            <button type="submit">Submit </button>
-          
+            <button onClick={submitHandler}>Submit </button>
+            {showModal && <Popup/>}
           </form>
         </div>
       </div>
     </div>
   );
 }
-/*<button type="submit" className="submit-btnn">
-Submit
-</button>*/
+
