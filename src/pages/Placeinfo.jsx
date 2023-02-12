@@ -1,11 +1,14 @@
-import React from "react";
+import React,{useState} from "react";
 import { CiShare1 } from "react-icons/ci";
-import { BsBookmarkPlus } from "react-icons/bs";
-import { AiFillStar } from "react-icons/ai";
+import { BsBookmarkPlus } from "react-icons/Bs";
+import { AiFillStar } from "react-icons/Ai";
 import place from "../assets/place.jpg";
+import Reviews from "./Reviews";
 import "./Placeinfo.css"
 // import { Link } from "react-router-dom";
 function Placeinfo() {
+  const[showModal,setShowModal]=useState(false);
+  const closeModal = () => setShowModal(false);
   return (
     <div className="placeinfo">
       <div className="place--header">
@@ -67,8 +70,8 @@ function Placeinfo() {
                   <h6 className="place-outoffive">4.5/5</h6>
                 </div>
                 <div className="place--userreview"></div>
-                <button className="place--reviewbutton" type="submit">more</button>
-              
+                <button className="place--reviewbutton" type="submit" onClick={()=>setShowModal(true)}>More</button>
+              {showModal && <Reviews closeModal={closeModal}/>}
               </div>
 
             </div>
