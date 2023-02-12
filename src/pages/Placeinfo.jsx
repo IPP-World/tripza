@@ -43,12 +43,14 @@ function Placeinfo() {
             </p>
             <div className="offers--container">
             <h1 className="place--offers">What this place offers</h1>
+            <div className="place--offerlistbox">
             <span className="place--offerlist">Garden View</span>
             <span className="place--offerlist">Mountain View</span>
             <span className="place--offerlist">Wifi</span>
             <span className="place--offerlist">Pets allowed</span>
             <span className="place--offerlist">Tiger statue</span>
             <span className="place--offerlist">Tiktok zone</span>
+            </div>
             </div>
             <div className="place--nearby">
               <button className="hotels--nearby" type="submit">Hotels nearby</button>
@@ -61,8 +63,8 @@ function Placeinfo() {
               <span className="place--reviewhead">Reviews</span>
               <div className="place--ratings">
                 <div className="place--ratings-stars">
-                <AiFillStar className="place-sharelogo" />
-                  <h6>4.5/5</h6>
+                <AiFillStar className="place-starlogo" />
+                  <h6 className="place-outoffive">4.5/5</h6>
                 </div>
                 <div className="place--userreview"></div>
                 <button className="place--reviewbutton" type="submit">more</button>
