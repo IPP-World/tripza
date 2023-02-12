@@ -1,24 +1,160 @@
-.reward-wrapper{
-position: fixed;
-left: 0;
-top: 0;
-right: 0;
-bottom: 0;
-background-color: #0F4C5C;
-opacity: 0.5;
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Poppins';
+    font-style: normal;
+    color: #0F4C5C;
 }
-.reward-container{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 600px;
-    height: 300px;
-    background: #D9D9D9;
+.contribute-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+.left-part{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-top: 50px;
+    font-weight: medium;
+    font-size:  25px;
+}
+.maps-container img{
+    height: 330px;
+    width: 500px;
+    margin-top: 20px;
     border-radius: 7px;
 }
-.reward--close-btnn{
-    padding: 0.6rem 1.4rem;
-    cursor: pointer;
-    transform: scale(0.9);
+
+.place-info input::placeholder{
+    text-align: left;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-left: 5px;
 }
+.places-container ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none; 
+    
+}
+.places-container img{
+    height: 100px;
+    margin-top: 10px;
+    border-radius: 7px;
+}
+.add-box{
+    height: 300px;
+    width: 300px;
+    margin-left: 20px;
+    border-radius: 7px;
+    border: 1px solid #0F4C5C;
+}
+.add{
+    margin-top: 45px;
+     
+}
+.right-part{
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+    margin-top: 160px;
+}
+.place-info form{
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 2px 2px;
+    margin: 8px 8px;
+    box-sizing: border-box;
+    border-radius: 100px;
+}
+.place-info input::placeholder{
+   padding-top: 100px;
+}
+.place-name1{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    text-align: top;
+    border-radius: 7px;
+    margin-top: -50px;
+    border: 1.2px solid #0F4C5C ;
+}
+.place-name2{
+    padding: 5px 5px 5px ;
+    margin-top: 20px;
+    height: 50px;
+    text-align: top;
+    border-radius: 7px;
+    border: 1.2px solid #0F4C5C ;
+    
+}
+.place-offers-text{
+margin-top: 15px;
+/*margin-bottom: 200px;*/
+}
+.review-text{
+    margin-top: 70px;
+}
+.review{
+    margin-top: 5px;
+}
+.review-box{
+    margin-top: 3px;
+}
+.review-box input{
+    text-align: top;
+    border-radius: 7px;
+    border: 1.2px solid #0F4C5C ;
+    margin-top: 3px;
+    width: 385px;
+    padding: 5px 5px 5px;
+}
+.checkbox label{
+    font-size: 13px;
+    margin-left: 0px;
+}
+.checkbox input {
+    margin-top:15px;
+    border-radius: 10px;
+    
+}
+.submit {
+    background-color: #0F4C5C;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 5px 5px 5px 5px;
+    width: 110px;
+  }
+    
+.reward-wrapper{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0F4C5C;
+    opacity: 0.5;
+    }
+    .reward-container{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 600px;
+        height: 300px;
+        background: #D9D9D9;
+        border-radius: 7px;
+    }
+    .reward--close-btnn{
+        padding: 0.6rem 1.4rem;
+        cursor: pointer;
+        transform: scale(0.9);
+    }
