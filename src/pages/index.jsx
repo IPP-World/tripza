@@ -6,5 +6,6 @@ import Login from "./Login";
 import Profile from "./Profile";
 import Landing from "./Landing";
 import Reviews from "./Reviews";
+import Placeinfo from "./Placeinfo";
 
-export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews}
+export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews,Placeinfo}

@@ -11,7 +11,8 @@ import {
   Profile,
   Hotels,
   Contribute,
-Reviews
+  Reviews,
+  Placeinfo
 } from "./pages";
 import { useState } from "react";
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/reviews" element={<Reviews/>} />
+          <Route path="/placeinfo" element={<Placeinfo />} />
         </Routes>
       </Router>
     </>

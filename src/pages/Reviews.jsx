@@ -1,10 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {AiOutlineClose} from 'react-icons/Ai'
 import {CgProfile} from 'react-icons/Cg'
 import reviewData from '../components/ReviewData';
 import ReviewComponent from '../components/ReviewComponent';
-
-function Reviews() {
+function Reviews({closeModal}) {
     const reviewSection = reviewData.map((rev) => {
         return (
           <ReviewComponent
@@ -23,7 +22,7 @@ function Reviews() {
       return(<>
         <div className='reviews-wrapper'></div>
           <div className="reviews-container">
-          <button className='review-close-btn'><AiOutlineClose/></button>
+          <button className='review-close-btn' onClick={closeModal}><AiOutlineClose/></button>
           <p className='reviews-text'>Reviews</p>
           <div className="review-input">
               <label><CgProfile/></label>
