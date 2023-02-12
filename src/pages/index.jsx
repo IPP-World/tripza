@@ -5,5 +5,6 @@ import Hotels from "./Hotels";
 import Login from "./Login";
 import Profile from "./Profile";
 import Landing from "./Landing";
+import Placeinfo from "./Placeinfo";
 
-export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing}
+export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing, Placeinfo}

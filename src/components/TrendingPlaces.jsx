@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./TrendingPlaces.css";
+
+
 function TrendingPlaces(props) {
         return (
                   <div className="trending--places">
                     <div className="trending--card">
-                      <img className="trending--image" src={props.Img} alt="place" />
+                     <Link to= "/placeinfo"><img className="trending--image" src={props.Img} alt="place" /></Link>
                       <div className="trending--details">
                         <span className="trending--name">{props.name}</span>
                         <span className="trending--location">{props.location}</span>
