@@ -68,7 +68,14 @@ export default function Contribute() {
             />
             <div className="place-offers-text">What this place offers</div>
             <div className="place-offers">
-              
+            <div className="place--offerlistbox">
+            <span className="place--offerlist"><GrAdd className="add-offer"/></span>
+            <span className="place--offerlist">Mountain View</span>
+            <span className="place--offerlist">Wifi</span>
+            <span className="place--offerlist">Pets allowed</span>
+            <span className="place--offerlist">Tiger statue</span>
+            <span className="place--offerlist">Tiktok zone</span>
+            </div>
             </div>
             <div className="review-text">Your review of the place</div>
             <div className="review">

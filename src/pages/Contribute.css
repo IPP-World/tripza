@@ -94,10 +94,30 @@
 }
 .place-offers-text{
 margin-top: 15px;
+margin-bottom: 15px;
 /*margin-bottom: 200px;*/
 }
+.place--offerlistbox{
+    margin-top: -5px;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .place--offerlist{
+    border: 1px solid #0F4C5C;
+    border-radius: 24px;
+    width: 133px;
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 10px;
+    color: #0F4C5C;
+  }
+  .add-offer{
+    color: blue;
+  }
 .review-text{
-    margin-top: 70px;
+    margin-top: 20px;
 }
 .review{
     margin-top: 5px;
