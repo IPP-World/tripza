@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import {AiOutlineClose} from 'react-icons/Ai'
 import NearbyData from '../components/NearbyData';
 import NearbyComponent from '../components/NearbyComponent';
+import "./agenciesnearby.css"
 function AgenciesNearby({closeModal}) {
     const nearbySection = NearbyData.map((near) => {
         return (
