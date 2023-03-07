@@ -3,12 +3,13 @@ import {AiOutlineClose} from 'react-icons/Ai'
 import {CgProfile} from 'react-icons/Cg'
 import reviewData from '../components/ReviewData';
 import ReviewComponent from '../components/ReviewComponent';
+import "./Reviews.css";
 function Reviews({closeModal}) {
     const reviewSection = reviewData.map((rev) => {
         return (
           <ReviewComponent
             key={rev.id}
-            Img={rev.img}
+            Img={rev.img}SSSSS
             name={rev.name}
             ratings={rev.ratings}
             review={rev.review}

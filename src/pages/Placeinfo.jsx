@@ -4,13 +4,23 @@ import { BsBookmarkPlus } from "react-icons/Bs";
 import { AiFillStar } from "react-icons/Ai";
 import place from "../assets/place.jpg";
 import Reviews from "./Reviews";
+import HotelsNearby from './HotelsNearby';
+import AgenciesNearby from "./AgenciesNearby";
 import "./Placeinfo.css"
+
 // import { Link } from "react-router-dom";
 function Placeinfo() {
-  const[showModal,setShowModal]=useState(false);
-  const closeModal = () => setShowModal(false);
+  const states = Object.freeze({
+    REVIEWS: <Reviews closeModal={()=>setCurrentState(states.NONE)}/>,
+    HOTELS: <HotelsNearby closeModal={()=>setCurrentState(states.NONE)}/>,
+    AGENCIES: <AgenciesNearby closeModal={()=>setCurrentState(states.NONE)}/>,
+    NONE: <></>
+  })
+
+  const [currentState, setCurrentState] = useState(states.NONE)
   return (
     <div className="placeinfo">
+      {currentState}
       <div className="place--header">
         <div className="place--details">
           <h1 className="place--name">Veluvana Bali - Owl Bamboo House</h1>
@@ -56,8 +66,8 @@ function Placeinfo() {
             </div>
             </div>
             <div className="place--nearby">
-              <button className="hotels--nearby" type="submit">Hotels nearby</button>
-              <button className="agencies--nearby" type="submit">Agencies</button>
+              <button className="hotels--nearby" type="submit" onClick={()=>setCurrentState(states.HOTELS)}>Hotels nearby</button>
+              <button className="agencies--nearby" type="submit" onClick={()=>setCurrentState(states.AGENCIES)}>Agencies</button>
             </div>
           </div>
           <div className="descreview-divider"></div>
@@ -70,10 +80,8 @@ function Placeinfo() {
                   <h6 className="place-outoffive">4.5/5</h6>
                 </div>
                 <div className="place--userreview"></div>
-                <button className="place--reviewbutton" type="submit" onClick={()=>setShowModal(true)}>More</button>
-              {showModal && <Reviews closeModal={closeModal}/>}
+                <button className="place--reviewbutton" type="submit" onClick={()=>setCurrentState(states.REVIEWS)}>More</button>
               </div>
-
             </div>
           </div>
         </div>
