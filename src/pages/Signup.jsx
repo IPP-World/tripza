@@ -1,8 +1,19 @@
-import React from "react";
+import React,{useState} from "react";
 import khaltiLogo from "../assets/khaltiLogo.png";
 import { FcGoogle } from "react-icons/fc";
 import "./Signup.css";
+//import ReactCountryInput from "react-country-input";
 function Signup() {
+   const[credentials,setCredentials]=useState({
+     name:"",
+     password:"",
+     number:"",
+     dob:"",
+     email:""
+});
+ const handleChange=(e)=>{
+     setCredentials({...credentials,[e.target.name]:e.target.value});
+ }
   return (
     <div className="signup--page">
       <div className="signup--header">
@@ -47,6 +58,7 @@ function Signup() {
               placeholder=""
               id="E-mail"
             />
+          
             {/* Date of birth<span>(YYYY-MM-DD)AD</span> */}
           </form>
         </div>
