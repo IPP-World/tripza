@@ -21,7 +21,7 @@ function Login(){
                 <p>We are glad to see you.</p>
                 <form method="#">
                     <input type="text" className='name' name="name" value={credentials.name} placeholder='name' onChange={handleChange}/>
-                    <input type="text" className='password' name="password" value={credentials.password} placeholder='password' onChange={handleChange}/>
+                    <input type="password" className='password' name="password" value={credentials.password} placeholder='password' onChange={handleChange}/>
                 </form>
                 <button type="submit" className='login-btn'>Login</button>
                     <div className='or'>or</div>

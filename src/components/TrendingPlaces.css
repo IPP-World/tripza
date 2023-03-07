@@ -24,10 +24,12 @@
 }
 .trending--name{
     font-size: 1.2em;
+    color: white;
 }
 .trending--location{
     margin-top: -1px;
     font-weight: 300;
     font-size: 0.8em;
+    color: white;
 }
 
