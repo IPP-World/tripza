@@ -12,13 +12,26 @@
   .place--header{
     display: flex;
     flex-direction: row;
-    margin-top: 30px;
+    margin-top: 20px;
     justify-content: center;
+    color: #0F4C5C;
+  }
+  .place--details{
+    margin-left: -100px;
+  }
+  .place--name{
+    font-size: 1.6em;
+  }
+  .place--location{
+    margin-top: -5px;
+    font-size: 1em;
+    font-weight: 400;
   }
 
   .place--sharesave{
-    margin-left: 550px;
+    padding-left: 570px;
     padding-top: 15px;
+    color: #0F4C5C;
   }
   .place-share{
     margin-right: 20px;
@@ -39,17 +52,151 @@
 }
 .place-pic-pic{
     width: 500px;
-    height: 219px;
+    height: 238px;
     border-radius: 7px;
 }
 .place-map{
     background-color: #0F4C5C;
     width: 500px;
-    height: 219px;
+    height: 238px;
     border-radius: 7px;
 }
 
 .place--desc-reviews{
     margin-left: 50px;
     margin-right: 50px;
+}
+
+.place--desc-p{
+  font-size: 0.8em;
+}
+
+.place--offers{
+ font-size: 1em;
+ margin-top: 5px;
+}
+.place--offerlistbox{
+  margin-top: -5px;
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.place--offerlist{
+  border: 1px solid #0F4C5C;
+  border-radius: 24px;
+  width: 133px;
+  text-align: center;
+  margin-top: 10px;
+  margin-right: 10px;
+  color: #0F4C5C;
+}
+
+.place--nearby{
+  display: flex;
+  margin-top: 15px;
+
+}
+
+.hotels--nearby{
+  border: none;
+  background-color: #0f4c5c;
+  border-radius: 24px;
+  color: white;
+  font-family: Poppins;
+  font-size: 1.1em;
+  width: 154px;
+  height: 45px;
+  letter-spacing: 0.03em;
+  box-shadow: 0px 4px 2px #0f4c5c;
+  font-weight: 350;
+}
+
+.agencies--nearby{
+  margin-left: 20px;
+  border: none;
+  background-color: #0f4c5c;
+  border-radius: 24px;
+  color: white;
+  font-family: Poppins;
+  font-size: 1.1em;
+  width: 154px;
+  height: 45px;
+  letter-spacing: 0.03em;
+  box-shadow: 0px 4px 2px #0f4c5c;
+  font-weight: 350;
+}
+
+.descreview-divider{
+  width: 700px;
+  height: 1px;
+  background-color: #0F4C5C;
+  margin-top: 15px;
+}
+
+.place-reviews{
+  margin-top: 10px;
+}
+.place--reviews-header{
+  display: flex;
+}
+
+.place--reviewhead{
+  border: none;
+  background-color: #0f4c5c;
+  border-radius: 24px;
+  color: white;
+  font-family: Poppins;
+  font-size: 1.1em;
+  width: 75px;
+  height: 25px;
+  padding: 8px 10px;
+  letter-spacing: 0.03em;
+  border: 2px solid #0f4c5c;
+  box-shadow: 0px 4px 2px #0f4c5c;
+  font-weight: 350;
+}
+.place--ratings-stars{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0px 0px 10px;
+  margin-left: -365px;
+}
+
+.place-starlogo{
+  color:#FB8B24;
+  height: 20px;
+}
+
+.place-outoffive{
+  font-size: 15px;
+  font-weight: 400;
+ 
+}
+
+.place--userreview{
+  background-color: #0F4C5C;
+    width: 500px;
+    height: 75px;
+    border-radius: 7px;
+    margin-left: -100px;
+    margin-top: 7px;
+}
+
+.place--reviewbutton{
+  margin-left: -100px;
+  margin-top: 7px;
+  border: none;
+  background-color: #FB8B24;
+  border-radius: 24px;
+  color: #0F4C5C;
+  font-family: Poppins;
+  font-size: 1.1em;
+  width: 96px;
+  height: 35px;
+  letter-spacing: 0.03em;
+  border: 2px solid #FB8B24;
+  box-shadow: 0px 4px 2px #FB8B24;
 }
