@@ -12,9 +12,8 @@
   font-family: Poppins;
   font-size: 1.1rem;
   width: 100%
-  
 }
-
+ 
 .nav--logo{
   width: 100px;
 }
@@ -28,8 +27,18 @@
   border-radius: 24px;
   letter-spacing: 0.03em;
 }
-
-.nav--links{
+.nav--links {
   text-decoration: none;
   color: #0F4C5C;
+  transition: color 0.2s ease-in-out;  
+}
+
+.nav--links:hover {
+  color: #082c35;  
+  font-weight: 500;
+}
+.nav--links:active {
+  color: #3e565e;  
+  font-weight: 500;
+  text-shadow: 0 0 5px #edf4f5;
 }

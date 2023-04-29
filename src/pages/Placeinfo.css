@@ -102,32 +102,49 @@
 .hotels--nearby{
   border: none;
   background-color: #0f4c5c;
-  border-radius: 24px;
+  border-radius: 20px;
   color: white;
   font-family: Poppins;
   font-size: 1.1em;
-  width: 154px;
+  width: 140px;
   height: 45px;
-  letter-spacing: 0.03em;
-  box-shadow: 0px 4px 2px #0f4c5c;
+  letter-spacing: 0.01em;
+
   font-weight: 350;
 }
-
+.hotels--nearby:hover{
+  background-color: #021a20;
+  cursor: pointer;
+  color: solid;
+  box-shadow: 0px 4px 2px #0e4b5c;
+}
+.hotels--nearby:active{
+  background-color: #1e6577;
+   color: aliceblue;
+}
 .agencies--nearby{
-  margin-left: 20px;
+  margin-left: 10px;
   border: none;
   background-color: #0f4c5c;
-  border-radius: 24px;
+  border-radius: 20px;
   color: white;
   font-family: Poppins;
   font-size: 1.1em;
-  width: 154px;
+  width: 120px;
   height: 45px;
   letter-spacing: 0.03em;
-  box-shadow: 0px 4px 2px #0f4c5c;
+ 
   font-weight: 350;
 }
-
+.agencies--nearby:hover{
+  background-color: #021a20;
+  cursor: pointer;
+  box-shadow: 0px 4px 2px #0e4b5c;
+}
+.agencies--nearby:active{
+  background-color: #1e6577;
+   color: aliceblue;
+}
 .descreview-divider{
   width: 700px;
   height: 1px;
@@ -167,7 +184,7 @@
 }
 
 .place-starlogo{
-  color:#FB8B24;
+  color:#db791d;
   height: 20px;
 }
 
@@ -190,14 +207,23 @@
   margin-left: -100px;
   margin-top: 7px;
   border: none;
-  background-color: #FB8B24;
-  border-radius: 24px;
+  background-color:  #FB8B24;
+  border-radius: 25px;
   color: #0F4C5C;
   font-family: Poppins;
   font-size: 1.1em;
+  font-weight: 500;
   width: 96px;
   height: 35px;
-  letter-spacing: 0.03em;
-  border: 2px solid #FB8B24;
-  box-shadow: 0px 4px 2px #FB8B24;
+  letter-spacing: 0.01em;
+ 
+ 
+}
+.place--reviewbutton:hover{
+  background-color: #bb610d;
+  cursor: pointer;
+}
+.place--reviewbutton:active{
+  background-color: #8d520f;
+  color: rgb(29, 89, 112);
 }

@@ -1,6 +1,7 @@
 import { GrAdd } from "react-icons/Gr";
 import { AiFillStar } from "react-icons/Ai";
 import { AiOutlineStar } from "react-icons/Ai";
+import { AiOutlineClose } from "react-icons/Ai";
 import React, { useState } from "react";
 import screenshot from "../assets/Screenshot (40).png"
 import "./Contribute.css";
@@ -8,22 +9,28 @@ import "./Contribute.css";
 export default function Contribute() {
   const [showModal, setShowModal] = useState(false);
   const Popup = () => {
+    const handleCloseModal = () => {
+      setShowModal(false);
+    };
     return (
       <>
-        <div className="reward-wrapper"> </div>
+  <div className="reward-wrapper" onClick={handleCloseModal}></div>
         <div className="reward-container">
-          <button
+          <div
             className="reward--close-btnn"
+            
             onClick={() => setShowModal(false)}
           >
-            close
-          </button>
-          <p>
+               <AiOutlineClose />
+          </div>
+          <p className="reward--text1" >
             Congratulations
-            <br />
+            </p>
+          <p className="reward--text2">
             You contributed a place
           </p>
-          <div className="reward-points"></div>
+          <div className="reward-points">Reward points</div>
+          <div className="level">Level 1</div>
         </div>
       </>
     );
@@ -36,7 +43,7 @@ export default function Contribute() {
   return (
     <div className="contribute-container">
       <div className="left-part">
-        <div className="contribute-text">Contribute a Place</div>
+        <div className="contribute-text">Contribute a place</div>
         <div className="places-container">
           <ul>
             <li>

@@ -1,0 +1,59 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    overflow-y: scroll;
+    margin: 0;
+  }
+.reviews-section {
+    max-height: 500px;
+  }
+  
+  .review-card {
+    background-color: #dde1e4;
+    margin: 13px 13px ;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #0f4c5c;
+  }
+  
+  .review--profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .review--image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .reviewer--name {
+    font-weight: 510;
+    font-size: 18px;
+    color: #0f4c5c;
+  }
+  
+  .ratings {
+    margin-left: 10px;
+    color: #ffc107;
+  }
+  
+  .review--text {
+    margin-top: 10px;
+    font-size: 15px;
+    color:#0f4c5c;
+    font-size:90%;
+  }
+  
+  .like-section {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .like-section span {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
