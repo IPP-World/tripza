@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User
 from django.contrib import auth
+from rest_framework_jwt.settings import api_settings
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
     
@@ -30,6 +31,13 @@ class EmailVerificationSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
         fields=['token']
+
+class ForgotPasswordSerializer(serializers.ModelSerializer):
+    token=serializers.CharField(max_length=255)
+
+    class Meta:
+        model=User
+        fields=['token', 'email']
 
 
         
@@ -81,7 +89,6 @@ class LoginViewSerializer(serializers.ModelSerializer):
             'tokens': user.tokens
         }
 
-from rest_framework_jwt.settings import api_settings
 
 class LogoutViewSerializer(serializers.Serializer):
     refresh_token = serializers.CharField()
