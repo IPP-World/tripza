@@ -15,6 +15,11 @@ function Navbar() {
     setSearchValue("");
   }
 
+  function search() {
+     
+    console.log(`Searching for: ${searchValue}`);
+  }
+
   return (
     <div className="nav--container">
       <Link to="/">
@@ -29,9 +34,11 @@ function Navbar() {
           onChange={handleSearchChange}
         />
         {searchValue && (
-          <button className="nav--search-clear" onClick={clearSearch}>
-            &#xD7;
-          </button>
+          <>
+            <button className="nav--search-clear" onClick={clearSearch}>
+              &#xD7;
+            </button>
+          </>
         )}
       </div>
       <Link className="nav--links" to="/agencies">

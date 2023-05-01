@@ -45,15 +45,43 @@ body {
     font-size:90%;
   }
   
+  .like-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: 8px;
+    
+  }
+  
+  .like-button:focus {
+    outline: none;
+  }
+  
+  .like-button:hover {
+    color: #0d6efd;
+  }
+  
+  .liked {
+    color: #0d6efd;
+  }
+  
+  .disliked {
+    color: #dc3545;
+  }
+  
   .like-section {
     display: flex;
     align-items: center;
     margin-top: 10px;
+    
   }
-  
   .like-section span {
-    margin-left: 5px;
-    font-size: 14px;
+    margin-left: 10px;
+    font-size: 16px;
+  }
+  .like-button {
+    color: #fd950d;
     font-weight: bold;
   }
+  
   
