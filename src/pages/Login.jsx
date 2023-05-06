@@ -18,7 +18,7 @@ function Login() {
                 <img src={khalti}></img>
                 <h1>Welcome</h1>
                 <p>We are glad to see you.</p>
-                <form method="#">
+                <form method="POST">
                     <input
                         type="text"
                         className='name'

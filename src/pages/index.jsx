@@ -7,5 +7,6 @@ import Profile from "./Profile";
 import Landing from "./Landing";
 import Reviews from "./Reviews";
 import Placeinfo from "./Placeinfo";
+import 'leaflet/dist/leaflet.css';
 
 export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews,Placeinfo}

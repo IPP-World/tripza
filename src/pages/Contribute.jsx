@@ -1,31 +1,58 @@
-import { GrAdd } from "react-icons/Gr";
-import { AiFillStar } from "react-icons/Ai";
-import { AiOutlineStar } from "react-icons/Ai";
+import { GrAdd,GrClose } from "react-icons/Gr";
 import { AiOutlineClose } from "react-icons/Ai";
-import React, { useState } from "react";
-import screenshot from "../assets/Screenshot (40).png"
+import React, { useState,useEffect } from "react";
+import RatingStars from "../components/ratings";
+import PlaceOffers from "../components/offers";
+import MapSection from "../components/maps";
 import "./Contribute.css";
 
 export default function Contribute() {
   const [showModal, setShowModal] = useState(false);
+  const [legitChecked, setLegitChecked] = useState(false);
+  const [images, setImages] = useState([]);
+
+  const [placedesc, setPlacedesc] = useState({
+    placeName:"",
+    placeDescription:"",
+    review:""
+  });
+  const handleChange = (e) => {
+    setPlacedesc({ ...placedesc, [e.target.name]: e.target.value });
+}
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+  const handleImageUpload = (event) => {
+    const files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+      reader.readAsDataURL(files[i]);
+      reader.onload = () => {
+        setImages([...images, reader.result]);
+      };
+    }
+  };
+  const handleImageDelete = (index) => {
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+  };
+
   const Popup = () => {
-    const handleCloseModal = () => {
-      setShowModal(false);
-    };
     return (
       <>
-  <div className="reward-wrapper" onClick={handleCloseModal}></div>
+        <div className="reward-wrapper" onClick={handleCloseModal}></div>
         <div className="reward-container">
           <div
             className="reward--close-btnn"
-            
             onClick={() => setShowModal(false)}
           >
-               <AiOutlineClose />
+            <AiOutlineClose />
           </div>
           <p className="reward--text1" >
             Congratulations
-            </p>
+          </p>
           <p className="reward--text2">
             You contributed a place
           </p>
@@ -35,87 +62,142 @@ export default function Contribute() {
       </>
     );
   };
+
+  const handleOffersSelected = (selectedOffers) => {
+    console.log('offers:',selectedOffers);
+    };
+    const handleRating=(rating)=>{
+      console.log('rating:',rating);
+    }
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!position) {
+      alert('Please select a position in the map');
+      return;
+    }
+    if (!legitChecked) {
+      alert('Please confirm that the information you submitted is legit');
+      return;
+    }
+    if (!images){
+      alert('Please select one or more images');
+    }
     setShowModal(true);
+
+   // console.log('Map Markers:', position);
+    console.log('description:',placedesc);
+    handleOffersSelected;
+    handleRating;
+
+    //const latitude = position.lat;
+    //const longitude = position.lng;
+    const form = e.target;
+    const formData = new FormData(form);
+   // formData.append('latitude', latitude);
+    //formData.append('longitude', longitude);
+    //formData.append('image',imageFile);
+    //formData.append('rating',rating);
+    fetch('/api/contribute/', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Form data sent successfully');
+      } else {
+        console.error('Error sending form data');
+      }
+    })
+    .catch(error => console.error(error));
   };
+  
+
 
   return (
     <div className="contribute-container">
       <div className="left-part">
         <div className="contribute-text">Contribute a place</div>
         <div className="places-container">
-          <ul>
-            <li>
-              <img src={screenshot}></img>
-            </li>
-            <li>
-              <span className="add-box">
-                <GrAdd className="add"/>
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div className="maps-container">
-        <img className="map" src={screenshot}></img>
-        </div>
+      <ul>
+        {images.map((image, index) => (
+          <li key={index} className="imageContainer">
+            <img src={image} alt={`image-${index}`} />
+            <button className="delete-button" onClick={() => handleImageDelete(index)}>
+              <GrClose />
+              </button>
+          </li>
+        ))}
+        <li>
+          <label htmlFor="image-upload" className="add-box">
+            <GrAdd className="image-add" />
+          </label>
+          <input
+            id="image-upload"
+            type="file"
+            multiple
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+          />
+        </li>
+      </ul>
+    </div>
+
+
+    <div className="maps-container">
+    <MapSection/>
+    </div>
+
       </div>
       <div className="right-part">
         <div className="place-info">
-          <form method="#">
-            <input
-              className="place-name1"
-              type="text"
-              placeholder="Name of the place"
-            />
-            <input
-              className="place-name2"
-              type="textbox"
-              placeholder="Description of the place"
-            />
-            <div className="place-offers-text">What this place offers</div>
-            <div className="place-offers">
-            <div className="place--offerlistbox">
-            <span className="place--offerlist"><GrAdd className="add-offer"/></span>
-            <span className="place--offerlist">Mountain View</span>
-            <span className="place--offerlist">Wifi</span>
-            <span className="place--offerlist">Pets allowed</span>
-            <span className="place--offerlist">Tiger statue</span>
-            <span className="place--offerlist">Tiktok zone</span>
-            </div>
-            </div>
-            <div className="review-text">Your review of the place</div>
-            <div className="review">
-              <span>
-                <AiFillStar />
-              </span>
-              <span>
-                <AiFillStar />
-              </span>
-              <span>
-                <AiFillStar />
-              </span>
-              <span>
-                <AiOutlineStar />
-              </span>
-              <span>
-                <AiOutlineStar />
-              </span>
-            </div>
-            <div className="review-box">
-              <input type="text" placeholder="Review Here" />
-            </div>
-            <div className="checkbox">
-            <label required>
-              <input type="checkbox" />
-              The information I submitted here is legit.
-            </label></div>
-            <br />
-          <button className="submit" onClick={submitHandler}>
-              Submit
-            </button>
-            {showModal && <Popup />}
-          </form>
+      <form onSubmit={submitHandler}>
+      <input
+        className="place-name1"
+        type="text"
+        name="placeName"
+        placeholder="Name of the place"
+        value={placedesc.placeName}
+        onChange={handleChange}
+      />
+      <input
+        className="place-name2"
+        type="text"
+        name="placeDescription"
+        placeholder="Description of the place"
+        value={placedesc.placeDescription}
+        onChange={handleChange}
+      />
+      <div className="place-offers-text">What this place offers</div>
+     <div className="reviews">
+      <PlaceOffers
+      onOffersSelected={handleOffersSelected}/> 
+
+     </div>
+  
+      <div className="review-text">Your review of the place</div>
+
+      <div className="review">
+       <RatingStars sendRating={handleRating}/>
+      </div>
+
+
+
+      <div className="review-box">
+        <input type="text" name="review" placeholder="Review Here" onChange={handleChange}   value={placedesc.review}/>
+      </div>
+      <div className="checkbox">
+        <label required>
+        <input type="checkbox" checked={legitChecked} onChange={() => setLegitChecked(!legitChecked)} />
+          The information I submitted here is legit.
+        </label>
+      </div>
+      <br />
+      <button className="submit" type="submit">
+        Submit
+      </button>
+      {showModal && <Popup />}
+       </form>
         </div>
       </div>
     </div>
