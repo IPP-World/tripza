@@ -1,25 +1,30 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { CiShare1 } from "react-icons/ci";
 import { BsBookmarkPlus } from "react-icons/Bs";
-import { AiFillStar } from "react-icons/Ai";
+import { AiFillStar } from 'react-icons/Ai';
 import place from "../assets/place.jpg";
+import Screenshot from "../assets/Screenshot (40).png";
+import Logo from "../assets/khaltiLogo.png";
 import Reviews from "./Reviews";
-import HotelsNearby from './HotelsNearby';
+import HotelsNearby from "./HotelsNearby";
 import AgenciesNearby from "./AgenciesNearby";
-import "./Placeinfo.css"
+import "./PlaceInfo.css";
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
-// import { Link } from "react-router-dom";
-function Placeinfo() {
+function PlaceInfo() {
   const states = Object.freeze({
-    REVIEWS: <Reviews closeModal={()=>setCurrentState(states.NONE)}/>,
-    HOTELS: <HotelsNearby closeModal={()=>setCurrentState(states.NONE)}/>,
-    AGENCIES: <AgenciesNearby closeModal={()=>setCurrentState(states.NONE)}/>,
-    NONE: <></>
-  })
+    REVIEWS: <Reviews closeModal={() => setCurrentState(states.NONE)} />,
+    HOTELS: <HotelsNearby closeModal={() => setCurrentState(states.NONE)} />,
+    AGENCIES: (
+      <AgenciesNearby closeModal={() => setCurrentState(states.NONE)} />
+    ),
+    NONE: <></>,
+  });
 
-  const [currentState, setCurrentState] = useState(states.NONE)
+  const [currentState, setCurrentState] = useState(states.NONE);
   return (
-    <div className="placeinfo">
+    <div className="PlaceInfo">
       {currentState}
       <div className="place--header">
         <div className="place--details">
@@ -40,7 +45,11 @@ function Placeinfo() {
       <div className="place--body">
         <div className="place--pic-map">
           <div className="place-pic">
-            <img className="place-pic-pic" src={place} alt="place" />
+          <AliceCarousel>
+            <p><img src={place} /></p>
+            <p><img src={Screenshot} /></p>
+            <p><img src={Logo} /></p>
+          </AliceCarousel>
           </div>
           <div className="place-map"></div>
         </div>
@@ -90,4 +99,4 @@ function Placeinfo() {
   );
 }
 
-export default Placeinfo;
+export default PlaceInfo;

@@ -10,14 +10,17 @@
     "host": "vite --host"
   },
   "dependencies": {
+    "better-react-carousel": "^1.1.1",
     "exif-js": "^2.3.0",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.9.3",
     "react": "^18.2.0",
+    "react-alice-carousel": "^2.7.1",
     "react-dom": "^18.2.0",
     "react-geocode": "^0.2.3",
     "react-icons": "^4.7.1",
     "react-leaflet": "^4.2.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router": "^6.8.0",
     "react-router-dom": "^6.8.0",
     "reactjs-popup": "^2.0.5",
