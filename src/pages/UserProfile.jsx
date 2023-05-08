@@ -12,4 +12,4 @@ export default function UserProfile() {
       <Profile name="John Doe" role="General User" contributions={contributions} />
     </div>
   );
-}
+  }

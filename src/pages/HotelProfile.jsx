@@ -12,4 +12,4 @@ export default function HotelProfile() {
       <Profile name="Hotel Name" role="Hotel Owner" contributions={contributions} />
     </div>
   );
-}
+  }
