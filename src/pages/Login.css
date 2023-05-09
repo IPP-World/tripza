@@ -77,8 +77,11 @@
     padding:8px 20px;
     margin-top: 10px;
     letter-spacing: 0.03em;
-
-
+    cursor: pointer;
+}
+.loginpage .box button:hover{
+    background-color: #255957;
+    color: black;
 }
 
 .loginpage .box .or{

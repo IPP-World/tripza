@@ -12,13 +12,23 @@ import {
   Hotels,
   Contribute,
   Reviews,
-  Placeinfo
+  Placeinfo,
+  ResetPassword,
+  ResetPasswordConfirm
 } from "./pages";
+import Facebook from './containers/Facebook';
+import Google from './containers/Google';
+import Activate from './containers/Activate';
 import { useState } from "react";
+import { Provider } from 'react-redux';
+import store from './store';
+
+import Layout from './hocs/layout';
+
 function App() {
 
   return (
-    <>
+    <Provider store={store}>
       <Router>
         <Navbar />
         <Routes>
@@ -26,6 +36,11 @@ function App() {
           <Route path="/agencies" element={<Agencies />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/facebook' element={<Facebook/>} />
+          <Route path='/google' element={<Google/>} />
+          <Route path='/reset-password' element={<ResetPassword/>} />
+          <Route path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm/>} />
+          <Route path='/activate/:uid/:token' element={<Activate/>} />
           <Route path="/contribute" element={<Contribute />} />
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/profile" element={<Profile />} />
@@ -33,7 +48,7 @@ function App() {
           <Route path="/placeinfo" element={<Placeinfo />} />
         </Routes>
       </Router>
-    </>
+    </Provider>
   );
 }
 

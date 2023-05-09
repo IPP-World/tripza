@@ -41,26 +41,33 @@
   .place--body{
     display: flex;
     margin: 20px;
+  }
+ .place-pic{
+  width: 100px;
+  height: 10px;
+ }
+ .alice-carousel {
+  width: 500px;
+  height: 255px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
-.place--pic-map{
-    display: flex;
-    flex-direction: column;
-    margin-left: 30px;
-}
-.place-pic{
-    width: 500px;
-   
-}
-.place-pic-pic{
-    width: 500px;
-    height: 238px;
-    border-radius: 7px;
+
+.alice-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: top;
 }
 .place-map{
     background-color: #0F4C5C;
     width: 500px;
     height: 238px;
     border-radius: 7px;
+    margin-top: 250px;
 }
 
 .place--desc-reviews{

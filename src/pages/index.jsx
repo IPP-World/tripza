@@ -7,6 +7,8 @@ import Profile from "./Profile";
 import Landing from "./Landing";
 import Reviews from "./Reviews";
 import Placeinfo from "./Placeinfo";
+import ResetPassword from "./ResetPassword";
+import ResetPasswordConfirm from "./ResetPasswordConfirm";
 import 'leaflet/dist/leaflet.css';
 
-export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews,Placeinfo}
+export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews,Placeinfo,ResetPassword,ResetPasswordConfirm}

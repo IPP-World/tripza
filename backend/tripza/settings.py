@@ -106,7 +106,7 @@ WSGI_APPLICATION = 'tripza.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tripza',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'tripza',
         'HOST': 'localhost'
