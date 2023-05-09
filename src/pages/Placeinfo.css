@@ -101,12 +101,13 @@
 
 .place--offers {
   font-size: 1em;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .place--offerlistbox {
   margin-top: -5px;
-  width: 600px;
+  width: 500px;
   display: flex;
+  margin-bottom: 10px;
 
 }
 .place--offerlist {
@@ -118,9 +119,7 @@
   margin-right: 10px;
   color: #0f4c5c;
 }
-.place--offerlist:hover {
- color: #fff;
-}
+
 
 .place--nearby {
   display: flex;
