@@ -6,7 +6,8 @@ export default function Profile({ name, role, contributions }) {
     <div className="profile-container">
       <div className="profile-leftpart">
         <div className="profile-pic">
-          <CgProfile /><br/>
+          <CgProfile />
+          <br />
           <label className="name">{name}</label>
           <br />
           <label className="role">{role}</label>

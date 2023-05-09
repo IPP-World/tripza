@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CiShare1 } from "react-icons/ci";
 import { BsBookmarkPlus } from "react-icons/Bs";
-import { AiFillStar } from 'react-icons/Ai';
+import { AiFillStar } from "react-icons/Ai";
 import place from "../assets/place.jpg";
 import Screenshot from "../assets/Screenshot (40).png";
 import Logo from "../assets/khaltiLogo.png";
@@ -9,8 +9,8 @@ import Reviews from "./Reviews";
 import HotelsNearby from "./HotelsNearby";
 import AgenciesNearby from "./AgenciesNearby";
 import "./PlaceInfo.css";
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 
 function PlaceInfo() {
   const states = Object.freeze({
@@ -21,6 +21,12 @@ function PlaceInfo() {
     ),
     NONE: <></>,
   });
+
+  const carouselItems = [
+    <img src={place}/>,
+    <img src={Screenshot}/>,
+    <img src={Logo}/>,
+  ];
 
   const [currentState, setCurrentState] = useState(states.NONE);
   return (
@@ -45,11 +51,16 @@ function PlaceInfo() {
       <div className="place--body">
         <div className="place--pic-map">
           <div className="place-pic">
-          <AliceCarousel>
-            <p><img src={place} /></p>
-            <p><img src={Screenshot} /></p>
-            <p><img src={Logo} /></p>
-          </AliceCarousel>
+            <AliceCarousel
+              items={carouselItems}
+              // responsive={{ 0: { items: 1 }, 1024: { items: 2 } }}
+              animationDuration={1000}
+              autoPlay= {true}
+              autoPlayInterval={2000}
+              infinite = {true}
+  
+            >
+            </AliceCarousel>
           </div>
           <div className="place-map"></div>
         </div>
@@ -64,19 +75,31 @@ function PlaceInfo() {
               full of drama into a journey with ultimate joy.
             </p>
             <div className="offers--container">
-            <h1 className="place--offers">What this place offers</h1>
-            <div className="place--offerlistbox">
-            <span className="place--offerlist">Garden View</span>
-            <span className="place--offerlist">Mountain View</span>
-            <span className="place--offerlist">Wifi</span>
-            <span className="place--offerlist">Pets allowed</span>
-            <span className="place--offerlist">Tiger statue</span>
-            <span className="place--offerlist">Tiktok zone</span>
-            </div>
+              <h1 className="place--offers">What this place offers</h1>
+              <div className="place--offerlistbox">
+                <span className="place--offerlist">Garden View</span>
+                <span className="place--offerlist">Mountain View</span>
+                <span className="place--offerlist">Wifi</span>
+                <span className="place--offerlist">Pets allowed</span>
+                <span className="place--offerlist">Tiger statue</span>
+                <span className="place--offerlist">Tiktok zone</span>
+              </div>
             </div>
             <div className="place--nearby">
-              <button className="hotels--nearby" type="submit" onClick={()=>setCurrentState(states.HOTELS)}>Hotels nearby</button>
-              <button className="agencies--nearby" type="submit" onClick={()=>setCurrentState(states.AGENCIES)}>Agencies</button>
+              <button
+                className="hotels--nearby"
+                type="submit"
+                onClick={() => setCurrentState(states.HOTELS)}
+              >
+                Hotels nearby
+              </button>
+              <button
+                className="agencies--nearby"
+                type="submit"
+                onClick={() => setCurrentState(states.AGENCIES)}
+              >
+                Agencies
+              </button>
             </div>
           </div>
           <div className="descreview-divider"></div>
@@ -85,11 +108,17 @@ function PlaceInfo() {
               <span className="place--reviewhead">Reviews</span>
               <div className="place--ratings">
                 <div className="place--ratings-stars">
-                <AiFillStar className="place-starlogo" />
+                  <AiFillStar className="place-starlogo" />
                   <h6 className="place-outoffive">4.5/5</h6>
                 </div>
                 <div className="place--userreview"></div>
-                <button className="place--reviewbutton" type="submit" onClick={()=>setCurrentState(states.REVIEWS)}>More</button>
+                <button
+                  className="place--reviewbutton"
+                  type="submit"
+                  onClick={() => setCurrentState(states.REVIEWS)}
+                >
+                  More
+                </button>
               </div>
             </div>
           </div>
