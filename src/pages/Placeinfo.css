@@ -105,10 +105,9 @@
 }
 .place--offerlistbox {
   margin-top: -5px;
-  width: 500px;
+  width: 600px;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+
 }
 .place--offerlist {
   border: 1px solid #0f4c5c;
@@ -118,6 +117,9 @@
   margin-top: 10px;
   margin-right: 10px;
   color: #0f4c5c;
+}
+.place--offerlist:hover {
+ color: #fff;
 }
 
 .place--nearby {
