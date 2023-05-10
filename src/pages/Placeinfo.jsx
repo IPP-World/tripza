@@ -56,7 +56,7 @@ function PlaceInfo() {
               // responsive={{ 0: { items: 1 }, 1024: { items: 2 } }}
               animationDuration={1000}
               autoPlay= {true}
-              autoPlayInterval={2000}
+              autoPlayInterval={3000}
               infinite = {true}
   
             >

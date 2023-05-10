@@ -76,10 +76,10 @@ const Login = ({ login, isAuthenticated }) => {
                         required
 
                     />
-                </form>
-
+                </form >
+                
                 <button type="submit" className='login-btn'>Login</button>
-               
+                
                 <div className='or'>or</div>
 
                 <div className='loginwith'>login with</div>
