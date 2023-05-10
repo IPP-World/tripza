@@ -3,8 +3,8 @@ import { CiShare1 } from "react-icons/ci";
 import { BsBookmarkPlus } from "react-icons/Bs";
 import { AiFillStar } from "react-icons/Ai";
 import place from "../assets/place.jpg";
-import Screenshot from "../assets/Screenshot (40).png";
-import Logo from "../assets/khaltiLogo.png";
+import place2 from "../assets/Khumai2.jpg";
+import place1 from "../assets/Khumai1.jpg";
 import Reviews from "./Reviews";
 import HotelsNearby from "./HotelsNearby";
 import AgenciesNearby from "./AgenciesNearby";
@@ -24,8 +24,8 @@ function PlaceInfo() {
 
   const carouselItems = [
     <img src={place}/>,
-    <img src={Screenshot}/>,
-    <img src={Logo}/>,
+    <img src={place1}/>,
+    <img src={place2}/>,
   ];
 
   const [currentState, setCurrentState] = useState(states.NONE);
@@ -34,8 +34,8 @@ function PlaceInfo() {
       {currentState}
       <div className="place--header">
         <div className="place--details">
-          <h1 className="place--name">Veluvana Bali - Owl Bamboo House</h1>
-          <h4 className="place--location">Sidemen, Bali, Indonesia</h4>
+          <h1 className="place--name">Khumai Dada - Great Machhapuchare Trail</h1>
+          <h4 className="place--location">Machhapuchchhre 33700, Pokhara</h4>
         </div>
         <div className="place--sharesave">
           <a href="#" className="place-share">
@@ -67,22 +67,20 @@ function PlaceInfo() {
         <div className="place--desc-reviews">
           <div className="place-desc">
             <p className="place-desc-p">
-              Veluvana is a unique bamboo house with a wonderful view of Sidemen
-              Valley, a genuine tropical landscape with Mount Agung peak on its
-              back. This getaway spot is a great place to bring into reality the
-              dream adventure of the true wanderer. We invite you to feel the
-              magnificent vibes of the entire house to escape the life that is
-              full of drama into a journey with ultimate joy.
+            Khumai Danda Trek is a trekking trail with a lot of potential for new demanding trekking routes in Nepal.
+            Already some hikers hiked to these beautiful places and got popular among Nepali travelers. Because of the appealing mountain views especially the view of
+            Mt. Machhapuchhere. Typical villages and lifestyle of the local people. Mountain views, local villages,
+            lush forests, and the culture of the local community is the attraction of this trek. Khumai Danda Trek is also called Machhapuchhere Model Trek. Because this trek goes around Mount Machhapuchare and its surroundings.
             </p>
             <div className="offers--container">
               <h1 className="place--offers">What this place offers</h1>
               <div className="place--offerlistbox">
-                <span className="place--offerlist">Garden View</span>
+                <span className="place--offerlist">Typical villages</span>
                 <span className="place--offerlist">Mountain View</span>
-                <span className="place--offerlist">Wifi</span>
-                <span className="place--offerlist">Pets allowed</span>
-                <span className="place--offerlist">Tiger statue</span>
-                <span className="place--offerlist">Tiktok zone</span>
+                <span className="place--offerlist">Sunset and sunrise</span>
+                <span className="place--offerlist">Snow</span>
+                <span className="place--offerlist">Trekking trail</span>
+                <span className="place--offerlist">Campfire</span>
               </div>
             </div>
             <div className="place--nearby">

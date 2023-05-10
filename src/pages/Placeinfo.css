@@ -18,7 +18,7 @@
   color: #0f4c5c;
 }
 .place--details {
-  margin-left: -100px;
+  margin-left: -30px;
 }
 .place--name {
   font-size: 1.6em;
@@ -85,7 +85,7 @@
 .place-map {
   background-color: #0f4c5c;
   width: 500px;
-  height: 238px;
+  height: 270px;
   border-radius: 7px;
   margin-top: 250px;
 }
@@ -105,7 +105,7 @@
 }
 .place--offerlistbox {
   margin-top: -5px;
-  width: 500px;
+  width: 550px;
   display: flex;
   margin-bottom: 10px;
 
@@ -113,7 +113,7 @@
 .place--offerlist {
   border: 1px solid #0f4c5c;
   border-radius: 24px;
-  width: 133px;
+  width: 170px;
   text-align: center;
   margin-top: 10px;
   margin-right: 10px;
