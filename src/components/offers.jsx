@@ -4,11 +4,11 @@ import './offers.css';
 
 const PlaceOffers = ({ onOffersSelected }) => {
   const [offerList, setOfferList] = useState([
-    { text: 'Mountain View', isSelected: false },
-    { text: 'Wifi', isSelected: false },
-    { text: 'Pets allowed', isSelected: false },
-    { text: 'Tiger statue', isSelected: false },
-    { text: 'Tiktok zone', isSelected: false },
+    // { text: 'Mountain View', isSelected: false },
+    // { text: 'Wifi', isSelected: false },
+    // { text: 'Pets allowed', isSelected: false },
+    // { text: 'Tiger statue', isSelected: false },
+    // { text: 'Tiktok zone', isSelected: false },
   ]);
 
   const [selectedOfferIndexes, setSelectedOfferIndexes] = useState([]);
@@ -57,7 +57,7 @@ const PlaceOffers = ({ onOffersSelected }) => {
     <div className="place-offers">
       <div className="place--offerlistbox">
         <span
-          className={`place--offerlist ${selectedOfferIndexes.length === offerList.length ? 'selected' : ''}`}
+          className={`place--offerlists ${selectedOfferIndexes.length === offerList.length ? 'selected' : ''}`}
           onClick={() => {
             if (selectedOfferIndexes.length === offerList.length) {
               setSelectedOfferIndexes([]);
@@ -92,7 +92,7 @@ const PlaceOffers = ({ onOffersSelected }) => {
               placeholder="New Offer"
             />
           </span>
-         ):  <GrAdd className="place--offerlist" onClick={handleAddOffer}/>
+         ):  <GrAdd className="place--offerlists" onClick={handleAddOffer}/>
          }
           </div> 
          </div>
