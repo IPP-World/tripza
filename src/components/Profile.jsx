@@ -1,7 +1,12 @@
 import { CgProfile } from "react-icons/Cg";
 import "./Profile.css";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router";
 
 export default function Profile({ name, role, contributions }) {
+  const isAuthenticated = useSelector(state=>state.auth)
+  if(!isAuthenticated)
+    <Navigate to='/login'/>
   return (
     <div className="profile-container">
       <div className="profile-leftpart">
