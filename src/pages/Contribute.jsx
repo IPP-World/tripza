@@ -62,6 +62,9 @@ export default function Contribute() {
       </>
     );
   };
+  const handleLocationSelect = (location) => {
+    console.log('Selected Location:', location);
+  };
 
   const handleOffersSelected = (selectedOffers) => {
     console.log('offers:',selectedOffers);
@@ -145,7 +148,7 @@ export default function Contribute() {
 
 
     <div className="maps-container">
-    <MapSection/>
+    <MapSection onLocationSelect={handleLocationSelect} />
     </div>
 
       </div>

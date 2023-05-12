@@ -12,9 +12,11 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
     "exif-js": "^2.3.0",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.9.3",
+    "leaflet-control-geocoder": "^2.4.0",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-alice-carousel": "^2.7.1",

@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import khaltiLogo from "../assets/khaltiLogo.png";
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
 import "./Navbar.css";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [searchValue, setSearchValue] = useState("");
+  const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
 
   function handleSearchChange(event) {
     setSearchValue(event.target.value);
@@ -16,7 +18,6 @@ function Navbar() {
   }
 
   function search() {
-     
     console.log(`Searching for: ${searchValue}`);
   }
 
@@ -50,6 +51,7 @@ function Navbar() {
       <Link className="nav--links" to="/contribute">
         Contribute
       </Link>
+      {!isAuthenticated &&
       <div className="nav--signup_login">
         <Link className="nav--links" to="/login">
           Login
@@ -58,7 +60,8 @@ function Navbar() {
         <Link className="nav--links" to="/signup">
           Signup
         </Link>
-      </div>
+      </div>}
+      {isAuthenticated && <Link className="nav--links" to="/profile">Profile</Link>}
     </div>
   );
 }

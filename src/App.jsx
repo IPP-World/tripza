@@ -19,7 +19,6 @@ import {
 import Facebook from './containers/Facebook';
 import Google from './containers/Google';
 import Activate from './containers/Activate';
-import { useState } from "react";
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -34,6 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/agencies" element={<Agencies />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path='/facebook' element={<Facebook/>} />

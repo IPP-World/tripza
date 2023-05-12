@@ -1,32 +1,42 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset_password_confirm } from '../actions/auth';
+import axios from 'axios';
 
-const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
-    const [requestSent, setRequestSent] = useState(false);
+const ResetPasswordConfirm = () => {
     const [formData, setFormData] = useState({
         new_password: '',
         re_new_password: ''
     });
+    const [resetSuccess, setResetSuccess] = useState(false)
+    const params = useParams()
 
     const { new_password, re_new_password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+    
         e.preventDefault();
 
-        const uid = match.params.uid;
-        const token = match.params.token;
-
-        reset_password_confirm(uid, token, new_password, re_new_password);
-        setRequestSent(true);
+        const body = JSON.stringify({ uid: params.uid, token: params.token, new_password: formData.new_password, re_new_password: formData.re_new_password });
+        try{
+            await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password_confirm/`, body, config)
+            
+            setResetSuccess(true)
+        }catch(e){
+            alert(e)
+    }
     };
 
-    if (requestSent) {
-        return <Navigate to='/' />
-    }
+    if(resetSuccess)
+       return <Navigate to='/login'/>
 
     return (
         <div>

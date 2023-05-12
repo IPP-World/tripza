@@ -27,9 +27,6 @@ SECRET_KEY = 'django-insecure-e5gd$ncv8hn-b+y-vw^5(b*0fx_pbg1n^sm4352c)n-*llg_y=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,9 +39,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'accounts',
+    'tripza'
 ]
 
 MIDDLEWARE = [
+    'tripza.middleware.CorsMiddleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -106,7 +105,7 @@ WSGI_APPLICATION = 'tripza.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'tripza',
         'USER': 'postgres',
         'PASSWORD': 'tripza',
         'HOST': 'localhost'

@@ -20,14 +20,14 @@ import {
     LOGOUT
 } from '../actions/types';
 
-export const initialState = {
+const initialState = {
     access: localStorage.getItem('access'),
     refresh: localStorage.getItem('refresh'),
-    isAuthenticated: null,
+    isAuthenticated: localStorage.getItem('access') ? true : false,
     user: null
 };
 
-export const authReducer=(state = initialState, action)=> {
+export default function(state = initialState, action) {
     const { type, payload } = action;
 
     switch(type) {
@@ -37,6 +37,15 @@ export const authReducer=(state = initialState, action)=> {
                 isAuthenticated: true
             }
         case LOGIN_SUCCESS:
+            console.log("Success login: ", state)
+            localStorage.setItem('access', payload.access);
+            localStorage.setItem('refresh', payload.refresh);
+            return {
+                ...state,
+                isAuthenticated: true,
+                access: payload.access,
+                refresh: payload.refresh
+            }
         case GOOGLE_AUTH_SUCCESS:
         case FACEBOOK_AUTH_SUCCESS:
             localStorage.setItem('access', payload.access);

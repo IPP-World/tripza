@@ -32,7 +32,7 @@ export const load_user = () => async dispatch => {
         }; 
 
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/jwt/create`, config);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/`, config);
     
             dispatch({
                 type: USER_LOADED_SUCCESS,
@@ -150,8 +150,7 @@ export const checkAuthenticated = () => async dispatch => {
     }
 };
 
-export const login = (email, password) => async dispatch => {
-    const config = {
+export const login = (email, password) => async dispatch => {    const config = {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -160,7 +159,7 @@ export const login = (email, password) => async dispatch => {
     const body = JSON.stringify({ email, password });
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create`, body, config);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`, body, config);
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -169,20 +168,21 @@ export const login = (email, password) => async dispatch => {
 
         dispatch(load_user());
     } catch (err) {
+        console.error(err)
         dispatch({
             type: LOGIN_FAIL
         })
     }
 };
 
-export const signup = (first_name, last_name, email, password, re_password,number,dob) => async dispatch => {
+export const signup = (fname, lname, email, password, re_password, dob) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     };
 
-    const body = JSON.stringify({ first_name, last_name, email, password, re_password,number,dob });
+    const body = JSON.stringify({ fname, lname, email, password, re_password, dob, number: dob});
 
     try {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`, body, config);
@@ -231,7 +231,6 @@ export const reset_password = (email) => async dispatch => {
 
     try {
         await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password/`, body, config);
-
         dispatch({
             type: PASSWORD_RESET_SUCCESS
         });
