@@ -18,7 +18,7 @@ const MapSection = ({ onLocationSelect }) => {
       }
     };
 
-    getUserLocation();
+    getUserLocation()
   }, []);
 
   const getCurrentPosition = () => {

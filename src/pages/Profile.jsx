@@ -1,18 +1,30 @@
 import { CgProfile } from "react-icons/Cg";
 import "./Profile.css"
 import { Navigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { load_user, logout } from "../actions/auth";
+import store from '../store'
+
 export default function Profile({}) {
   const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
-  const user = useSelector(state => state.auth.user)
+  const contributions = useSelector(state=>state.auth.contriubtions)
 
+  const user = useSelector(state => state.auth.user)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(load_user())
+  }, [])
+  console.log(store.getState())
   if(isAuthenticated)
     return (
+      <div className="flex flex-col">
       <div className="profile-container">
         <div className="profile-leftpart">
           <div className="profile-pic">
             <CgProfile /><br/>
-            <label className="name">{user.fname + ' ' + user.lname}</label>
+            <label className="name">{user?.fname + ' ' + user?.lname}</label>
             <br />
             <label className="role">Hya role hala</label>
           </div>
@@ -28,20 +40,21 @@ export default function Profile({}) {
           <p>Recent Contributions</p>
           <div className="recent-container">
             <ul>
-              <li>
-                <p>Owl Bamboo House</p>
-                <br />
-                <p>Sidemen,Bali,Indonesia</p>
-              </li>
-              <li>
-                <p>Owl Bamboo House</p>
-                <br />
-                <p>Sidemen,Bali,Indonesia</p>
-              </li>
+              {
+                contributions?.length && contributions?.map(c=>{
+                  return(<li>
+                    <p>{c.title || "Title here"}</p>
+                    <br />
+                    <p>{c.address || "Address here"}</p>
+                  </li>)
+                })
+              }
             </ul>
           </div>
           <button className="more-btn">More</button>
         </div>
+        <button onClick={() => dispatch(logout())} className="px-2 py3 border border-2 border-red-300">Logout</button>
+      </div>
       </div>
     );
     else
