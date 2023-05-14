@@ -1,6 +1,6 @@
-import { GrAdd,GrClose } from "react-icons/Gr";
+import React, { useState } from "react";
+import { GrAdd, GrClose } from "react-icons/Gr";
 import { AiOutlineClose } from "react-icons/Ai";
-import React, { useState,useEffect } from "react";
 import RatingStars from "../components/ratings";
 import PlaceOffers from "../components/offers";
 import MapSection from "../components/maps";
@@ -29,7 +29,7 @@ export default function Contribute() {
       const reader = new FileReader();
       reader.readAsDataURL(files[i]);
       reader.onload = () => {
-        setImages([...images, reader.result]);
+        setImages((prevImages) => [...prevImages, reader.result]);
       };
     }
   };
@@ -87,6 +87,7 @@ export default function Contribute() {
       alert('Please select one or more images');
     }
     setShowModal(true);
+  
 
    // console.log('Map Markers:', position);
     console.log('description:',placedesc);
@@ -205,4 +206,5 @@ export default function Contribute() {
       </div>
     </div>
   );
-}
+        }
+

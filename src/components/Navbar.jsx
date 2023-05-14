@@ -1,25 +1,47 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import khaltiLogo from "../assets/khaltiLogo.png";
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
 import "./Navbar.css";
-import { useSelector } from "react-redux";
 
 function Navbar() {
   const [searchValue, setSearchValue] = useState("");
-  const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  function handleSearchChange(event) {
+  const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
-  }
+  };
 
-  function clearSearch() {
+  const clearSearch = () => {
     setSearchValue("");
-  }
+  };
 
-  function search() {
+  const search = () => {
     console.log(`Searching for: ${searchValue}`);
-  }
+  };
+
+  const renderAuthLinks = () => {
+    if (isAuthenticated) {
+      return (
+        <Link className="nav--links" to="/profile">
+          Profile
+        </Link>
+      );
+    } else {
+      return (
+        <div className="nav--signup-login">
+          <Link className="nav--links" to="/login">
+            Login
+          </Link>{" "}
+          |{" "}
+          <Link className="nav--links" to="/signup">
+            Signup
+          </Link>
+        </div>
+      );
+    }
+  };
 
   return (
     <div className="nav--container">
@@ -35,11 +57,9 @@ function Navbar() {
           onChange={handleSearchChange}
         />
         {searchValue && (
-          <>
-            <button className="nav--search-clear" onClick={clearSearch}>
-              &#xD7;
-            </button>
-          </>
+          <button className="nav--search-clear" onClick={clearSearch}>
+            &#xD7;
+          </button>
         )}
       </div>
       <Link className="nav--links" to="/agencies">
@@ -51,17 +71,7 @@ function Navbar() {
       <Link className="nav--links" to="/contribute">
         Contribute
       </Link>
-      {!isAuthenticated &&
-      <div className="nav--signup_login">
-        <Link className="nav--links" to="/login">
-          Login
-        </Link>{" "}
-        |{" "}
-        <Link className="nav--links" to="/signup">
-          Signup
-        </Link>
-      </div>}
-      {isAuthenticated && <Link className="nav--links" to="/profile">Profile</Link>}
+      {renderAuthLinks()}
     </div>
   );
 }
