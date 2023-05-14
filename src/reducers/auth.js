@@ -62,6 +62,7 @@ export default function(state = initialState, action) {
                 isAuthenticated: false
             }
         case USER_LOADED_SUCCESS:
+            console.log(state, "Payload: ", payload)
             return {
                 ...state,
                 user: payload
