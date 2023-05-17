@@ -4,7 +4,9 @@ import { Navigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { load_user, logout } from "../actions/auth";
-import store from '../store'
+import store from '../store';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Profile({}) {
   const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
@@ -13,6 +15,10 @@ export default function Profile({}) {
   const user = useSelector(state => state.auth.user)
   const dispatch = useDispatch()
 
+  const navigate=useNavigate();
+  const handleEdit=()=>{
+    navigate('/editprofile');
+  }
   useEffect(()=>{
     dispatch(load_user())
   }, [])
@@ -28,7 +34,7 @@ export default function Profile({}) {
             <br />
             <label className="role">Hya role hala</label>
           </div>
-          <button className="edit-btn">Edit</button>
+          <button className="edit-btn" onClick={handleEdit}>Edit</button>
           <div className="level">
             <div className="level-bar"></div>
             <label>Level 1</label>
@@ -53,7 +59,7 @@ export default function Profile({}) {
           </div>
           <button className="more-btn">More</button>
         </div>
-        <button onClick={() => dispatch(logout())} className="px-2 py3 border border-2 border-red-300">Logout</button>
+        <button onClick={() => dispatch(logout())} className="logout-btn">Logout</button>
       </div>
       </div>
     );

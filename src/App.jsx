@@ -14,7 +14,8 @@ import {
   Reviews,
   Placeinfo,
   ResetPassword,
-  ResetPasswordConfirm
+  ResetPasswordConfirm,
+  EditProfile
 } from "./pages";
 import Facebook from './containers/Facebook';
 import Google from './containers/Google';
@@ -22,7 +23,7 @@ import Activate from './containers/Activate';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import Layout from './hocs/layout';
+
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/agencies" element={<Agencies />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path='/facebook' element={<Facebook/>} />

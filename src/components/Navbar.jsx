@@ -52,7 +52,7 @@ function Navbar() {
         <input
           className="nav--search"
           type="text"
-          placeholder="&#xF002; Search for places/destinations"
+          placeholder="&#xf002; Search for places/destinations"
           value={searchValue}
           onChange={handleSearchChange}
         />
