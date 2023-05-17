@@ -11,11 +11,12 @@ function Signup() {
         password: "",
         dob: "",
         email: "",
+        number: "",
     });
     const dispatch = useDispatch()
     function submit(e) {
         e.preventDefault();
-        dispatch(signup(credentials.fname, credentials.lname, credentials.email, credentials.password, credentials.password, credentials.dob))
+        dispatch(signup(credentials.fname, credentials.lname, credentials.email, credentials.password, credentials.password, credentials.dob, credentials.number))
     }
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -51,12 +52,12 @@ function Signup() {
                             onChange={(e)=>handleChange(e)}
                         />
 
-                        <label htmlFor="phone"> Phone number*</label>
+                        <label htmlFor="number"> Phone number*</label>
                         <input
                             className="signup--inputbox"
                             type="tel"
                             placeholder=""
-                            name="phone"
+                            name="number"
                             onChange={(e)=>handleChange(e)}
                         />
                         <label htmlFor="password"> Password*</label>
