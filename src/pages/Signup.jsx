@@ -16,7 +16,7 @@ function Signup() {
     const dispatch = useDispatch()
     function submit(e) {
         e.preventDefault();
-        dispatch(signup(credentials.fname, credentials.lname, credentials.email, credentials.password, credentials.password, credentials.dob, credentials.number))
+        dispatch(signup(credentials.fname, credentials.lname, credentials.email, credentials.number, credentials.password, credentials.password, credentials.dob))
     }
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
