@@ -4,7 +4,6 @@ import { FcGoogle } from "react-icons/fc";
 import "./Signup.css";
 import {signup} from "../actions/auth";
 import {useDispatch} from "react-redux";
-//import ReactCountryInput from "react-country-input";
 function Signup() {
     const [credentials, setCredentials] = useState({
         fname: "",
@@ -35,7 +34,7 @@ function Signup() {
                         className="signup--input"
                         method="POST"
                     >
-                        <label htmlFor="fname"> Front Name*</label>
+                        <label htmlFor="fname"> First Name*</label>
                         <input
                             className="signup--inputbox"
                             type="text"
@@ -43,7 +42,7 @@ function Signup() {
                             name="fname"
                             onChange={(e)=>handleChange(e)}
                         />
-<label htmlFor="fname"> Last Name*</label>
+                        <label htmlFor="fname"> Last Name*</label>
                         <input
                             className="signup--inputbox"
                             type="text"
