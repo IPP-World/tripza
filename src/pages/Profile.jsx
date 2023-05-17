@@ -44,6 +44,7 @@ export default function Profile({}) {
           </div>
           <div className="profile--userinfo">
         <div><h5 className="p-userinfo--email">{user?.email}</h5></div>
+        <div><h5 className="p-userinfo--email">{user?.number}</h5></div>
       </div>
       <button className="profile--edit-btn" onClick={handleEdit}>Edit Profile</button>
       <button className="profile--subscribe-btn" onClick={handleSubscribe}>Subscribe</button>
@@ -51,12 +52,15 @@ export default function Profile({}) {
 
         </div>
         <div className="profile--rightpart">
-          <div>
-            <p>Recent Contributions</p>
-            <div></div>
+          <div className="profile--booking--list">
+            <div><p>Booking List</p>
+            
             </div>
-          
-          <div className="recent-container">
+            <button className="more-btn">More</button>
+          </div>
+          <div className="profile--contribution">
+            <p>Recent Contributions</p>
+            <div className="profile--contribution--list">
             <ul>
               {
                 contributions?.length && contributions?.map(c=>{
@@ -69,9 +73,21 @@ export default function Profile({}) {
               }
             </ul>
           </div>
-          <button className="more-btn">More</button>
+            
+            </div>
+          
+          
+          <button className="cont--more--btn">More</button>
+        </div>
+        <div className="profile--saved">
+          <h5>Saved</h5>
+          //yeta saved map garne
+        </div>
+        <div className="Your hotel">
+          //Your hotel here
         </div>
       </div>
+      
     
     );
     else
