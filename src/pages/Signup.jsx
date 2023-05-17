@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import khaltiLogo from "../assets/khaltiLogo.png";
+import logo from "../assets/logo.png";
 import { FcGoogle } from "react-icons/fc";
 import "./Signup.css";
 import {signup} from "../actions/auth";
@@ -26,7 +27,7 @@ function Signup() {
     return (
         <div className="signup--page">
             <div className="signup--header">
-                <img src={khaltiLogo} alt="logo" />
+                <img src={logo} alt="logo" />
                 <h1 className="Createtext">Create your Tripza Account </h1>
             </div>
             <div className="signup--boxes">

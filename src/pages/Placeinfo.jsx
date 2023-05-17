@@ -11,6 +11,7 @@ import AgenciesNearby from "./AgenciesNearby";
 import "./PlaceInfo.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
+import { useNavigate } from 'react-router-dom';
 
 function PlaceInfo() {
   const states = Object.freeze({
@@ -21,7 +22,10 @@ function PlaceInfo() {
     ),
     NONE: <></>,
   });
-
+ const navigate=useNavigate();
+ const handleAddService=()=>{
+    navigate('/addservices');
+ }
   const carouselItems = [
     <img src={place}/>,
     <img src={place1}/>,
@@ -38,6 +42,7 @@ function PlaceInfo() {
           <h4 className="place--location">Machhapuchchhre 33700, Pokhara</h4>
         </div>
         <div className="place--sharesave">
+        <button className="profile--edit-btn" onClick={handleAddService}>Add service</button>
           <a href="#" className="place-share">
             <CiShare1 className="place-sharelogo" />
             Share

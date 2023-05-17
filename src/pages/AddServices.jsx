@@ -1,21 +1,21 @@
 import { GrAdd, GrClose } from "react-icons/Gr";
 import { AiOutlineClose } from "react-icons/Ai";
 import React, { useState, useEffect } from "react";
-import RatingStars from "../components/ratings";
+// import RatingStars from "../components/ratings";
 import PlaceOffers from "../components/offers";
 import MapSection from "../components/maps";
 import exifr from "exifr";
 import "./Contribute.css";
 
-export default function AddHotel() {
+export default function AddServices() {
   const [showModal, setShowModal] = useState(false);
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
 
   const [placedesc, setPlacedesc] = useState({
     placeName: "",
-    placeDescription: "",
-    review: "",
+    // review: "",
+    placeDescription: ""
   });
   const handleChange = (e) => {
     setPlacedesc({ ...placedesc, [e.target.name]: e.target.value });
@@ -65,13 +65,6 @@ export default function AddHotel() {
   };
 
   const Popup = () => {
-    const [level, setLevel] = useState(0);
-    const handleIncreaseLevel = () => {
-      setLevel((prevLevel) => prevLevel + 1);
-    };
-    useEffect(() => {
-      handleIncreaseLevel();
-    }, []);
     return (
       <>
         <div className="reward-wrapper" onClick={handleCloseModal}></div>
@@ -83,33 +76,7 @@ export default function AddHotel() {
             <AiOutlineClose />
           </div>
           <p className="reward--text1">Congratulations</p>
-          <p className="reward--text2">You contributed a place</p>
-          <div className="reward-points">Reward points</div>
-          <div className="level">
-            <div
-              style={{
-                width: "400px",
-                backgroundColor: "grey",
-                height: "20px",
-                borderRadius: "10px",
-              }}
-            >
-              <div
-                style={{
-                  width: `${level * 10}%`,
-                  backgroundColor: "#0F4C5C",
-                  height: "20px",
-                  borderRadius: "10px",
-                  display: "inline-flex",
-                  maxWidth: "100%",
-                  minWidth: "6%",
-                }}
-              ></div>
-            </div>
-          </div>
-          <div style={{ marginLeft: "17rem", marginTop: "1rem" }}>
-            Level {level}
-          </div>
+          <p className="reward--text2">You successfully added a service</p>
         </div>
       </>
     );
@@ -121,9 +88,9 @@ export default function AddHotel() {
   const handleOffersSelected = (selectedOffers) => {
     console.log("offers:", selectedOffers);
   };
-  const handleRating = (rating) => {
-    console.log("rating:", rating);
-  };
+  // const handleRating = (rating) => {
+  //   console.log("rating:", rating);
+  // };
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -143,7 +110,7 @@ export default function AddHotel() {
     // console.log('Map Markers:', position);
     console.log("description:", placedesc);
     handleOffersSelected;
-    handleRating;
+    //handleRating;
 
     //const latitude = position.lat;
     //const longitude = position.lng;
@@ -170,7 +137,7 @@ export default function AddHotel() {
   return (
     <div className="contribute-container">
       <div className="left-part">
-        <div className="contribute-text">Contribute a place</div>
+        <div className="contribute-text">Add a service</div>
         <div className="places-container">
     <ul>
       {images.map((imageWithMetadata, index) => (
@@ -219,12 +186,12 @@ export default function AddHotel() {
               value={placedesc.placeDescription}
               onChange={handleChange}
             />
-            <div className="place-offers-text">What this place offers</div>
+            <div className="place-offers-text">Services provided</div>
             <div className="reviews">
               <PlaceOffers onOffersSelected={handleOffersSelected} />
             </div>
 
-            <div className="review-text">Your review of the place</div>
+            {/* <div className="review-text">Your review of the place</div>
 
             <div className="review">
               <RatingStars sendRating={handleRating} />
@@ -238,7 +205,7 @@ export default function AddHotel() {
                 onChange={handleChange}
                 value={placedesc.review}
               />
-            </div>
+            </div> */}
             <div className="checkbox">
               <label required>
                 <input
