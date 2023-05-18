@@ -16,6 +16,16 @@
     color: #0F4C5C;
     cursor: pointer;
   }
+  .place--offerlist-add input{
+    border: 1px solid #0F4C5C;
+    border-radius: 24px;
+    min-width: 155px;
+    text-align: center;
+    margin-top: 10px;
+    margin-right: 10px;
+    color: #0F4C5C;
+    cursor: pointer;
+  }
   .place--offerlists:hover,
   .place--offerlists:active {
   background-color: #0F4C5C;

@@ -50,19 +50,20 @@
     margin-right: 8px;
     border-radius: 7px;
 }
-.add-box{
+/* .add-box{
     height: 300px;
     width: 300px;
     margin-left: 20px;
     border-radius: 7px;
     border: 1px solid #0F4C5C;
-}
+} */
 .add{
     margin-top: 45px;
      
 }
 .imageContainer {
     position: relative;
+    /* height: 400px; */
   }
   
   .delete-button {
@@ -140,9 +141,11 @@ margin-bottom: 15px;
     width: 385px;
     padding: 5px 5px 5px;
 }
+
 .checkbox label{
     font-size: 13px;
     margin-left: 0px;
+
 }
 .checkbox input {
     margin-top:15px;

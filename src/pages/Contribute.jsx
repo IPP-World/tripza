@@ -242,6 +242,7 @@ export default function Contribute() {
             <div className="checkbox">
               <label required>
                 <input
+                
                   type="checkbox"
                   checked={legitChecked}
                   onChange={() => setLegitChecked(!legitChecked)}

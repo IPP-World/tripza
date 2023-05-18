@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
@@ -8,6 +8,12 @@ import "./Navbar.css";
 function Navbar() {
   const [searchValue, setSearchValue] = useState("");
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const location = useLocation();
+  const hideNavbar =
+    location.pathname === "/login" || location.pathname === "/signup";
+  if (hideNavbar) {
+    return null;
+  }
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -43,6 +49,26 @@ function Navbar() {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const navbar = document.querySelector('.nav--container');
+      if (navbar) {
+        if (window.pageYOffset > 0) {
+          navbar.classList.add('sticky');
+        } else {
+          navbar.classList.remove('sticky');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div className="nav--container">
       <Link to="/">
@@ -62,11 +88,8 @@ function Navbar() {
           </button>
         )}
       </div>
-      <Link className="nav--links" to="/agencies">
-        Agencies
-      </Link>
       <Link className="nav--links" to="/hotels">
-        Hotels
+        Services
       </Link>
       <Link className="nav--links" to="/contribute">
         Contribute
