@@ -1,9 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
-
-from .models import Place
-from .serializers import PlaceSerializer
+from rest_framework import status, generics
+from django.shortcuts import get_object_or_404
+from django.http import Http404
+from .models import Place, Review
+from .serializers import PlaceSerializer, ReviewSerializer
 from rest_framework.permissions import IsAuthenticated
 
 class PlaceListAPIView(APIView):
@@ -50,3 +51,18 @@ class PlaceDetailAPIView(APIView):
         place = self.get_object(slug)
         place.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+class ReviewListCreateAPIView(generics.ListCreateAPIView):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        place_slug = self.kwargs['place_slug']
+        place = Place.objects.get(slug=place_slug)
+        queryset = Review.objects.filter(place=place)
+        return queryset
+
+    def perform_create(self, serializer):
+        place_slug = self.kwargs['place_slug']
+        place = Place.objects.get(slug=place_slug)
+        serializer.save(place=place, reviewer=self.request.user)
