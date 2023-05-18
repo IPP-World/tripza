@@ -23,5 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 __pycache**
-venv/*
+venv
 db.sqlite3*
