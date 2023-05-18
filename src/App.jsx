@@ -24,10 +24,7 @@ import Activate from './containers/Activate';
 import { Provider } from 'react-redux';
 import store from './store';
 
-
-
 function App() {
-
   return (
     <Provider store={store}>
       <Router>
@@ -42,7 +39,7 @@ function App() {
           <Route path='/facebook' element={<Facebook/>} />
           <Route path='/google' element={<Google/>} />
           <Route path='/reset-password' element={<ResetPassword/>} />
-          <Route path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm/>} />
+          <Route path='/api/user/reset/:uid/:token' element={<ResetPasswordConfirm/>} />
           <Route path='/activate/:uid/:token' element={<Activate/>} />
           <Route path="/contribute" element={<Contribute />} />
           <Route path="/hotels" element={<Hotels />} />
