@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import khaltiLogo from "../assets/khaltiLogo.png";
 import { FcGoogle } from "react-icons/fc";
 import "./Signup.css";
-import {signup} from "../actions/auth";
-import {useDispatch} from "react-redux";
+import { Navigate } from "react-router";
+import axios from "axios";
+
 function Signup() {
     const [credentials, setCredentials] = useState({
         fname: "",
@@ -13,17 +14,40 @@ function Signup() {
         email: "",
         number: "",
     });
-    const dispatch = useDispatch()
+    const [signupSuccess, setSignUpSuccess] = useState(false)
     function submit(e) {
+        console.log("Submitting")
         e.preventDefault();
-        dispatch(signup(credentials.fname, credentials.lname, credentials.email, credentials.number, credentials.password, credentials.password, credentials.dob))
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+    
+        const body = JSON.stringify({ 
+            fname: credentials.fname, 
+            lname: credentials.lname, 
+            email: credentials.email, 
+            number:credentials.number,
+            password: credentials.password,
+            password2: credentials.password,
+            dob: credentials.dob
+        });
+        
+
+        axios.post(`${process.env.REACT_APP_API_URL}/api/user/register/`, body, config).then(r=>setSignUpSuccess(true)).catch(e=>{
+            console.error(e)
+            alert("Error signing up")
+        })
     }
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
-        console.log(credentials)
     };
+
+    if(signupSuccess)
+        return <Navigate to="/login"/>
     
-    return (
+        return (
         <div className="signup--page">
             <div className="signup--header">
                 <img src={khaltiLogo} alt="logo" />
@@ -66,6 +90,7 @@ function Signup() {
                             type="password"
                             placeholder=""
                             name="password"
+                            minLength="6"
                             onChange={(e)=>handleChange(e)}
                         />
                         <label htmlFor="dateofbirth"> Date of birth*</label>

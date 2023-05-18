@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import khaltiLogo from "../assets/khaltiLogo.png";
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
@@ -8,7 +8,13 @@ import "./Navbar.css";
 function Navbar() {
   const [searchValue, setSearchValue] = useState("");
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const location=useLocation();
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
 
+  if (hideNavbar) {
+    return null; // Don't render the navbar
+  }
+  
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
   };

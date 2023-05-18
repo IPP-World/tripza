@@ -4,7 +4,6 @@ import { Navigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { load_user, logout } from "../actions/auth";
-import store from '../store';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -22,7 +21,6 @@ export default function Profile({}) {
   useEffect(()=>{
     dispatch(load_user())
   }, [])
-  console.log(store.getState())
   const handleSubscribe = () => {}
   if(isAuthenticated)
     return (
