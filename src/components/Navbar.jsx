@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link,useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import khaltiLogo from "../assets/khaltiLogo.png";
+import logo from "../assets/logo.png";
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
 import "./Navbar.css";
 
@@ -52,7 +52,7 @@ function Navbar() {
   return (
     <div className="nav--container">
       <Link to="/">
-        <img className="nav--logo" src={khaltiLogo} alt="Logo" />
+        <img className="nav--logo" src={logo} alt="Logo" />
       </Link>
       <div className="nav--search-container">
         <input

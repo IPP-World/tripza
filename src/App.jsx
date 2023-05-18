@@ -15,7 +15,8 @@ import {
   Placeinfo,
   ResetPassword,
   ResetPasswordConfirm,
-  EditProfile
+  EditProfile,
+  AddServices
 } from "./pages";
 import Facebook from './containers/Facebook';
 import Google from './containers/Google';
@@ -45,6 +46,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/reviews" element={<Reviews/>} />
           <Route path="/placeinfo" element={<Placeinfo />} />
+          <Route path="/addservices" element={<AddServices />} />
         </Routes>
       </Router>
     </Provider>

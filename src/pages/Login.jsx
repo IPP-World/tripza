@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-import khalti from "../assets/khaltiLogo.png";
+import logo from "../assets/logo.png";
 const Login = ({ login, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         email: "",
@@ -51,7 +51,7 @@ const Login = ({ login, isAuthenticated }) => {
     return (
         <div className="loginpage">
             <div className="box">
-                <img src={khalti}></img>
+                <img src={logo}></img>
                 <h1>Welcome</h1>
                 <p>We are glad to see you.</p>
                 <form onSubmit={(e) => onSubmit(e)}>
