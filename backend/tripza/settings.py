@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'accounts',
-    'tripza'
+    'tripza',
+    'places',
 ]
 
 MIDDLEWARE = [
