@@ -4,8 +4,8 @@ from django.utils.text import slugify
 class Place(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=50, decimal_places=10)
+    longitude = models.DecimalField(max_digits=50, decimal_places=10)
     slug = models.SlugField(unique=True, blank=True)
     is_verified = models.BooleanField(default=False)
     contributor = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -25,7 +25,3 @@ dist-ssr
 __pycache**
 venv
 db.sqlite3*
-
-__pycache**
-venv
-db.sqlite3*

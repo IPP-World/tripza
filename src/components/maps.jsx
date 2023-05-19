@@ -12,7 +12,7 @@ const Recenter = ({ lat, lng }) => {
 };
 
 const MapSection = ({ onLocationSelect }) => {
-  const [mapCenter, setMapCenter] = useState([30.255673, 83.978599]);
+  const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {

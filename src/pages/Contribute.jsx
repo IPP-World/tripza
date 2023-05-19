@@ -5,20 +5,71 @@ import RatingStars from "../components/ratings";
 import PlaceOffers from "../components/offers";
 import MapSection from "../components/maps";
 import exifr from "exifr";
+import axios from "axios";
 import "./Contribute.css";
 
+function isPhotoInCircle(photoLat, photoLng, circleCenterLat, circleCenterLng, circleRadius) {
+  const earthRadius = 6371; // Earth's radius in kilometers
+
+  // Convert coordinates to radians
+  const photoLatRad = toRadians(photoLat);
+  const photoLngRad = toRadians(photoLng);
+  const circleCenterLatRad = toRadians(circleCenterLat);
+  const circleCenterLngRad = toRadians(circleCenterLng);
+  console.log('photolatitude in radian',photoLatRad );
+  console.log('photolongitude in radian',photoLngRad );
+  console.log('circlecenterlat',circleCenterLatRad);
+  console.log('circlecenterlng',circleCenterLngRad);
+
+  // Calculate the distance between the photo's location and the circle center using the Haversine formula
+  const deltaLat = photoLatRad - circleCenterLatRad;
+  const deltaLng = photoLngRad - circleCenterLngRad;
+  console.log('deltalat:',deltaLat);
+  const a =
+    Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+    Math.cos(circleCenterLatRad) *
+      Math.cos(photoLatRad) *
+      Math.sin(deltaLng / 2) *
+      Math.sin(deltaLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = earthRadius * c;
+
+  // Check if the distance is within the circle's radius
+  return distance <= circleRadius;
+}
+
+// Helper function to convert degrees to radians
+function toRadians(degrees) {
+  return degrees * (Math.PI / 180);
+}
+
+
+
 export default function Contribute() {
+  const [imageAdded,setImageAdded]=useState(false);
+  const [ratingValue,setRatingValue]= useState(null);
+  const [positionMarked, setPositionMarked] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
+  const [photolat, setPhotolat] = useState(null);
+  const [photolon, setPhotolon] = useState(null);
+  const [maplat, setMaplat] = useState(null);
+  const [maplon, setMaplon] = useState(null);
+  const [isWithinCircle,setIsWithinCircle]=useState(false);
 
-  const [placedesc, setPlacedesc] = useState({
-    placeName: "",
-    placeDescription: "",
-    review: "",
-  });
+  const [placedetails,setPlacedetails]=useState({
+    name: "",
+    description: "",
+    // selectedOffers:"",
+    //rating:"",
+    // latitude:"",
+    // longitude:"",
+    // isVerified:""
+    });
+
   const handleChange = (e) => {
-    setPlacedesc({ ...placedesc, [e.target.name]: e.target.value });
+    setPlacedetails({ ...placedetails, [e.target.name]: e.target.value });
   };
 
   const handleCloseModal = () => {
@@ -30,21 +81,41 @@ export default function Contribute() {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const reader = new FileReader();
-  
+      
       reader.onload = async () => {
         const imageData = reader.result;
-  
+        
         try {
           const exifData = await exifr.gps(imageData);
-          let latitude,longitude;
           if (exifData && exifData.latitude && exifData.longitude) {
-            latitude = exifData.latitude;
-            longitude = exifData.longitude;
+            setPhotolat (exifData.latitude);
+            setPhotolon (exifData.longitude);
+  
+            // Check if the photo's location falls within the circular area
+            const circleCenterLat = maplat; // Latitude of the circle center
+            const circleCenterLng =maplon ; // Longitude of the circle center
+            const circleRadius = 5; // Radius of the circle in kilometers
+  
+            const isWithinCurrentCircle = isPhotoInCircle(
+              photolat,
+              photolon,
+              circleCenterLat,
+              circleCenterLng,
+              circleRadius
+            );
+            console.log("Is within circle:", isWithinCurrentCircle);
+  
+            // Update the flag variable if any photo is within the circle
+            if (isWithinCurrentCircle) {
+              setIsWithinCircle(true);
+            }
           }
+  
           const metadata = {
-            location: { latitude, longitude },
+            location: { photolat, photolon },
           };
-           console.log([latitude,longitude]);
+          
+          console.log('image location:',[photolat, photolon]);
           const objectURL = URL.createObjectURL(file);
           const imageWithMetadata = { objectURL, metadata };
           setImages([...images, imageWithMetadata]);
@@ -52,16 +123,23 @@ export default function Contribute() {
           console.error('Error extracting metadata:', error);
         }
       };
-  
+      setImageAdded(true);
       reader.readAsDataURL(file);
     }
   };
-
+  
 
   const handleImageDelete = (index) => {
     const newImages = [...images];
     newImages.splice(index, 1);
     setImages(newImages);
+    console.log(index);
+    if(index==0){
+      setImageAdded(false);
+    }
+    else{
+      setImageAdded(true);
+    }
   };
 
   const Popup = () => {
@@ -114,20 +192,46 @@ export default function Contribute() {
       </>
     );
   };
-  const handleLocationSelect = (location) => {
-    console.log("Selected Location:", location);
-  };
 
+  const handleLocationSelect = (position) => {
+    console.log("Selected Location:", position);
+    setMaplat(position.latitude);
+    setMaplon(position.longitude);
+    const circleCenterLat = maplat; // Latitude of the circle center
+    const circleCenterLng = maplon; // Longitude of the circle center
+    const circleRadius = 5; // Radius of the circle in kilometers
+    console.log('photo latitude:',photolat);
+    if(photolat && photolon){
+    const isWithinCurrentCircle = isPhotoInCircle(
+      photolat,
+      photolon,
+      circleCenterLat,
+      circleCenterLng,
+      circleRadius
+    );
+    console.log("Is within circle:", isWithinCurrentCircle);
+    if (isWithinCurrentCircle) {
+      setIsWithinCircle(true);
+    }
+    else{
+      setIsWithinCircle(false);
+    }
+  }
+    setPositionMarked(true);
+  };
   const handleOffersSelected = (selectedOffers) => {
     console.log("offers:", selectedOffers);
   };
   const handleRating = (rating) => {
     console.log("rating:", rating);
+    setRatingValue(rating);
   };
+
+
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (!location) {
+    if (!positionMarked) {
       alert("Please select a location in the map");
       return;
     }
@@ -135,39 +239,45 @@ export default function Contribute() {
       alert("Please confirm that the information you submitted is legit");
       return;
     }
-    if (!images) {
-      alert("Please select one or more images");
+     if (!imageAdded) {
+       alert("Please select one or more images");
+       return;
+     }
+     if (!ratingValue) {
+      alert("Please give your ratings");
+      return;
     }
     setShowModal(true);
 
-    // console.log('Map Markers:', position);
-    console.log("description:", placedesc);
-    handleOffersSelected;
-    handleRating;
-
-    //const latitude = position.lat;
-    //const longitude = position.lng;
-    const form = e.target;
-    const formData = new FormData(form);
-    // formData.append('latitude', latitude);
-    //formData.append('longitude', longitude);
-    //formData.append('image',imageFile);
-    //formData.append('rating',rating);
-    fetch("/api/contribute/", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Form data sent successfully");
-        } else {
-          console.error("Error sending form data");
-        }
+   // console.log("description:", placedesc);
+   // handleOffersSelected;
+   // handleRating;
+    console.log('correct metadata:',isWithinCircle);
+    
+    const config ={
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access')}`
+      }
+    };
+    const body = JSON.stringify({
+      name: placedetails.name,
+      description:placedetails.description,
+      latitude:"21.56",
+      longitude:"80.96",
+      is_verified:isWithinCircle,
+      rating:ratingValue
+    });
+    axios.post(`${process.env.REACT_APP_API_URL}/api/place/`, body, config)
+ .catch(e=>
+      {
+        console.error(e)
+        alert("Error sending details")
       })
-      .catch((error) => console.error(error));
   };
 
   return (
+    <form onSubmit={submitHandler}>
     <div className="contribute-container">
       <div className="left-part">
         <div className="contribute-text">Contribute a place</div>
@@ -195,29 +305,29 @@ export default function Contribute() {
       </li>
     </ul>
   </div>
-
         <div className="maps-container">
-          <MapSection onLocationSelect={handleLocationSelect} />
+        <MapSection onLocationSelect={handleLocationSelect} />
         </div>
       </div>
       <div className="right-part">
         <div className="place-info">
-          <form onSubmit={submitHandler}>
             <input
               className="place-name1"
               type="text"
-              name="placeName"
+              name="name"
               placeholder="Name of the place"
-              value={placedesc.placeName}
+              value={placedetails.name}
               onChange={handleChange}
+              required
             />
             <input
               className="place-name2"
               type="text"
-              name="placeDescription"
+              name="description"
               placeholder="Description of the place"
-              value={placedesc.placeDescription}
+              value={placedetails.description}
               onChange={handleChange}
+              required
             />
             <div className="place-offers-text">What this place offers</div>
             <div className="reviews">
@@ -236,7 +346,7 @@ export default function Contribute() {
                 name="review"
                 placeholder="Review Here"
                 onChange={handleChange}
-                value={placedesc.review}
+                value={placedetails.review}
               />
             </div>
             <div className="checkbox">
@@ -255,10 +365,10 @@ export default function Contribute() {
               Submit
             </button>
             {showModal && <Popup />}
-          </form>
         </div>
       </div>
     </div>
+   </form>
   );
         }
 
