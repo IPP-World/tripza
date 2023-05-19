@@ -1,6 +1,9 @@
 from django.db import models
 from accounts.models import User
 from django.utils.text import slugify
+from django.db.models import Avg
+
+    
 class Place(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -10,7 +13,6 @@ class Place(models.Model):
     is_verified = models.BooleanField(default=False)
     contributor = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.DecimalField(max_digits=3, decimal_places=2)
-
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -36,6 +38,16 @@ class Place(models.Model):
         return self.name
 
 
+class Review(models.Model):
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.DecimalField(max_digits=3, decimal_places=2)
+    description = models.TextField()
+    review_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.reviewer.username} for {self.place.name}"
+    
 class PlaceImage(models.Model):
     place = models.ForeignKey(Place, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='place_images/', null=True)

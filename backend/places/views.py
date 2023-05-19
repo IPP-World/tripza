@@ -1,11 +1,18 @@
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
-
-from .models import Place
-from .serializers import PlaceSerializer
+from rest_framework import status, generics
+from django.shortcuts import get_object_or_404
+from django.http import Http404
+from .models import Place, Review
+from .serializers import PlaceSerializer, ReviewSerializer
+from rest_framework import status, generics
+from django.shortcuts import get_object_or_404
+from django.http import Http404
+from .models import Place, Review
+from .serializers import PlaceSerializer, ReviewSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Avg
 
 class PlaceListAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -50,4 +57,31 @@ class PlaceDetailAPIView(APIView):
     def delete(self, request, slug):
         place = self.get_object(slug)
         place.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+class ReviewListCreateAPIView(generics.ListCreateAPIView):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        place_slug = self.kwargs['place_slug']
+        place = Place.objects.get(slug=place_slug)
+        queryset = Review.objects.filter(place=place)
+        return queryset
+
+    def perform_create(self, serializer):
+        place_slug = self.kwargs['place_slug']
+        place = Place.objects.get(slug=place_slug)
+        reviewer = self.request.user
+        rating = serializer.validated_data['rating']
+
+        # Calculate the average rating including the new rating
+        average_rating = Review.objects.filter(place=place).aggregate(avg_rating=Avg('rating'))['avg_rating']
+        if average_rating is not None:
+            new_rating_count = Review.objects.filter(place=place).count() + 1
+            average_rating = (average_rating * (new_rating_count - 1) + rating) / new_rating_count
+        else:
+            average_rating = rating
+
+        place.rating = round(average_rating, 2)
+        place.save()
+        serializer.save(place=place, reviewer=reviewer)
