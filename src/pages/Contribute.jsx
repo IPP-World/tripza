@@ -230,28 +230,28 @@ export default function Contribute() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const circleCenterLat = maplat; // Latitude of the circle center
-     const circleCenterLng = maplon; // Longitude of the circle center
-     console.log(circleCenterLat);
-     console.log(circleCenterLng);
-     const circleRadius = 5; // Radius of the circle in kilometers
-     console.log('photo latitude:',photolat);
-     if(photolat && photolon){
-     const isWithinCurrentCircle = isPhotoInCircle(
-       photolat,
-       photolon,
-       circleCenterLat,
-       circleCenterLng,
-       circleRadius
-     );
-     console.log("Is within circle:", isWithinCurrentCircle);
-     if (isWithinCurrentCircle=='true') {
-       setIsWithinCircle(true);
-     }
-     else{
-       setIsWithinCircle(false);
-     }
-    }
+    // const circleCenterLat = maplat; // Latitude of the circle center
+    //  const circleCenterLng = maplon; // Longitude of the circle center
+    //  console.log(circleCenterLat);
+    //  console.log(circleCenterLng);
+    //  const circleRadius = 5; // Radius of the circle in kilometers
+    //  console.log('photo latitude:',photolat);
+    //  if(photolat && photolon){
+    //  const isWithinCurrentCircle = isPhotoInCircle(
+    //    photolat,
+    //    photolon,
+    //    circleCenterLat,
+    //    circleCenterLng,
+    //    circleRadius
+    //  );
+    //  console.log("Is within circle:", isWithinCurrentCircle);
+    //  if (isWithinCurrentCircle=='true') {
+    //    setIsWithinCircle(true);
+    //  }
+    //  else{
+    //    setIsWithinCircle(false);
+    //  }
+    //}
     
 
     if (!positionMarked) {
@@ -275,7 +275,7 @@ export default function Contribute() {
    // console.log("description:", placedesc);
    // handleOffersSelected;
    // handleRating;
-    console.log('correct metadata:',isWithinCircle);
+   // console.log('correct metadata:',isWithinCircle);
     
     const config ={
       headers:{
@@ -286,9 +286,10 @@ export default function Contribute() {
     const body = JSON.stringify({
       name: placedetails.name,
       description:placedetails.description,
-      latitude:"21.56",
-      longitude:"80.96",
-      is_verified:isWithinCircle,
+      latitude:maplat,
+      longitude:maplon,
+      metalatitude:photolat,
+      metalongitude:photolon,
       rating:ratingValue
     });
     axios.post(`${process.env.REACT_APP_API_URL}/api/place/`, body, config)
