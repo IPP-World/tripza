@@ -105,7 +105,7 @@ function PlaceInfo() {
               >
                 Agencies
               </button>
-              <button className="profile--edit-btn" onClick={handleAddService}>Add service</button>
+              <button className="service--add-btn" onClick={handleAddService}>Add service</button>
             </div>
           </div>
           <div className="descreview-divider"></div>
