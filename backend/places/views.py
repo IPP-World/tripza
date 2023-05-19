@@ -5,6 +5,11 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 from .models import Place, Review
 from .serializers import PlaceSerializer, ReviewSerializer
+from rest_framework import status, generics
+from django.shortcuts import get_object_or_404
+from django.http import Http404
+from .models import Place, Review
+from .serializers import PlaceSerializer, ReviewSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Avg
 
@@ -51,7 +56,6 @@ class PlaceDetailAPIView(APIView):
     def delete(self, request, slug):
         place = self.get_object(slug)
         place.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
     
 
 class ReviewListCreateAPIView(generics.ListCreateAPIView):
