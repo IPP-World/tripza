@@ -10,7 +10,7 @@ import axios from "axios";
 
 export default function Profile({}) {
   const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
-  const contributions = useSelector(state=>state.auth.contriubtions)
+  const contributions = useSelector(state=>state.auth.contributions)
 
   const user = useSelector(state => state.auth.user)
   const dispatch = useDispatch()

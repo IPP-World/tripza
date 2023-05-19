@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { Navigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { verify } from '../actions/auth';
 
 const Activate = ({ verify }) => {
     const [verified, setVerified] = useState(false);
     const {uid, token} = useParams()
-
+    
     const verify_account = e => {
-
+        
         verify(uid, token);
         setVerified(true);
     };
-
+    
+    navigate=useNavigate();
     if (verified) {
-        return <Navigate to='/login' />
+        navigate('/login');
     }
 
     return (
