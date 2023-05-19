@@ -8,40 +8,40 @@ import exifr from "exifr";
 import axios from "axios";
 import "./Contribute.css";
 
-function isPhotoInCircle(photoLat, photoLng, circleCenterLat, circleCenterLng, circleRadius) {
-  const earthRadius = 6371; // Earth's radius in kilometers
+// function isPhotoInCircle(photoLat, photoLng, circleCenterLat, circleCenterLng, circleRadius) {
+//   const earthRadius = 6371; // Earth's radius in kilometers
 
-  // Convert coordinates to radians
-  const photoLatRad = toRadians(photoLat);
-  const photoLngRad = toRadians(photoLng);
-  const circleCenterLatRad = toRadians(circleCenterLat);
-  const circleCenterLngRad = toRadians(circleCenterLng);
-  console.log('photolatitude in radian',photoLatRad );
-  console.log('photolongitude in radian',photoLngRad );
-  console.log('circlecenterlat',circleCenterLatRad);
-  console.log('circlecenterlng',circleCenterLngRad);
+//   // Convert coordinates to radians
+//   const photoLatRad = toRadians(photoLat);
+//   const photoLngRad = toRadians(photoLng);
+//   const circleCenterLatRad = toRadians(circleCenterLat);
+//   const circleCenterLngRad = toRadians(circleCenterLng);
+//   console.log('photolatitude in radian',photoLatRad );
+//   console.log('photolongitude in radian',photoLngRad );
+//   console.log('circlecenterlat',circleCenterLatRad);
+//   console.log('circlecenterlng',circleCenterLngRad);
 
-  // Calculate the distance between the photo's location and the circle center using the Haversine formula
-  const deltaLat = photoLatRad - circleCenterLatRad;
-  const deltaLng = photoLngRad - circleCenterLngRad;
-  console.log('deltalat:',deltaLat);
-  const a =
-    Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
-    Math.cos(circleCenterLatRad) *
-      Math.cos(photoLatRad) *
-      Math.sin(deltaLng / 2) *
-      Math.sin(deltaLng / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = earthRadius * c;
+//   // Calculate the distance between the photo's location and the circle center using the Haversine formula
+//   const deltaLat = photoLatRad - circleCenterLatRad;
+//   const deltaLng = photoLngRad - circleCenterLngRad;
+//   console.log('deltalat:',deltaLat);
+//   const a =
+//     Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+//     Math.cos(circleCenterLatRad) *
+//       Math.cos(photoLatRad) *
+//       Math.sin(deltaLng / 2) *
+//       Math.sin(deltaLng / 2);
+//   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//   const distance = earthRadius * c;
 
-  // Check if the distance is within the circle's radius
-  return distance <= circleRadius;
-}
+//   // Check if the distance is within the circle's radius
+//   return distance <= circleRadius;
+// }
 
-// Helper function to convert degrees to radians
-function toRadians(degrees) {
-  return degrees * (Math.PI / 180);
-}
+// // Helper function to convert degrees to radians
+// function toRadians(degrees) {
+//   return degrees * (Math.PI / 180);
+// }
 
 
 
@@ -56,7 +56,7 @@ export default function Contribute() {
   const [photolon, setPhotolon] = useState(null);
   const [maplat, setMaplat] = useState(null);
   const [maplon, setMaplon] = useState(null);
-  const [isWithinCircle,setIsWithinCircle]=useState(false);
+  // const [isWithinCircle,setIsWithinCircle]=useState(false);
 
   const [placedetails,setPlacedetails]=useState({
     name: "",

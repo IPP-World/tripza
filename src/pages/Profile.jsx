@@ -43,27 +43,22 @@ export default function Profile({}) {
  
       <div className="profile--container">
         <div className="profile--leftpart">
-          <div className="profile--pic">
-            <CgProfile /><br/>
-            <label className="profile--name">{user?.fname + ' ' + user?.lname}</label>
+          <div className="profile--content">
+            <div className="profile--pic"></div>
+            <label className="profile--name">{user?.fname + ' ' + user?.lname}
+            <span className="profile--role">service owner</span>
+            </label>
             <br />
-            <label className="profile--role">Hya role hala</label>
-          </div>
-          
-          <div className="profile--level">
-            <div className="profile--level-bar"></div>
-            <label>Level 1</label>
-            <br />
-            <label>69/100</label>
           </div>
           <div className="profile--userinfo">
         <div><h5 className="p-userinfo--email">{user?.email}</h5></div>
         <div><h5 className="p-userinfo--email">{user?.number}</h5></div>
       </div>
+      <div className="profile--buttons">
       <button className="profile--edit-btn" onClick={handleEdit}>Edit Profile</button>
       <button className="profile--subscribe-btn" onClick={handleSubscribe}>Subscribe</button>
       <button onClick={() => dispatch(logout())} className="logout-btn">Logout</button>
-
+       </div>
         </div>
         <div className="profile--rightpart">
           <div className="profile--booking--list">

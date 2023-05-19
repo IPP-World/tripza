@@ -3,3 +3,48 @@
   justify-content: center;
   
 }
+.profile--leftpart{
+  margin-top:1.5rem;
+  margin-right:5rem;
+}
+.profile--content{
+  justify-content:center;
+}
+.profile--pic{
+    height: 201px;
+    width: 201px;
+    background-color: darkgrey;
+    border-radius: 50%;
+    box-shadow: 0 0 7px #0F4C5C;
+    margin-bottom:12px;
+}
+.profile--name{
+  justify-self: center;
+  margin-left:2.2rem;
+  padding:5px;
+  font-size:20px;
+}
+.profile--role{
+  padding: 1.2px;
+  color: black;
+  font-size:8.5px;
+  background: goldenrod;
+  border-radius: 35px;
+  box-shadow: 0 0 5px gold;
+}
+.profile--userinfo{
+  margin:10px;
+}
+.p-userinfo--email{
+  margin-bottom: 7px;
+}
+.profile--buttons{
+  margin-top: 35px;
+  display: flex;
+  gap: 19px;
+  flex-direction: column;
+  width: 119px;
+}
+.profile--rightpart{
+  margin:10px;
+}
