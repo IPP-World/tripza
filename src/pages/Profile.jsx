@@ -13,15 +13,16 @@ export default function Profile({}) {
   const contributions = useSelector(state=>state.auth.contributions)
 
   const user = useSelector(state => state.auth.user)
+  useEffect(()=>{
+    dispatch(load_user())
+  }, [])
+
   const dispatch = useDispatch()
 
   const navigate=useNavigate();
   const handleEdit=()=>{
-    navigate('/editprofile');
+    navigate('/profile/editprofile');
   }
-  useEffect(()=>{
-    dispatch(load_user())
-  }, [])
   const handleSubscribe = () => {
     let config = {
       publicKey: "test_public_key_1bc1b5b65fb14323bd5b06c4938e7e90",
