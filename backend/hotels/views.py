@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from django.shortcuts import get_object_or_404
 from django.http import Http404
-from .models import Hotel, HotelReview, HotelImage
+from .models import Hotel, HotelReview, HotelImage, KhaltiValidation
 from .serializers import HotelSerializer, HotelReviewSerializer, HotelImageSerializer, KhaltiValidationSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Avg
@@ -92,3 +92,17 @@ class KhaltiValidationView(APIView):
             serialized_data = KhaltiValidationSerializer(instance).data
             return Response(serialized_data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def get(self, request):
+        validations = KhaltiValidation.objects.all()
+        serializer = KhaltiValidationSerializer(validations, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    
+
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+@api_view(['GET'])
+def get_validation_data(request):
+    validations = KhaltiValidation.objects.all()
+    serializer = KhaltiValidationSerializer(validations, many=True)
+    return JsonResponse(serializer.data, safe=False)

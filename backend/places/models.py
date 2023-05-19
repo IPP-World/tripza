@@ -2,13 +2,18 @@ from django.db import models
 from accounts.models import User
 from django.utils.text import slugify
 from django.db.models import Avg
+from .verify import haversine_distance
 
     
 class Place(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    latitude = models.DecimalField(max_digits=50, decimal_places=10)
-    longitude = models.DecimalField(max_digits=50, decimal_places=10)
+    latitude = models.DecimalField(max_digits=20, decimal_places=16)
+    longitude = models.DecimalField(max_digits=20, decimal_places=16)
+    
+    metalatitude = models.DecimalField(max_digits=20, decimal_places=16)
+    metalongitude = models.DecimalField(max_digits=20, decimal_places=16)
+
     slug = models.SlugField(unique=True, blank=True)
     is_verified = models.BooleanField(default=False)
     contributor = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -32,6 +37,11 @@ class Place(models.Model):
 
             self.slug = slug
 
+        if self.is_verified is False:
+            distance = haversine_distance(self.latitude, self.longitude, self.metalatitude, self.metalongitude)
+            if distance <= 300:
+                self.is_verified=True
+                
         super().save(*args, **kwargs)
 
     def __str__(self):

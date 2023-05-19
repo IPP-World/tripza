@@ -31,6 +31,6 @@ distance = haversine_distance(lat1, lon1, lat2, lon2)
 
 # Check if the distance is within 300 meters
 if distance <= 300:
-    print("lat2, lon2 is within 300 meters from lat1, lon1")
+    is_verified=True
 else:
-    print("lat2, lon2 is more than 300 meters away from lat1, lon1")
+    is_verified=False
