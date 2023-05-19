@@ -105,6 +105,6 @@ export default function Profile({}) {
     
     );
     else
-      return <Navigate to='/signup'/>
+      return <Navigate to='/login'/>
 }
 

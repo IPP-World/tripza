@@ -11,7 +11,7 @@ import AgenciesNearby from "./AgenciesNearby";
 import "./PlaceInfo.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 function PlaceInfo() {
   const states = Object.freeze({
@@ -42,7 +42,7 @@ function PlaceInfo() {
           <h4 className="place--location">Machhapuchchhre 33700, Pokhara</h4>
         </div>
         <div className="place--sharesave">
-        <button className="profile--edit-btn" onClick={handleAddService}>Add service</button>
+        
           <a href="#" className="place-share">
             <CiShare1 className="place-sharelogo" />
             Share
@@ -59,6 +59,8 @@ function PlaceInfo() {
             <AliceCarousel
               items={carouselItems}
               // responsive={{ 0: { items: 1 }, 1024: { items: 2 } }}
+              mouseTracking = {true}
+              // touchTracking = {true}
               animationDuration={1000}
               autoPlay= {true}
               autoPlayInterval={3000}
@@ -103,6 +105,7 @@ function PlaceInfo() {
               >
                 Agencies
               </button>
+              <button className="profile--edit-btn" onClick={handleAddService}>Add service</button>
             </div>
           </div>
           <div className="descreview-divider"></div>
@@ -116,7 +119,7 @@ function PlaceInfo() {
                 </div>
                 <div className="place--userreview"></div>
                 <button
-                  className="place--reviewbutton"
+                  className="placeinfo--place--reviewbutton"
                   type="submit"
                   onClick={() => setCurrentState(states.REVIEWS)}
                 >
