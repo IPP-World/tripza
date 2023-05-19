@@ -1,10 +1,11 @@
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 from .models import Hotel, HotelReview, HotelImage
-from .serializers import HotelSerializer, HotelReviewSerializer, HotelImageSerializer
+from .serializers import HotelSerializer, HotelReviewSerializer, HotelImageSerializer, KhaltiValidationSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Avg
 
@@ -80,3 +81,14 @@ class ReviewListCreateAPIView(generics.ListCreateAPIView):
         hotel.rating = round(average_rating, 2)
         hotel.save()
         serializer.save(hotel=hotel, reviewer=reviewer)
+
+
+class KhaltiValidationView(APIView):
+    def post(self, request):
+
+        serializer = KhaltiValidationSerializer(data=request.data)
+        if serializer.is_valid():
+            instance = serializer.save()
+            serialized_data = KhaltiValidationSerializer(instance).data
+            return Response(serialized_data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

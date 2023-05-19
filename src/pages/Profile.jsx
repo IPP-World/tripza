@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { load_user, logout } from "../actions/auth";
 import { useNavigate } from 'react-router-dom';
-
+import KhaltiCheckout from "khalti-checkout-web"
+import axios from "axios";
 
 export default function Profile({}) {
   const isAuthenticated = useSelector(state=>state.auth.isAuthenticated)
@@ -21,7 +22,21 @@ export default function Profile({}) {
   useEffect(()=>{
     dispatch(load_user())
   }, [])
-  const handleSubscribe = () => {}
+  const handleSubscribe = () => {
+    let config = {
+      publicKey: "test_public_key_1bc1b5b65fb14323bd5b06c4938e7e90",
+      productIdentity: "User ko id, jun chai transaction kasle garyo vanne thapauna ko lagi",
+      productName: "Tripza",
+      productUrl: "https://localhost:8000/subscribe",
+      eventHandler: {
+        onSuccess(payload) {
+          axios.post(`${process.env.REACT_APP_API_URL}/api/hotel/subscribe`, {amount: payload.amount, token: payload.token})
+        }
+      }
+    }
+    const checkout = new KhaltiCheckout(config)
+    checkout.show({amount: 200 * 100})
+  }
   if(isAuthenticated)
     return (
  
@@ -89,6 +104,6 @@ export default function Profile({}) {
     
     );
     else
-      return <Navigate to='/'/>
+      return <Navigate to='/signup'/>
 }
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers, viewsets, routers
-from .models import Hotel, HotelImage, HotelReview
+from .models import Hotel, HotelImage, HotelReview, KhaltiValidation
 
 
 class HotelImageSerializer(serializers.ModelSerializer):
@@ -32,3 +32,12 @@ class HotelReviewSerializer(serializers.ModelSerializer):
 
     def get_reviewer(self, obj):
         return obj.reviewer.fname if obj.reviewer else None
+
+
+class KhaltiValidationSerializer(serializers.ModelSerializer):
+    subscribed_at = serializers.DateTimeField(read_only=True)
+    is_active = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = KhaltiValidation
+        fields = ('id', 'amount', 'token', 'subscribed_at', 'is_active')

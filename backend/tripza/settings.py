@@ -27,6 +27,9 @@ SECRET_KEY = 'django-insecure-e5gd$ncv8hn-b+y-vw^5(b*0fx_pbg1n^sm4352c)n-*llg_y=
 DEBUG = True
 
 # Application definition
+#for khalti
+public_key="test_public_key_1bc1b5b65fb14323bd5b06c4938e7e90"
+secret_key="test_secret_key_9125092c5640491aabc8d2b5b2a71ef5"
 
 INSTALLED_APPS = [
     'django.contrib.admin',

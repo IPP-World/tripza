@@ -58,3 +58,30 @@ class HotelImage(models.Model):
     def __str__(self):
         return f"Image for {self.hotel.name}"
     
+# class KhaltiValidation(models.Model):
+#     amount=models.IntegerField(default=0)
+#     token= models.CharField(max_length=255)
+#     def __str__(self):
+#         return self.token
+
+from django.utils import timezone
+
+class KhaltiValidation(models.Model):
+    amount = models.IntegerField(default=0)
+    token = models.CharField(max_length=255)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.token
+
+    def save(self, *args, **kwargs):
+        # Calculate the expiration date (30 days from the subscribed_at)
+        expiration_date = self.subscribed_at + timezone.timedelta(days=30)
+
+        # Update the is_active attribute based on the current date
+        if timezone.now() > expiration_date:
+            self.is_active = False
+
+        super().save(*args, **kwargs)
+    
