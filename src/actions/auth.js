@@ -250,7 +250,7 @@ export const reset_password_confirm = (uid, token, password, password2) => async
 
     const body = JSON.stringify({ password, password2 });
     try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/api/user/reset-password/`, body);
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/user/reset-password/`, body,config);
 
         dispatch({
             type: PASSWORD_RESET_CONFIRM_SUCCESS
