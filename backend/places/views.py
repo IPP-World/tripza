@@ -6,6 +6,7 @@ from django.http import Http404
 from .models import Place, Review
 from .serializers import PlaceSerializer, ReviewSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Avg
 
 class PlaceListAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -65,4 +66,17 @@ class ReviewListCreateAPIView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         place_slug = self.kwargs['place_slug']
         place = Place.objects.get(slug=place_slug)
-        serializer.save(place=place, reviewer=self.request.user)
+        reviewer = self.request.user
+        rating = serializer.validated_data['rating']
+
+        # Calculate the average rating including the new rating
+        average_rating = Review.objects.filter(place=place).aggregate(avg_rating=Avg('rating'))['avg_rating']
+        if average_rating is not None:
+            new_rating_count = Review.objects.filter(place=place).count() + 1
+            average_rating = (average_rating * (new_rating_count - 1) + rating) / new_rating_count
+        else:
+            average_rating = rating
+
+        place.rating = round(average_rating, 2)
+        place.save()
+        serializer.save(place=place, reviewer=reviewer)

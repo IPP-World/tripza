@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'tripza',
     'places',
+    'hotels',
 ]
 
 MIDDLEWARE = [
