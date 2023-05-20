@@ -31,7 +31,7 @@ export default function Profile({}) {
       productUrl: "https://localhost:8000/subscribe",
       eventHandler: {
         onSuccess(payload) {
-          axios.post(`${process.env.REACT_APP_API_URL}/api/hotel/subscribe`, {amount: payload.amount, token: payload.token})
+          axios.post(`${process.env.REACT_APP_API_URL}/api/hotel/subscribe/`, {amount: payload.amount, token: payload.token})
         }
       }
     }

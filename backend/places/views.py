@@ -25,6 +25,8 @@ class PlaceListAPIView(APIView):
         contributor = request.user  # Get the authenticated user
         request.data['contributor'] = contributor.id  # Assign the user's ID as the contributor
         # request.data['contributor_name'] = f"{contributor.fname} {contributor.lname}"  # Assign the user's name separately
+        # request.data['images'] ma image axa tara database ma save vaxaina hola
+        # Image data lai database ma kasari rakhne ho google and findout
         serializer = PlaceSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

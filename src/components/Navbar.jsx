@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState,useEffect } from "react";
-=======
-import React, { useState, useEffect } from "react";
->>>>>>> aca0d659 (reviews added)
 import { Link,useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";

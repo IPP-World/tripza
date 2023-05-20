@@ -52,10 +52,10 @@ export default function Contribute() {
   const [showModal, setShowModal] = useState(false);
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
-  const [photolat, setPhotolat] = useState(null);
-  const [photolon, setPhotolon] = useState(null);
-  const [maplat, setMaplat] = useState(null);
-  const [maplon, setMaplon] = useState(null);
+  const [photolat, setPhotolat] = useState(0);
+  const [photolon, setPhotolon] = useState(0);
+  const [maplat, setMaplat] = useState(0);
+  const [maplon, setMaplon] = useState(0);
   const [isWithinCircle,setIsWithinCircle]=useState(false);
 
   const [placedetails,setPlacedetails]=useState({
@@ -82,7 +82,7 @@ export default function Contribute() {
       const file = files[i];
       const reader = new FileReader();
       
-      reader.onload = async () => {
+      reader.onload = async (f) => {
         const imageData = reader.result;
         
         try {
@@ -90,40 +90,16 @@ export default function Contribute() {
           if (exifData && exifData.latitude && exifData.longitude) {
             setPhotolat (exifData.latitude);
             setPhotolon (exifData.longitude);
-  
-          //   // Check if the photo's location falls within the circular area
-          //   const circleCenterLat = maplat; // Latitude of the circle center
-          //   const circleCenterLng =maplon ; // Longitude of the circle center
-          //   const circleRadius = 5; // Radius of the circle in kilometers
-  
-          //   const isWithinCurrentCircle = isPhotoInCircle(
-          //     photolat,
-          //     photolon,
-          //     circleCenterLat,
-          //     circleCenterLng,
-          //     circleRadius
-          //   );
-          //   console.log("Is within circle:", isWithinCurrentCircle);
-  
-          //   // Update the flag variable if any photo is within the circle
-          //   if (isWithinCurrentCircle) {
-          //     setIsWithinCircle(true);
-          //   }
-           }
-  
-          const metadata = {
-            location: { photolat, photolon },
-          };
-          
-          console.log('image location:',[photolat, photolon]);
-          const objectURL = URL.createObjectURL(file);
-          const imageWithMetadata = { objectURL, metadata };
-          setImages([...images, imageWithMetadata]);
+          }
         } catch (error) {
           console.error('Error extracting metadata:', error);
         }
       };
+
       setImageAdded(true);
+      const objectURL = URL.createObjectURL(file);
+      const imageWithMetadata = { objectURL, url: file };
+      setImages([...images, imageWithMetadata]);
       reader.readAsDataURL(file);
     }
   };
@@ -251,7 +227,7 @@ export default function Contribute() {
     //  else{
     //    setIsWithinCircle(false);
     //  }
-    //}
+    // }
     
 
     if (!positionMarked) {
@@ -275,25 +251,28 @@ export default function Contribute() {
    // console.log("description:", placedesc);
    // handleOffersSelected;
    // handleRating;
-   // console.log('correct metadata:',isWithinCircle);
+    // console.log('correct metadata:',isWithinCircle);
     
     const config ={
       headers:{
-        'Content-Type':'application/json',
+        'Content-Type':'mutlipart/form-data',
         'Authorization': `Bearer ${localStorage.getItem('access')}`
       }
     };
-    const body = JSON.stringify({
+    const body = {
       name: placedetails.name,
       description:placedetails.description,
       latitude:maplat,
       longitude:maplon,
-      metalatitude:photolat,
-      metalongitude:photolon,
+      metalatitude: photolat ,
+      metalongitude: photolon ,
       rating:ratingValue
-    });
-    axios.post(`${process.env.REACT_APP_API_URL}/api/place/`, body, config)
- .catch(e=>
+    };
+    const fd = new FormData()
+    Object.keys(body).map(k => fd.set(k, body[k]))
+    images.map(i => fd.append('images', i.url))
+    axios.post(`${process.env.REACT_APP_API_URL}/api/place/`, fd, config)
+    .catch(e=>
       {
         console.error(e)
         alert("Error sending details")
