@@ -10,8 +10,8 @@
   }
   
   .explore--image{
-      height: 175px;
-      width: 250px;
+      height: 220px;
+      /* width: 250px; */
       border-radius: 7px;
       margin-left: 15px;
   }

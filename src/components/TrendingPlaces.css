@@ -11,10 +11,11 @@
 }
 
 .trending--image{
-    height: 175px;
-    width: 250px;
+    height: 220px;
+    /* width: 300px; */
     border-radius: 7px;
     margin-left: 15px;
+    
 }
 .trending--details{
     display: flex;

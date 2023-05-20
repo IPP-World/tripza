@@ -66,7 +66,7 @@
 }
 .landing--trendingCar .alice-carousel__next-btn [data-area]::after,
 .landing--trendingCar .alice-carousel__prev-btn [data-area]::after {
-  color: #0f4c5c;
+  color: rgb(15, 76, 92);
   background-color: #ccc;
   border-radius: 15px;
 }

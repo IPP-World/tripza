@@ -3,8 +3,8 @@ import a1 from "../assets/a1.jpeg"
 import a2 from "../assets/a2.jpeg"
 import a3 from "../assets/a3.jpeg"
 import a4 from "../assets/a4.jpeg"
-import a5 from "../assets/a5.jpg"
-import a6 from "../assets/a6.jpg"
+// import a5 from "../assets/a5.jpg"
+// import a6 from "../assets/a6.jpg"
 // import a7 from "../assets/a7.jpeg"
 // import a8 from "../assets/a8.jpeg"
 // import a9 from "../assets/a9.jpeg"
@@ -42,18 +42,18 @@ export const data = [
         Img: a4,
         location: "makwanpur",
     },
-    {
-        id: 6,
-        name: "akala",
-        Img: a5,
-        location: "pokhara",
-    },
-    {
-        id: 7,
-        name: "begnas",
-        Img: a6,
-        location: "lekhnath",
-    },
+    // {
+    //     id: 6,
+    //     name: "akala",
+    //     Img: a5,
+    //     location: "pokhara",
+    // },
+    // {
+    //     id: 7,
+    //     name: "begnas",
+    //     Img: a6,
+    //     location: "lekhnath",
+    // },
     // {
     //     id: 4,
     //     name: "Ball",

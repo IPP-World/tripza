@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import TrendingPlaces from "../components/TrendingPlaces";
 import data from "../components/TrendingPlacesData";
-import exdata from "../components/Exploreplacesdata";
 import ExplorePlaces from "../components/ExplorePlaces";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
