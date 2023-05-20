@@ -11,8 +11,10 @@ class Place(models.Model):
     latitude = models.DecimalField(max_digits=20, decimal_places=16)
     longitude = models.DecimalField(max_digits=20, decimal_places=16)
     
-    metalatitude = models.DecimalField(max_digits=20, decimal_places=16)
-    metalongitude = models.DecimalField(max_digits=20, decimal_places=16)
+    # metalatitude = models.DecimalField(max_digits=20, decimal_places=16,null=True,default=0)
+    # metalongitude = models.DecimalField(max_digits=20, decimal_places=16,null=True,default=0)
+    metalatitude = models.CharField(max_length=50)
+    metalongitude = models.CharField(max_length=50)
 
     slug = models.SlugField(unique=True, blank=True)
     is_verified = models.BooleanField(default=False)
@@ -44,8 +46,14 @@ class Place(models.Model):
                 
         super().save(*args, **kwargs)
 
+    def calculate_average_rating(self):
+        average_rating = Review.objects.filter(place=self).aggregate(avg_rating=Avg('rating'))['avg_rating']
+        self.rating = round(average_rating, 2) if average_rating else 0
+        self.save()
+
     def __str__(self):
         return self.name
+    
 
 
 class Review(models.Model):

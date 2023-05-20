@@ -158,32 +158,6 @@ export default function Contribute() {
           </div>
           <p className="reward--text1">Congratulations</p>
           <p className="reward--text2">You contributed a place</p>
-          <div className="reward-points">Reward points</div>
-          <div className="level">
-            <div
-              style={{
-                width: "400px",
-                backgroundColor: "grey",
-                height: "20px",
-                borderRadius: "10px",
-              }}
-            >
-              <div
-                style={{
-                  width: `${level * 10}%`,
-                  backgroundColor: "#0F4C5C",
-                  height: "20px",
-                  borderRadius: "10px",
-                  display: "inline-flex",
-                  maxWidth: "100%",
-                  minWidth: "6%",
-                }}
-              ></div>
-            </div>
-          </div>
-          <div style={{ marginLeft: "17rem", marginTop: "1rem" }}>
-            Level {level}
-          </div>
         </div>
       </>
     );

@@ -16,10 +16,6 @@ from django.db.models import Avg
 
 class PlaceListAPIView(APIView):
     permission_classes = [IsAuthenticated]
-    def get(self, request):
-        places = Place.objects.all()
-        serializer = PlaceSerializer(places, many=True)
-        return Response(serializer.data)
     
     def post(self, request):
         contributor = request.user  # Get the authenticated user
@@ -32,15 +28,37 @@ class PlaceListAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+        # def post(self, request):
+        # user = request.data
+        # serializer = self.serializer_class(data=user)
+        # serializer.is_valid(raise_exception=True)
+        # serializer.save()
+        # user_data = serializer.data
 
+        # user=User.objects.get(email=user_data['email'])
+        # token=RefreshToken.for_user(user).access_token
+        # current_site=get_current_site(request).domain
+        # relativeLink=reverse('email_verify')
+        # absurl='http://' + current_site + relativeLink + "?token="+ str(token)
+        # email_body='Hi ' + user.fname + ' Use the link below to verify your account \n' + absurl
+        # subject="Verify Account !!"
+        # data={'email_body':email_body,'to_email': user.email, 'email_subject': subject}
+        # Util.send_email(data)
+
+class PlaceShowAPIView(APIView):
+    def get(self, request):
+        places = Place.objects.all()
+        serializer = PlaceSerializer(places, many=True)
+        return Response(serializer.data)
 class PlaceDetailAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get_object(self, slug):
         try:
             return Place.objects.get(slug=slug)
         except Place.DoesNotExist:
             raise Http404
-    
+        
     def get(self, request, slug):
         place = self.get_object(slug)
         serializer = PlaceSerializer(place)
