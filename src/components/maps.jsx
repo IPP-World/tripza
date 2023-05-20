@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-leaflet';
 import React, { useState, useEffect } from "react";
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 
 const Recenter = ({ lat, lng }) => {
   const map = useMap();
@@ -10,6 +11,18 @@ const Recenter = ({ lat, lng }) => {
   
   return null;
 };
+
+const provider= new OpenStreetMapProvider();
+const searchControl = new GeoSearchControl({
+  provider: provider,
+});
+const Search = () =>{
+  const map=useMap();
+  useEffect(()=>{
+    map.addControl(searchControl);
+  })
+}
+
 
 const MapSection = ({ onLocationSelect }) => {
   const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
@@ -80,6 +93,7 @@ const MapSection = ({ onLocationSelect }) => {
             />
           </LayersControl.BaseLayer>
         </LayersControl>
+        <Search/>
         <MapClickHandler onMapClick={handleMapClick} />
         {selectedLocation && <Marker position={selectedLocation} />}
         {mapCenter && <Recenter lat={mapCenter[0]} lng={mapCenter[1]} />}

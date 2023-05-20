@@ -46,7 +46,7 @@
   width: 500px;
   height: 10px;
 }
-.alice-carousel {
+.place-pic .alice-carousel {
   width: 500px;
   /* height: 255px; */
   overflow: hidden;
@@ -54,28 +54,28 @@
   border-radius: 5px;
 }
 
-.alice-carousel img {
+.place-pic .alice-carousel img {
   width: 100%;
   height: 255px;
   object-fit: cover;
   vertical-align: top;
 }
-.alice-carousel__prev-btn,
-.alice-carousel__next-btn {
+.place-pic .alice-carousel__prev-btn,
+.place-pic .alice-carousel__next-btn {
   position: absolute;
   top: 70%;
   cursor: pointer;
   font-size: 30px;
   color: #021a20;
 }
-.alice-carousel__prev-btn {
+.place-pic .alice-carousel__prev-btn {
   left: 0;
 }
 
-.alice-carousel__next-btn {
+.place-pic .alice-carousel__next-btn {
   right: 0;
 }
-.alice-carousel__dots {
+.place-pic .alice-carousel__dots {
   position: absolute;
   bottom: 1px;
   left: 50%;
@@ -250,4 +250,20 @@
 .place--reviewbutton:active {
   background-color: #8d520f;
   color: rgb(29, 89, 112);
+}
+
+.service--add-btn{
+  margin-left: 10px;
+  border: 1px solid #0f4c5c;
+  background-color: #fff;
+  border-radius: 20px;
+  color: #0f4c5c;
+  font-family: Poppins;
+  font-size: 1.1em;
+  width: 120px;
+  height: 45px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+
+  font-weight: 400;
 }

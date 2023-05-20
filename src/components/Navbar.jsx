@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link,useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";
@@ -28,7 +28,6 @@ function Navbar() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
   const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
 
   if (hideNavbar) {
@@ -69,6 +68,25 @@ function Navbar() {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const navbar = document.querySelector('.nav--container');
+      if (navbar) {
+        if (window.pageYOffset > 0) {
+          navbar.classList.add('sticky');
+        } else {
+          navbar.classList.remove('sticky');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div className="nav--container">
