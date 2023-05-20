@@ -1,6 +1,6 @@
 import { GrAdd, GrClose } from "react-icons/Gr";
 import { AiOutlineClose } from "react-icons/Ai";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import RatingStars from "../components/ratings";
 import PlaceOffers from "../components/offers";
 import MapSection from "../components/maps";
@@ -54,11 +54,15 @@ export default function Contribute() {
   const [photolon, setPhotolon] = useState(0);
   const [maplat, setMaplat] = useState(null);
   const [maplon, setMaplon] = useState(null);
+  const [offers, setOffers] = useState({});
+
   // const [isWithinCircle,setIsWithinCircle]=useState(false);
 
   const [placedetails, setPlacedetails] = useState({
     name: "",
     description: "",
+    location: "",
+    review:""
     // selectedOffers:"",
     //rating:"",
     // latitude:"",
@@ -191,11 +195,15 @@ export default function Contribute() {
   };
   const handleOffersSelected = (selectedOffers) => {
     console.log("offers:", selectedOffers);
+    setOffers({selectedOffers});
   };
   const handleRating = (rating) => {
     console.log("rating:", rating);
     setRatingValue(rating);
   };
+
+  console.log(images);
+  
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -248,21 +256,42 @@ export default function Contribute() {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        "Authorization": `Bearer ${localStorage.getItem("access")}`,
       },
     };
-    const body = JSON.stringify({
+
+  const body = JSON.stringify({
       name: placedetails.name,
       location: placedetails.location,
-      description: placedetails.description,
+      review:placedetails.review,
       latitude: maplat,
       longitude: maplon,
-      metalatitude: photolat,
       metalongitude: photolon,
+      metalatitude:photolat,
       rating: ratingValue,
-    });
+      offerings:offers
+  });
+
+    // const formData = new FormData(e.target);
+    // formData.append("name", placedetails.name);
+    // formData.append("location", placedetails.location);
+    // formData.append("description", placedetails.description);
+    // formData.append("latitude", maplat);
+    // formData.append("longitude", maplon);
+    // formData.append("metalatitude", photolat);
+    // formData.append("metalongitude", photolon);
+    // formData.append("rating", ratingValue);
+    // formData.append("review",review);
+    // formData.append("offering",offers);
+
+    // for (let i = 0; i < images.length; i++) {
+     // formData.append('images', images);
+    // }
+
+    //console.log('formdata',formData);
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/place/`, body, config)
+      .then((res) => console.log(res))
       .catch((e) => {
         console.error(e);
         alert("Error sending details");

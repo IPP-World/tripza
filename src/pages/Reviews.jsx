@@ -55,7 +55,7 @@ function Reviews({ closeModal,slug }) {
   
   useEffect(() => {
     getReviews();
-  }, []);
+  }, [reviews]);
   
   const handleRating = (rating) => {
     console.log("rating:", rating);

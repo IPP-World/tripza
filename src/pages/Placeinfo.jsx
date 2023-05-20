@@ -13,12 +13,15 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { useNavigate, useParams } from 'react-router-dom'; 
 import axios from "axios";
+import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-leaflet';
 
 
 
 
 function PlaceInfo(props) {
   const [placeData, setPlaceData] = useState({});
+  const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
+
   // const [reviews, setReviews] = useState([])
   const {slug} = useParams()
 
@@ -39,8 +42,17 @@ function PlaceInfo(props) {
   
       // Extract name and description
       const extractedData = data;
-  
+      const lat=Number(data.latitude);
+      const lon=Number(data.longitude);
+      console.log('datalatlon:',lat);
+      console.log('datalatlon:',lon);
+
+      setMapCenter([lat,lon]);
+
+      console.log('data:',extractedData);
      setPlaceData(extractedData);
+   
+    
     } catch (error) {
       console.log(error);
       throw error;
@@ -73,6 +85,8 @@ function PlaceInfo(props) {
 
   useEffect(() => {
     getPlaceData();
+    
+ 
     //getReviews();
   }, []);
 
@@ -132,7 +146,29 @@ function PlaceInfo(props) {
             >
             </AliceCarousel>
           </div>
-          <div className="place-map"></div>
+          <div className="place-map">
+          <MapContainer
+        center={mapCenter}
+        zoom={13}
+        scrollWheelZoom={true}
+        style={{ width: "100%", height: "100%", maxWidth: "600px", maxHeight: "500px" }}
+      >
+        <LayersControl position="topright">
+          <LayersControl.BaseLayer checked name="Street View">
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="Satellite View">
+            <TileLayer
+              url="http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+              maxZoom={20}
+              subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+            />
+          </LayersControl.BaseLayer>
+        </LayersControl>
+        <Marker position={mapCenter} />
+      </MapContainer>
+            
+            </div>
         </div>
         <div className="place--desc-reviews">
           <div className="place-desc">
