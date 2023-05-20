@@ -42,6 +42,8 @@ class User(AbstractBaseUser):
     photo = models.ImageField(upload_to='photos', null=True, blank=True, verbose_name="photoo")
     is_verified=models.BooleanField(default=False)
     
+    is_subscribed=models.BooleanField(default=False)
+    
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
 

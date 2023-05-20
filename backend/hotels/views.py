@@ -11,13 +11,15 @@ from django.db.models import Avg
 
 import requests
 
-class HotelListAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+class HotelShowAPIView(APIView):
     def get(self, request):
         hotels = Hotel.objects.all()
         serializer = HotelSerializer(hotels, many=True)
         return Response(serializer.data)
     
+
+class HotelListAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         owner = request.user  # Get the authenticated user
         request.data['owner'] = owner.id  # Assign the user's ID as the owner
@@ -29,7 +31,7 @@ class HotelListAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class HotelDetailAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get_object(self, slug):
         try:
             return Hotel.objects.get(slug=slug)
@@ -86,6 +88,7 @@ class ReviewListCreateAPIView(generics.ListCreateAPIView):
 
 
 class KhaltiValidationView(APIView):
+    # permission_classes=[IsAuthenticated]
     def post(self, request):
         print(request.data)
         data = {
@@ -93,6 +96,8 @@ class KhaltiValidationView(APIView):
             'token': request.data['token']
         }
         print(data)
+        # email=request.user.email
+        # print(email)
 
         headers = {
             'Authorization': 'Key test_secret_key_9125092c5640491aabc8d2b5b2a71ef5',
@@ -102,6 +107,7 @@ class KhaltiValidationView(APIView):
         response = requests.post('https://khalti.com/api/v2/payment/verify/', json=data, headers=headers)
         print(response.status_code, response)
         if response.status_code == 200:
+            
             # Save data in model
             serializer = KhaltiValidationSerializer(data=request.data)
             if serializer.is_valid():

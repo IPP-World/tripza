@@ -41,3 +41,9 @@ class KhaltiValidationSerializer(serializers.ModelSerializer):
     class Meta:
         model = KhaltiValidation
         fields = ('id', 'amount', 'token', 'subscribed_at', 'is_active')
+
+    def save(self, *args, **kwargs):
+        self.amount=200
+        self.token='idbiubficjd'
+        
+    
