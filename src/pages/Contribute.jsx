@@ -50,8 +50,8 @@ export default function Contribute() {
   const [showModal, setShowModal] = useState(false);
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
-  const [photolat, setPhotolat] = useState(null);
-  const [photolon, setPhotolon] = useState(null);
+  const [photolat, setPhotolat] = useState(0);
+  const [photolon, setPhotolon] = useState(0);
   const [maplat, setMaplat] = useState(null);
   const [maplon, setMaplon] = useState(null);
   // const [isWithinCircle,setIsWithinCircle]=useState(false);
@@ -158,32 +158,6 @@ export default function Contribute() {
           </div>
           <p className="reward--text1">Congratulations</p>
           <p className="reward--text2">You contributed a place</p>
-          <div className="reward-points">Reward points</div>
-          <div className="level">
-            <div
-              style={{
-                width: "400px",
-                backgroundColor: "grey",
-                height: "20px",
-                borderRadius: "10px",
-              }}
-            >
-              <div
-                style={{
-                  width: `${level * 10}%`,
-                  backgroundColor: "#0F4C5C",
-                  height: "20px",
-                  borderRadius: "10px",
-                  display: "inline-flex",
-                  maxWidth: "100%",
-                  minWidth: "6%",
-                }}
-              ></div>
-            </div>
-          </div>
-          <div style={{ marginLeft: "17rem", marginTop: "1rem" }}>
-            Level {level}
-          </div>
         </div>
       </>
     );

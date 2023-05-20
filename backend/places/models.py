@@ -11,8 +11,10 @@ class Place(models.Model):
     latitude = models.DecimalField(max_digits=20, decimal_places=16)
     longitude = models.DecimalField(max_digits=20, decimal_places=16)
     
-    metalatitude = models.DecimalField(max_digits=20, decimal_places=16)
-    metalongitude = models.DecimalField(max_digits=20, decimal_places=16)
+    # metalatitude = models.DecimalField(max_digits=20, decimal_places=16,null=True,default=0)
+    # metalongitude = models.DecimalField(max_digits=20, decimal_places=16,null=True,default=0)
+    metalatitude = models.CharField(max_length=50)
+    metalongitude = models.CharField(max_length=50)
 
     slug = models.SlugField(unique=True, blank=True)
     is_verified = models.BooleanField(default=False)
