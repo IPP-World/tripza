@@ -1,6 +1,8 @@
 import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-leaflet';
 import React, { useState, useEffect } from "react";
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import '../../node_modules/leaflet-geosearch/dist/geosearch.css';
+import "../components/maps.css"
 
 const Recenter = ({ lat, lng }) => {
   const map = useMap();
@@ -15,6 +17,8 @@ const Recenter = ({ lat, lng }) => {
 const provider= new OpenStreetMapProvider();
 const searchControl = new GeoSearchControl({
   provider: provider,
+  // style: 'bar',
+  showMarker: false,
 });
 const Search = () =>{
   const map=useMap();
