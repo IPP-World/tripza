@@ -8,41 +8,6 @@ import exifr from "exifr";
 import axios from "axios";
 import "./Contribute.css";
 
-// function isPhotoInCircle(photoLat, photoLng, circleCenterLat, circleCenterLng, circleRadius) {
-//   const earthRadius = 6371; // Earth's radius in kilometers
-
-//   // Convert coordinates to radians
-//   const photoLatRad = toRadians(photoLat);
-//   const photoLngRad = toRadians(photoLng);
-//   const circleCenterLatRad = toRadians(circleCenterLat);
-//   const circleCenterLngRad = toRadians(circleCenterLng);
-//   console.log('photolatitude in radian',photoLatRad );
-//   console.log('photolongitude in radian',photoLngRad );
-//   console.log('circlecenterlat',circleCenterLatRad);
-//   console.log('circlecenterlng',circleCenterLngRad);
-
-//   // Calculate the distance between the photo's location and the circle center using the Haversine formula
-//   const deltaLat = photoLatRad - circleCenterLatRad;
-//   const deltaLng = photoLngRad - circleCenterLngRad;
-//   console.log('deltalat:',deltaLat);
-//   const a =
-//     Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
-//     Math.cos(circleCenterLatRad) *
-//       Math.cos(photoLatRad) *
-//       Math.sin(deltaLng / 2) *
-//       Math.sin(deltaLng / 2);
-//   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-//   const distance = earthRadius * c;
-
-//   // Check if the distance is within the circle's radius
-//   return distance <= circleRadius;
-// }
-
-// // Helper function to convert degrees to radians
-// function toRadians(degrees) {
-//   return degrees * (Math.PI / 180);
-// }
-
 export default function Contribute() {
   const [imageAdded, setImageAdded] = useState(false);
   const [ratingValue, setRatingValue] = useState(null);
@@ -160,7 +125,7 @@ export default function Contribute() {
           >
             <AiOutlineClose />
           </div>
-          <p className="reward--text1">Congratulations</p>
+          <p className="reward--text1">Congratulations!</p>
           <p className="reward--text2">You contributed a place</p>
         </div>
       </>
@@ -302,11 +267,12 @@ export default function Contribute() {
     <form onSubmit={submitHandler}>
       <div className="contribute-container">
         <div className="left-part">
-          <div className="contribute-text">Contribute a place</div>
+          <div className="contribute-text"><h4>Contribute a place</h4></div>
+          <div className="contribute--add"><p>Add images</p></div>
           <div className="places-container">
             <ul>
               {images.map((imageWithMetadata, index) => (
-                <li key={index} className="imageContainer">
+                <li key={index} className="contribute--imageContainer">
                   <img
                     src={imageWithMetadata.objectURL}
                     alt={`image-${index}`}
@@ -334,7 +300,8 @@ export default function Contribute() {
             </ul>
           </div>
           <div className="maps-container">
-            <MapSection onLocationSelect={handleLocationSelect} />
+          <p className="contribute--addmap">Add place on map</p>
+            <MapSection className="contribute--map" onLocationSelect={handleLocationSelect} />
           </div>
         </div>
         <div className="right-part">

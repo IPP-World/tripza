@@ -3,13 +3,12 @@
     margin: 0px;
     font-family: 'Poppins';
     font-style: normal;
-    color: #0F4C5C;
+    /* color: #0F4C5C; */
 }
 .contribute-container{
     position: relative;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    align-items: center;
     
 }
 .left-part{
@@ -20,27 +19,8 @@
     font-weight: medium;
     font-size:  25px;
 }
-.contribute-text{
-    font-weight: 500;
-    margin-bottom: 5px;
-}
-.maps-container{
-    position: relative;
-    height: 330px;
-    width: 500px;
-    margin-top: 20px;
-    border-radius: 7px;
-}
-
-.place-info input::placeholder{
-    text-align: left;
-    margin-top: 0px;
-    padding-top: 0px;
-    padding-left: 5px;
-}
 .places-container ul{
     display: flex;
-    flex-direction: row;
     list-style-type: none; 
     
 }
@@ -50,41 +30,71 @@
     margin-right: 8px;
     border-radius: 7px;
 }
-/* .add-box{
-    height: 300px;
-    width: 300px;
-    margin-left: 20px;
-    border-radius: 7px;
-    border: 1px solid #0F4C5C;
-} */
-.add{
-    margin-top: 45px;
-     
+.contribute-text{
+    font-weight: 300;
+    font-size: 1.2em;
+    margin-top: -5px;
 }
-.imageContainer {
+.contribute--add{
+    font-size: 0.8em;
+    margin-bottom:5px;
+}
+.contribute--imageContainer{
     position: relative;
-    /* height: 400px; */
-  }
-  
-  .delete-button {
+    margin-top:-10px ;
+}
+.delete-button {
+  position: absolute;
+  top: 10%;
+  right: 8%;
+  background-color: #ccc;
+  opacity: 0.3;
+  border-radius: 20%;
+  border-radius: 50;
+}
+
+.delete-button:hover {
     position: absolute;
-    top: 0;
-    right: 0;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    padding: 0.5rem;
+    top: 10%;
+    right: 10%;
+    background-color: #ccc;
+    opacity: 0.5;
+    border-radius: 20%;
+    border-radius: 50;
     cursor: pointer;
-  }
-  
+}
+.add-box{
+    border-radius: 7px;
+}
+.add-box:hover{
+   cursor: pointer;
+}
+
+.contribute--addmap{
+    font-size: 0.8em;
+    margin-bottom:5px;
+}
 .right-part{
     display: flex;
     flex-direction: column;
-    margin-left: 100px;
-    margin-top: 160px;
+    /* margin-left: 100px;
+    margin-top: 160px; */
 }
-.place-info form{
+.place-info{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-left: 10px;
+}
+/* .place-info input::placeholder{
+    text-align: left;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-left: 5px;
+} */
+
+  
+/* .place-info form{
     padding: 10px;
     margin-bottom: 10px;
     display: flex;
@@ -94,10 +104,10 @@
     margin: 8px 8px;
     box-sizing: border-box;
     border-radius: 100px;
-}
-.place-info input::placeholder{
-   padding-top: 100px;
-}
+} */
+/* .place-info input::placeholder{
+    padding-top: 100px;
+} */
 .place-name1{
     padding-top: 5px;
     padding-bottom: 5px;
@@ -105,6 +115,13 @@
     text-align: top;
     border-radius: 7px;
     margin-top: -50px;
+    border: 1.2px solid #0F4C5C ;
+}
+.place-location{
+    padding: 5px 5px 5px ;
+    margin-top: 20px;
+    text-align: top;
+    border-radius: 7px;
     border: 1.2px solid #0F4C5C ;
 }
 .place-name2{
@@ -179,48 +196,26 @@ margin-bottom: 15px;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-        width: 600px;
-        height: 290px;
+        width: 30vw;
+        height: 20vh;
         background: #f0f2f3;
-        border-radius: 4px;
+        border-radius: 8px;
         z-index: 10000;
     }
     
     .reward--close-btnn {
-        padding: 8px 16px;
+        padding: 8px;
         font-size: 20px;
-        font-weight:300;
         color: #0F4C5C;
-        text-align:end;
-        text-decoration: none;
-        border: none;
+        text-align:right;
         cursor: pointer;
-        transition: all 0.3s ease;
-        margin:0;
-      }
-      
-      .reward--close-btnn:hover {
-        color: #072229;
-        size: 10px;
       }
     .reward--text1{
-        margin-left: 33%;
-        font-size: x-large;
+        margin-left: 20%;
+        font-size: 2em;
         font-weight: 500;
-        justify-content: center;
     }
     .reward--text2{
-        margin-left: 37%;
-        font-size: 13px;
-        justify-content: center;
-    }
-    .reward-points{
-        margin: 35px 39%;
-        font-size: large;
-        font-weight: 500;
-        
-    }
-    .level{
-        margin: 5rem 17rem;
-        font-size: 17px;
+        margin-left: 30%;
+        font-size: 1em;
     }
