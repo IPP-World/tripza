@@ -9,6 +9,8 @@ from .serializers import HotelSerializer, HotelReviewSerializer, HotelImageSeria
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Avg
 
+import requests
+
 class HotelListAPIView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
@@ -85,14 +87,35 @@ class ReviewListCreateAPIView(generics.ListCreateAPIView):
 
 class KhaltiValidationView(APIView):
     def post(self, request):
+        print(request.data)
+        data = {
+            'amount': int(request.data['amount']),
+            'token': request.data['token']
+        }
+        print(data)
 
-        serializer = KhaltiValidationSerializer(data=request.data)
-        if serializer.is_valid():
-            instance = serializer.save()
-            serialized_data = KhaltiValidationSerializer(instance).data
-            return Response(serialized_data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+        headers = {
+            'Authorization': 'Key test_secret_key_9125092c5640491aabc8d2b5b2a71ef5',
+            "Content-Type": "application/json",
+        }
+
+        response = requests.post('https://khalti.com/api/v2/payment/verify/', json=data, headers=headers)
+        print(response.status_code, response)
+        if response.status_code == 200:
+            # Save data in model
+            serializer = KhaltiValidationSerializer(data=request.data)
+            if serializer.is_valid():
+                instance = serializer.save()
+                serialized_data = KhaltiValidationSerializer(instance).data
+                return Response(serialized_data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            # return Response('success', status=status.HTTP_200_OK)
+        else:
+            return Response('error', status=status.HTTP_402_PAYMENT_REQUIRED)
+        # https://khalti.com/api/v2/payment/verify/ POST data = {amount, token}
+        # success -> 
+        # failed -> return Response(error, status = 400)
+
     def get(self, request):
         validations = KhaltiValidation.objects.all()
         serializer = KhaltiValidationSerializer(validations, many=True)
