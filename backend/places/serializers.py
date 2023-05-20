@@ -17,7 +17,7 @@ class PlaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Place
-        fields = ('id', 'name', 'description', 'latitude', 'longitude', 'metalatitude', 'metalongitude', 'slug', 'is_verified', 'contributor', 'rating', 'contributor_name', 'images')
+        fields = ('id', 'name', 'description', 'latitude', 'longitude', 'metalatitude', 'metalongitude', 'c_review', 'slug', 'is_verified', 'contributor', 'rating', 'contributor_name', 'images')
 
 class ReviewSerializer(serializers.ModelSerializer):
     # place = PlaceSerializer(read_only=True)

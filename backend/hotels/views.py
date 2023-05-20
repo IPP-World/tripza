@@ -25,11 +25,20 @@ class HotelListAPIView(APIView):
         request.data['owner'] = owner.id  # Assign the user's ID as the owner
         # request.data['owner_name'] = f"{owner.fname} {owner.lname}"  # Assign the user's name separately
         serializer = HotelSerializer(data=request.data)
+        
         if serializer.is_valid():
-            serializer.save()
+            images_data = request.FILES.getlist('images')
+            hotel = serializer.save() 
+            
+            for image_data in images_data:
+                image = HotelImage.objects.create(hotel=hotel, image=image_data)
+            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+        
 class HotelDetailAPIView(APIView):
     # permission_classes = [IsAuthenticated]
     def get_object(self, slug):
@@ -57,6 +66,7 @@ class HotelDetailAPIView(APIView):
         hotel = self.get_object(slug)
         hotel.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
     
 
 class ReviewListCreateAPIView(generics.ListCreateAPIView):

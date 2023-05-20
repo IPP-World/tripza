@@ -17,7 +17,7 @@ class HotelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Hotel
-        fields = ('id', 'name', 'description', 'latitude', 'longitude', 'price', 'slug', 'is_active', 'owner', 'rating', 'owner_name', 'images')
+        fields = ('id', 'name', 'description', 'latitude', 'longitude', 'c_review', 'price', 'slug', 'is_active', 'owner', 'rating', 'owner_name', 'images')
         extra_kwargs = {
             'price': {'required': True}  # Set 'price' field as required
         }

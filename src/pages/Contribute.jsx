@@ -139,13 +139,13 @@ export default function Contribute() {
   };
 
   const Popup = () => {
-    const [level, setLevel] = useState(0);
-    const handleIncreaseLevel = () => {
-      setLevel((prevLevel) => prevLevel + 1);
-    };
-    useEffect(() => {
-      handleIncreaseLevel();
-    }, []);
+    // const [level, setLevel] = useState(0);
+    // const handleIncreaseLevel = () => {
+    //   setLevel((prevLevel) => prevLevel + 1);
+    // };
+    // useEffect(() => {
+    //   handleIncreaseLevel();
+    // }, []);
     return (
       <>
         <div className="reward-wrapper" onClick={handleCloseModal}></div>
@@ -253,6 +253,7 @@ export default function Contribute() {
     };
     const body = JSON.stringify({
       name: placedetails.name,
+      location: placedetails.location,
       description: placedetails.description,
       latitude: maplat,
       longitude: maplon,
@@ -315,6 +316,15 @@ export default function Contribute() {
               name="name"
               placeholder="Name of the place"
               value={placedetails.name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              className="place-location"
+              type="text"
+              name="location"
+              placeholder="Location"
+              value={placedetails.location}
               onChange={handleChange}
               required
             />

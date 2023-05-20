@@ -11,14 +11,17 @@ import AgenciesNearby from "./AgenciesNearby";
 import "./PlaceInfo.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, useParams } from 'react-router-dom'; 
 import axios from "axios";
 
 
 
 
-function PlaceInfo() {
+function PlaceInfo(props) {
   const [placeData, setPlaceData] = useState({});
+  // const [reviews, setReviews] = useState([])
+  const {slug} = useParams()
+
 
   async function getPlaceData() {
     const config = {
@@ -29,12 +32,13 @@ function PlaceInfo() {
     };
   
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/place/', config);
-      const data = response.data;
+      console.log(slug);
+      const response = await axios.get(`http://127.0.0.1:8000/api/place/${slug}`, config);
+      const data = await response.data;
       console.log(data);
   
       // Extract name and description
-      const extractedData = data[0];
+      const extractedData = data;
   
      setPlaceData(extractedData);
     } catch (error) {
@@ -43,12 +47,37 @@ function PlaceInfo() {
     }
   }
 
+  // async function getReviews() {
+  //   const config = {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       // Authorization: `Bearer ${localStorage.getItem("access")}`,
+  //     },
+  //   };
+  
+  //   try {
+  //     console.log(slug);
+  //     const response = await axios.get(`http://127.0.0.1:8000/api/place/${slug}/reviews/`, config);
+  //     const data = await response.data;
+  
+  //     // Extract name and description
+  //     const extractedData = data;
+  //     console.log(extractedData);
+  
+  //    setReviews(extractedData);
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
+  // }
+
   useEffect(() => {
     getPlaceData();
+    //getReviews();
   }, []);
 
   const states = Object.freeze({
-    REVIEWS: <Reviews closeModal={() => setCurrentState(states.NONE)} />,
+    REVIEWS: <Reviews slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
     HOTELS: <HotelsNearby closeModal={() => setCurrentState(states.NONE)} />,
     AGENCIES: (
       <AgenciesNearby closeModal={() => setCurrentState(states.NONE)} />
@@ -73,7 +102,7 @@ function PlaceInfo() {
       <div className="place--header">
         <div className="place--details">
           <h1 className="place--name">{placeData.name}</h1>
-          <h4 className="place--location">Machhapuchchhre 33700, Pokhara</h4>
+          <h4 className="place--location">{placeData.location}</h4>
         </div>
         <div className="place--sharesave">
         
@@ -108,10 +137,7 @@ function PlaceInfo() {
         <div className="place--desc-reviews">
           <div className="place-desc">
             <p className="place-desc-p">
-            Khumai Danda Trek is a trekking trail with a lot of potential for new demanding trekking routes in Nepal.
-            Already some hikers hiked to these beautiful places and got popular among Nepali travelers. Because of the appealing mountain views especially the view of
-            Mt. Machhapuchhere. Typical villages and lifestyle of the local people. Mountain views, local villages,
-            lush forests, and the culture of the local community is the attraction of this trek. Khumai Danda Trek is also called Machhapuchhere Model Trek. Because this trek goes around Mount Machhapuchare and its surroundings.
+            {placeData.description}
             </p>
             <div className="offers--container">
               <h1 className="place--offers">What this place offers</h1>
@@ -149,7 +175,7 @@ function PlaceInfo() {
               <div className="place--ratings">
                 <div className="place--ratings-stars">
                   <AiFillStar className="place-starlogo" />
-                  <h6 className="place-outoffive">4.5/5</h6>
+                  <h6 className="place-outoffive">{placeData.rating}</h6>
                 </div>
                 <div className="place--userreview"></div>
                 <button

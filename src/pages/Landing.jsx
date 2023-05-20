@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import TrendingPlaces from "../components/TrendingPlaces";
 import data from "../components/TrendingPlacesData";
 import exdata from "../components/Exploreplacesdata";
@@ -7,6 +9,34 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import "./Landing.css";
 
 export default function Landing() {
+
+  const [places, setPlaces] = useState([])
+
+  async function getPlaceData() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    };
+  
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/place/show', config);
+      const data = response.data;
+      console.log(data);
+  
+      // Extract name and description
+      const extractedData = data;
+  
+     setPlaces(extractedData);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+  useEffect (() => {
+    getPlaceData()
+  }, [])
   
   const slicedData = data.slice(0, 8);
   const trendingPlaces = slicedData.map((place) => { 
@@ -20,16 +50,23 @@ export default function Landing() {
       />
     );
   });
-  const explorePlaces = exdata.map((other) => {
+  
+  // const explorePlaces = exdata.map((other) => {
+  //   return (
+  //     <ExplorePlaces
+  //       key={other.id}
+  //       Img={other.Img}
+  //       name={other.name}
+  //       location={other.location}
+  //     />
+  //   );
+  // });
+
+  const explorePlaces = places.map(place => {
     return (
-      <ExplorePlaces
-        key={other.id}
-        Img={other.Img}
-        name={other.name}
-        location={other.location}
-      />
-    );
-  });
+      <ExplorePlaces key={place.id} Img={place.images[0]} name={place.name} location={place.location} slug={place.slug} latitude={place.latitude} longitude={place.longitude}/>
+    )
+  })
   return (
     <div className="landing-page">
       <div className="landing--trendingCar">

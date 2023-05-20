@@ -6,7 +6,7 @@ from .verify import haversine_distance
 
     
 class Place(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     description = models.TextField()
     latitude = models.DecimalField(max_digits=20, decimal_places=16)
     longitude = models.DecimalField(max_digits=20, decimal_places=16)
@@ -15,6 +15,7 @@ class Place(models.Model):
     # metalongitude = models.DecimalField(max_digits=20, decimal_places=16,null=True,default=0)
     metalatitude = models.CharField(max_length=50)
     metalongitude = models.CharField(max_length=50)
+    c_review=models.CharField(null=True, max_length=500)
 
     slug = models.SlugField(unique=True, blank=True)
     is_verified = models.BooleanField(default=False)
@@ -39,10 +40,10 @@ class Place(models.Model):
 
             self.slug = slug
 
-        if self.is_verified is False:
-            distance = haversine_distance(self.latitude, self.longitude, self.metalatitude, self.metalongitude)
-            if distance <= 300:
-                self.is_verified=True
+        # if self.is_verified is False:
+        #     distance = haversine_distance(self.latitude, self.longitude, self.metalatitude, self.metalongitude)
+        #     if distance <= 300:
+        #         self.is_verified=True
                 
         super().save(*args, **kwargs)
 
@@ -54,7 +55,13 @@ class Place(models.Model):
     def __str__(self):
         return self.name
     
+class PlaceImage(models.Model):
+    place = models.ForeignKey(Place, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='place_images/', null=True)
 
+    def __str__(self):
+        return f"Image for {self.place.name}"
+    
 
 class Review(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
@@ -66,9 +73,3 @@ class Review(models.Model):
     def __str__(self):
         return f"Review by {self.reviewer.username} for {self.place.name}"
     
-class PlaceImage(models.Model):
-    place = models.ForeignKey(Place, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='place_images/', null=True)
-
-    def __str__(self):
-        return f"Image for {self.place.name}"

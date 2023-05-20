@@ -7,11 +7,12 @@ from django.core.exceptions import ObjectDoesNotExist
 
     
 class Hotel(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     description = models.TextField()
     latitude = models.DecimalField(max_digits=9, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)
     slug = models.SlugField(unique=True, blank=True)
+    c_review=models.CharField(null=True, max_length=500)
 
     is_active = models.BooleanField(default=False)
 
@@ -59,7 +60,7 @@ class HotelReview(models.Model):
         return f"Review by {self.reviewer.username} for {self.place.name}"
     
 class HotelImage(models.Model):
-    place = models.ForeignKey(Hotel, related_name='images', on_delete=models.CASCADE)
+    hotel = models.ForeignKey(Hotel, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='hotel_images/', null=True)
 
     def __str__(self):
@@ -81,6 +82,7 @@ class KhaltiValidation(models.Model):
     amount = models.IntegerField(default=200)
     token = models.CharField(max_length=255)
     subscribed_at = models.DateTimeField(auto_now_add=True)
+    expiry_date = models.DateTimeField(null=True)
     is_active = models.BooleanField(default=True)
 
     # def __str__(self):
@@ -89,10 +91,10 @@ class KhaltiValidation(models.Model):
     def save(self, *args, **kwargs):
         self.subscribed_at = datetime.datetime.now(pytz.utc)
         # Calculate the expiration date (30 days from the subscribed_at)
-        expiration_date = self.subscribed_at + timezone.timedelta(minutes=1)
-
+        expiry_date = self.subscribed_at + timezone.timedelta(days=30)
+        self.expiry_date=expiry_date
         # Update the is_active attribute based on the current date
-        if timezone.now() > expiration_date:
+        if timezone.now() > expiry_date:
             self.is_active = False
 
 

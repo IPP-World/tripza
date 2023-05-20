@@ -9,25 +9,80 @@ from .serializers import PlaceSerializer, ReviewSerializer
 from rest_framework import status, generics
 from django.shortcuts import get_object_or_404
 from django.http import Http404
-from .models import Place, Review
+from .models import Place, Review, PlaceImage
 from .serializers import PlaceSerializer, ReviewSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Avg
+
+        # request.data['contributor_name'] = f"{contributor.fname} {contributor.lname}"  # Assign the user's name separately
+        # request.data['images'] ma image axa tara database ma save vaxaina hola
+        # Image data lai database ma kasari rakhne ho google and findout
+
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 class PlaceListAPIView(APIView):
     permission_classes = [IsAuthenticated]
     
     def post(self, request):
-        contributor = request.user  # Get the authenticated user
-        request.data['contributor'] = contributor.id  # Assign the user's ID as the contributor
-        # request.data['contributor_name'] = f"{contributor.fname} {contributor.lname}"  # Assign the user's name separately
-        # request.data['images'] ma image axa tara database ma save vaxaina hola
-        # Image data lai database ma kasari rakhne ho google and findout
+        contributor = request.user
+        request.data['contributor'] = contributor.id
         serializer = PlaceSerializer(data=request.data)
+        
         if serializer.is_valid():
-            serializer.save()
+            images_data = request.FILES.getlist('images')
+            place = serializer.save()  # Save the place object and get the instance
+            
+            for image_data in images_data:
+                image = PlaceImage.objects.create(place=place, image=image_data)
+            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class PlaceListAPIView(APIView):
+#     permission_classes = [IsAuthenticated]
+    
+#     def post(self, request):
+#         contributor = request.user  # Get the authenticated user
+#         request.data['contributor'] = contributor.id  # Assign the user's ID as the contributor
+#         serializer = PlaceSerializer(data=request.data)
+#         if serializer.is_valid():
+#             images_data = request.FILES.getlist('images')
+#             images = []
+            
+#             for image_data in images_data:
+#                 # Assuming you have a PlaceImage model for storing images
+#                 image = PlaceImage.objects.create(image=image_data)
+#                 images.append(image)
+#             images=request.data.getlist('images')
+#                     # fields = ('id', 'name', 'description', 'latitude', 'longitude', 'metalatitude', 'metalongitude', 'c_review', 'slug', 'is_verified', 'contributor', 'rating', 'contributor_name', 'images')
+#             name = request.data.get('name')
+#             description = request.data.get('description')
+#             latitude = request.data.get('latitude')
+#             longitude = request.data.get('longitude')
+#             metalatitude = request.data.get('metalatitude')
+#             metalongitude = request.data.get('metalongitude')
+#             c_review = request.data.get('c_review')
+#             rating = request.data.get('rating')
+#             serializer.save(name=name, description=description, latitude=latitude, longitude=longitude, metalatitude=metalatitude, metalongitude=metalongitude, c_review=c_review, rating=rating, images=images)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+        # elif request.method == 'POST':
+        # serializer = MiniSerializer(request.data)
+        # if serializer.is_valid():
+        #     images = request.FILES.getlist('image')
+        #     mini_obj = serializer.save()
+        #     for i in images:
+        #         # TODO: error checking for images? it's not handled by the mini serializer.
+        #         #  Maybe make a separate image serializer that's only used for incoming?
+        #         #MiniImage.objects.create(mini=mini_obj, image=i)
+        #         image_serializer = MiniImageSerializer(mini=mini_obj, image=i)
+        #         if image_serializer.is_valid():
+        #             image_serializer.save()
+        #         else:
+        #             return Response(image_serializer.errors, status.HTTP_400_BAD_REQUEST)
+        #     return Response(request.POST, status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
     
         # def post(self, request):
         # user = request.data

@@ -44,8 +44,8 @@ function App() {
           <Route path="/contribute" element={<Contribute />} />
           <Route path="/hotels" element={<Hotels />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/reviews" element={<Reviews/>} />
-          <Route path="/placeinfo" element={<Placeinfo />} />
+          <Route path="/placeinfo/:slug/reviews" element={<Reviews/>} />
+          <Route path="/placeinfo/:slug" element={<Placeinfo />} />
           <Route path="/addservices" element={<AddServices />} />
         </Routes>
       </Router>

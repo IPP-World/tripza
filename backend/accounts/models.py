@@ -39,7 +39,7 @@ class User(AbstractBaseUser):
     lname=models.CharField(max_length=255)
     number=models.CharField(max_length=20)
     dob=models.DateField()
-    photo = models.ImageField(upload_to='photos', null=True, blank=True, verbose_name="photoo")
+    photo = models.ImageField(upload_to='photos', null=True, blank=True, verbose_name="photo")
     is_verified=models.BooleanField(default=False)
     is_subscribed=models.BooleanField(default=False)
     
