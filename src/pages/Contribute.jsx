@@ -50,8 +50,8 @@ export default function Contribute() {
   const [showModal, setShowModal] = useState(false);
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
-  const [photolat, setPhotolat] = useState(null);
-  const [photolon, setPhotolon] = useState(null);
+  const [photolat, setPhotolat] = useState(0);
+  const [photolon, setPhotolon] = useState(0);
   const [maplat, setMaplat] = useState(null);
   const [maplon, setMaplon] = useState(null);
   // const [isWithinCircle,setIsWithinCircle]=useState(false);

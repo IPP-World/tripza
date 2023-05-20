@@ -68,26 +68,6 @@ function Navbar() {
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const navbar = document.querySelector('.nav--container');
-      if (navbar) {
-        if (window.pageYOffset > 0) {
-          navbar.classList.add('sticky');
-        } else {
-          navbar.classList.remove('sticky');
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
     <div className="nav--container">
       <Link to="/">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { CiShare1 } from "react-icons/ci";
 import { BsBookmarkPlus } from "react-icons/Bs";
 import { AiFillStar } from "react-icons/Ai";
@@ -12,8 +12,41 @@ import "./PlaceInfo.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { useNavigate } from 'react-router-dom'; 
+import axios from "axios";
+
+
+
 
 function PlaceInfo() {
+  const [placeData, setPlaceData] = useState({});
+
+  async function getPlaceData() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    };
+  
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/place/', config);
+      const data = response.data;
+      console.log(data);
+  
+      // Extract name and description
+      const extractedData = data[0];
+  
+     setPlaceData(extractedData);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  useEffect(() => {
+    getPlaceData();
+  }, []);
+
   const states = Object.freeze({
     REVIEWS: <Reviews closeModal={() => setCurrentState(states.NONE)} />,
     HOTELS: <HotelsNearby closeModal={() => setCurrentState(states.NONE)} />,
@@ -22,6 +55,7 @@ function PlaceInfo() {
     ),
     NONE: <></>,
   });
+
  const navigate=useNavigate();
  const handleAddService=()=>{
     navigate('/addservices');
@@ -38,7 +72,7 @@ function PlaceInfo() {
       {currentState}
       <div className="place--header">
         <div className="place--details">
-          <h1 className="place--name">Khumai Dada - Great Machhapuchare Trail</h1>
+          <h1 className="place--name">{placeData.name}</h1>
           <h4 className="place--location">Machhapuchchhre 33700, Pokhara</h4>
         </div>
         <div className="place--sharesave">

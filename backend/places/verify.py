@@ -1,7 +1,8 @@
 from math import radians, sin, cos, sqrt, atan2
 
 def haversine_distance(lat1, lon1, lat2, lon2):
-    # Convert coordinates from degrees to radians
+    lat2 = float(lat2) # Convert coordinates from degrees to radians
+    lon2 = float(lon2) # Convert coordinates from degrees to radians
     lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
 
     # Earth's radius in meters

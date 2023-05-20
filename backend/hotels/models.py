@@ -68,6 +68,9 @@ from django.utils import timezone
 import datetime
 import pytz
 class KhaltiValidation(models.Model):
+
+    email=models.CharField(max_length=100, default='abc@gmail.com')
+
     amount = models.IntegerField(default=200)
     token = models.CharField(max_length=255)
     subscribed_at = models.DateTimeField(auto_now_add=True)
@@ -84,6 +87,7 @@ class KhaltiValidation(models.Model):
         # Update the is_active attribute based on the current date
         if timezone.now() > expiration_date:
             self.is_active = False
+
 
         super().save(*args, **kwargs)
     

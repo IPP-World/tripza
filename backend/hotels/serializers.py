@@ -40,4 +40,4 @@ class KhaltiValidationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = KhaltiValidation
-        fields = ('id', 'amount', 'token', 'subscribed_at', 'is_active')
+        fields = ('id', 'amount', 'token', 'subscribed_at', 'is_active', 'email')

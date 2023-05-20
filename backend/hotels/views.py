@@ -87,6 +87,7 @@ class ReviewListCreateAPIView(generics.ListCreateAPIView):
 
 class KhaltiValidationView(APIView):
     def post(self, request):
+        
         print(request.data)
         data = {
             'amount': int(request.data['amount']),
