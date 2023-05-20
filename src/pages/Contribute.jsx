@@ -5,6 +5,7 @@ import RatingStars from "../components/ratings";
 import PlaceOffers from "../components/offers";
 import MapSection from "../components/maps";
 import exifr from "exifr";
+import axios from "axios";
 import "./Contribute.css";
 
 // function isPhotoInCircle(photoLat, photoLng, circleCenterLat, circleCenterLng, circleRadius) {
@@ -42,9 +43,10 @@ import "./Contribute.css";
 //   return degrees * (Math.PI / 180);
 // }
 
-
-
 export default function Contribute() {
+  const [imageAdded, setImageAdded] = useState(false);
+  const [ratingValue, setRatingValue] = useState(null);
+  const [positionMarked, setPositionMarked] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
@@ -54,56 +56,86 @@ export default function Contribute() {
   const [maplon, setMaplon] = useState(null);
   // const [isWithinCircle,setIsWithinCircle]=useState(false);
 
-  const [placedesc, setPlacedesc] = useState({
-    placeName: "",
-    placeDescription: "",
-    review: "",
+  const [placedetails, setPlacedetails] = useState({
+    name: "",
+    description: "",
+    // selectedOffers:"",
+    //rating:"",
+    // latitude:"",
+    // longitude:"",
+    // isVerified:""
   });
+
   const handleChange = (e) => {
-    setPlacedesc({ ...placedesc, [e.target.name]: e.target.value });
+    setPlacedetails({ ...placedetails, [e.target.name]: e.target.value });
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
-  
+
   const handleImageUpload = async (event) => {
     const files = event.target.files;
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const reader = new FileReader();
-  
+
       reader.onload = async () => {
         const imageData = reader.result;
-  
+
         try {
           const exifData = await exifr.gps(imageData);
-          let latitude,longitude;
           if (exifData && exifData.latitude && exifData.longitude) {
-            latitude = exifData.latitude;
-            longitude = exifData.longitude;
+            setPhotolat(exifData.latitude);
+            setPhotolon(exifData.longitude);
+
+            //   // Check if the photo's location falls within the circular area
+            //   const circleCenterLat = maplat; // Latitude of the circle center
+            //   const circleCenterLng =maplon ; // Longitude of the circle center
+            //   const circleRadius = 5; // Radius of the circle in kilometers
+
+            //   const isWithinCurrentCircle = isPhotoInCircle(
+            //     photolat,
+            //     photolon,
+            //     circleCenterLat,
+            //     circleCenterLng,
+            //     circleRadius
+            //   );
+            //   console.log("Is within circle:", isWithinCurrentCircle);
+
+            //   // Update the flag variable if any photo is within the circle
+            //   if (isWithinCurrentCircle) {
+            //     setIsWithinCircle(true);
+            //   }
           }
+
           const metadata = {
-            location: { latitude, longitude },
+            location: { photolat, photolon },
           };
-           console.log([latitude,longitude]);
+
+          console.log("image location:", [photolat, photolon]);
           const objectURL = URL.createObjectURL(file);
           const imageWithMetadata = { objectURL, metadata };
           setImages([...images, imageWithMetadata]);
         } catch (error) {
-          console.error('Error extracting metadata:', error);
+          console.error("Error extracting metadata:", error);
         }
       };
-  
+      setImageAdded(true);
       reader.readAsDataURL(file);
     }
   };
-
 
   const handleImageDelete = (index) => {
     const newImages = [...images];
     newImages.splice(index, 1);
     setImages(newImages);
+    console.log(index);
+    if (index == 0) {
+      setImageAdded(false);
+    } else {
+      setImageAdded(true);
+    }
   };
 
   const Popup = () => {
@@ -156,20 +188,67 @@ export default function Contribute() {
       </>
     );
   };
-  const handleLocationSelect = (location) => {
-    console.log("Selected Location:", location);
-  };
 
+  const handleLocationSelect = (position) => {
+    console.log("Selected Location:", position);
+    setMaplat(position.latitude);
+    setMaplon(position.longitude);
+    // const circleCenterLat = maplat; // Latitude of the circle center
+    // const circleCenterLng = maplon; // Longitude of the circle center
+    // const circleRadius = 5; // Radius of the circle in kilometers
+    // console.log('photo latitude:',photolat);
+    // if(photolat && photolon){
+    // const isWithinCurrentCircle = isPhotoInCircle(
+    //   photolat,
+    //   photolon,
+    //   circleCenterLat,
+    //   circleCenterLng,
+    //   circleRadius
+    // );
+    // console.log("Is within circle:", isWithinCurrentCircle);
+    // if (isWithinCurrentCircle) {
+    //   setIsWithinCircle(true);
+    // }
+    // else{
+    //   setIsWithinCircle(false);
+    // }
+    //}
+    setPositionMarked(true);
+  };
   const handleOffersSelected = (selectedOffers) => {
     console.log("offers:", selectedOffers);
   };
   const handleRating = (rating) => {
     console.log("rating:", rating);
+    setRatingValue(rating);
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
+    // const circleCenterLat = maplat; // Latitude of the circle center
+    //  const circleCenterLng = maplon; // Longitude of the circle center
+    //  console.log(circleCenterLat);
+    //  console.log(circleCenterLng);
+    //  const circleRadius = 5; // Radius of the circle in kilometers
+    //  console.log('photo latitude:',photolat);
+    //  if(photolat && photolon){
+    //  const isWithinCurrentCircle = isPhotoInCircle(
+    //    photolat,
+    //    photolon,
+    //    circleCenterLat,
+    //    circleCenterLng,
+    //    circleRadius
+    //  );
+    //  console.log("Is within circle:", isWithinCurrentCircle);
+    //  if (isWithinCurrentCircle=='true') {
+    //    setIsWithinCircle(true);
+    //  }
+    //  else{
+    //    setIsWithinCircle(false);
+    //  }
+    //}
 
-    if (!location) {
+    if (!positionMarked) {
       alert("Please select a location in the map");
       return;
     }
@@ -177,89 +256,102 @@ export default function Contribute() {
       alert("Please confirm that the information you submitted is legit");
       return;
     }
-    if (!images) {
+    if (!imageAdded) {
       alert("Please select one or more images");
+      return;
+    }
+    if (!ratingValue) {
+      alert("Please give your ratings");
+      return;
     }
     setShowModal(true);
 
-    // console.log('Map Markers:', position);
-    console.log("description:", placedesc);
-    handleOffersSelected;
-    handleRating;
+    // console.log("description:", placedesc);
+    // handleOffersSelected;
+    // handleRating;
+    // console.log('correct metadata:',isWithinCircle);
 
-    //const latitude = position.lat;
-    //const longitude = position.lng;
-    const form = e.target;
-    const formData = new FormData(form);
-    // formData.append('latitude', latitude);
-    //formData.append('longitude', longitude);
-    //formData.append('image',imageFile);
-    //formData.append('rating',rating);
-    fetch("/api/contribute/", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Form data sent successfully");
-        } else {
-          console.error("Error sending form data");
-        }
-      })
-      .catch((error) => console.error(error));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    };
+    const body = JSON.stringify({
+      name: placedetails.name,
+      description: placedetails.description,
+      latitude: maplat,
+      longitude: maplon,
+      metalatitude: photolat,
+      metalongitude: photolon,
+      rating: ratingValue,
+    });
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/place/`, body, config)
+      .catch((e) => {
+        console.error(e);
+        alert("Error sending details");
+      });
   };
 
   return (
-    <div className="contribute-container">
-      <div className="left-part">
-        <div className="contribute-text">Contribute a place</div>
-        <div className="places-container">
-    <ul>
-      {images.map((imageWithMetadata, index) => (
-        <li key={index} className="imageContainer">
-          <img src={imageWithMetadata.objectURL} alt={`image-${index}`} />
-          <button className="delete-button" onClick={() => handleImageDelete(index)}>
-            <GrClose />
-          </button>
-        </li>
-      ))}
-      <li>
-        <label htmlFor="image-upload" className="add-box">
-          <GrAdd className="image-add" />
-        </label>
-        <input
-          id="image-upload"
-          type="file"
-          multiple
-          onChange={handleImageUpload}
-          style={{ display: 'none' }}
-        />
-      </li>
-    </ul>
-  </div>
-
-        <div className="maps-container">
-          <MapSection onLocationSelect={handleLocationSelect} />
+    <form onSubmit={submitHandler}>
+      <div className="contribute-container">
+        <div className="left-part">
+          <div className="contribute-text">Contribute a place</div>
+          <div className="places-container">
+            <ul>
+              {images.map((imageWithMetadata, index) => (
+                <li key={index} className="imageContainer">
+                  <img
+                    src={imageWithMetadata.objectURL}
+                    alt={`image-${index}`}
+                  />
+                  <button
+                    className="delete-button"
+                    onClick={() => handleImageDelete(index)}
+                  >
+                    <GrClose />
+                  </button>
+                </li>
+              ))}
+              <li>
+                <label htmlFor="image-upload" className="add-box">
+                  <GrAdd className="image-add" />
+                </label>
+                <input
+                  id="image-upload"
+                  type="file"
+                  multiple
+                  onChange={handleImageUpload}
+                  style={{ display: "none" }}
+                />
+              </li>
+            </ul>
+          </div>
+          <div className="maps-container">
+            <MapSection onLocationSelect={handleLocationSelect} />
+          </div>
         </div>
-      </div>
-      <div className="right-part">
-        <div className="place-info">
-          <form onSubmit={submitHandler}>
+        <div className="right-part">
+          <div className="place-info">
             <input
               className="place-name1"
               type="text"
-              name="placeName"
+              name="name"
               placeholder="Name of the place"
-              value={placedesc.placeName}
+              value={placedetails.name}
               onChange={handleChange}
+              required
             />
             <input
               className="place-name2"
               type="text"
-              name="placeDescription"
+              name="description"
               placeholder="Description of the place"
-              value={placedesc.placeDescription}
+              value={placedetails.description}
               onChange={handleChange}
+              required
             />
             <div className="place-offers-text">What this place offers</div>
             <div className="reviews">
@@ -278,13 +370,12 @@ export default function Contribute() {
                 name="review"
                 placeholder="Review Here"
                 onChange={handleChange}
-                value={placedesc.review}
+                value={placedetails.review}
               />
             </div>
             <div className="checkbox">
               <label required>
                 <input
-                
                   type="checkbox"
                   checked={legitChecked}
                   onChange={() => setLegitChecked(!legitChecked)}
@@ -297,10 +388,9 @@ export default function Contribute() {
               Submit
             </button>
             {showModal && <Popup />}
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   );
-        }
-
+}
