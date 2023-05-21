@@ -10,19 +10,19 @@ import axios from "axios";
 export default function Profile({}) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const contributions = useSelector((state) => state.auth.contributions);
-
+  
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(load_user());
   }, []);
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const handleEdit = () => {
     navigate("/profile/editprofile");
   };
   const handleSubscribe = () => {
+    // const mail=user?.email;
     let config = {
       publicKey: "test_public_key_1bc1b5b65fb14323bd5b06c4938e7e90",
       productIdentity:
@@ -34,6 +34,7 @@ export default function Profile({}) {
           axios.post(`${process.env.REACT_APP_API_URL}/api/hotel/subscribe`, {
             amount: payload.amount,
             token: payload.token,
+            email:payload.user?.email
           });
         },
       },

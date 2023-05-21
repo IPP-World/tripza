@@ -1,22 +1,24 @@
 import { GrAdd, GrClose } from "react-icons/Gr";
 import { AiOutlineClose } from "react-icons/Ai";
 import React, { useState, useEffect } from "react";
-
 import PlaceOffers from "../components/offers";
 import MapSection from "../components/maps";
 import exifr from "exifr";
+import axios from "axios";
 import "./Addservices.css";
 
 export default function AddServices() {
   const [showModal, setShowModal] = useState(false);
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
-
+  const [positionMarked, setPositionMarked] = useState(false);
+  const [photolat, setPhotolat] = useState(0);
+  const [photolon, setPhotolon] = useState(0);
+  const [maplat, setMaplat] = useState(null);
+  const [maplon, setMaplon] = useState(null);
+  const[offerlist,setOfferList]= useState({})
   const [offers, setOffers] = useState([
-    { name: "", rate: "" },
-    { name: "", rate: "" },
-    { name: "", rate: "" },
-    { name: "", rate: "" },
+    { offer: "", rate: "" },
   ]);
 
   const handleOfferChange = (index, field, value) => {
@@ -38,25 +40,25 @@ export default function AddServices() {
   };
 
   const options = [
-    "Option 1",
-    "Option 2",
-    "Option 3",
-    "Option 4",
-    "Option 5",
-    "Option 6",
-    "Option 7",
-    "Option 8",
-    "Option 9",
-    "Option 10",
+    "Room",
+    "Restaurant",
+    "Camping",
+    "View Tower",
+    "Boating",
+    "Swimming Pool",
+    "Bungee",
+    "Rafting",
+    "Travel Agency",
+    "Tour Operators",
   ];
 
-  const [placedesc, setPlacedesc] = useState({
+  const [servicedesc, setServicedesc] = useState({
     placeName: "",
-
     placeDescription: "",
+    location:""
   });
   const handleChange = (e) => {
-    setPlacedesc({ ...placedesc, [e.target.name]: e.target.value });
+    setServicedesc({ ...servicedesc, [e.target.name]: e.target.value });
   };
 
   const handleCloseModal = () => {
@@ -76,8 +78,8 @@ export default function AddServices() {
           const exifData = await exifr.gps(imageData);
           let latitude, longitude;
           if (exifData && exifData.latitude && exifData.longitude) {
-            latitude = exifData.latitude;
-            longitude = exifData.longitude;
+            setPhotolat(exifData.latitude);
+            setPhotolon(exifData.longitude);
           }
           const metadata = {
             location: { latitude, longitude },
@@ -120,11 +122,15 @@ export default function AddServices() {
   };
   const handleLocationSelect = (location) => {
     console.log("Selected Location:", location);
+    setMaplat(location.latitude);
+    setMaplon(location.longitude);
+    setPositionMarked(true);
   };
 
-  const handleOffersSelected = (selectedOffers) => {
-    console.log("offers:", selectedOffers);
-  };
+  // const handleOffersSelected = (selectedOffers) => {
+  //   console.log("offers:", selectedOffers);
+  //   setOfferList(selectedOffers);
+  // };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -133,10 +139,10 @@ export default function AddServices() {
       alert("Please select a location in the map");
       return;
     }
-    if (!selectedCategory) {
-      alert("Please select a category");
-      return;
-    }
+    // if (!selectedCategory) {
+    //   alert("Please select a category");
+    //   return;
+    // }
 
     if (!legitChecked) {
       alert("Please confirm that the information you submitted is legit");
@@ -145,33 +151,55 @@ export default function AddServices() {
     if (!images) {
       alert("Please select one or more images");
     }
-    setShowModal(true);
+    // setShowModal(true);
 
-    console.log("selectedcategory:", selectedCategory);
-    console.log("description:", placedesc);
-    handleOffersSelected;
+    // console.log("selectedcategory:", selectedCategory);
+    // console.log("description:", placedesc);
+    // handleOffersSelected;
+    
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    };
 
-    const form = e.target;
-    const formData = new FormData(form);
+    const body = JSON.stringify({
+      name: servicedesc.placeName,
+      location: servicedesc.location,
+      description:servicedesc.placeDescription,
+      // review: placedetails.review,
+      latitude: maplat,
+      longitude: maplon,
+       offering:offerlist,
+       category:selectedOption
 
-    fetch("/api/contribute/", {
-      method: "POST",
-      body: formData,
+      // metalongitude: photolon,
+      // metalatitude: photolat,
+      // rating: ratingValue
+    });
+
+    axios
+    .post(`${process.env.REACT_APP_API_URL}/api/hotel/`, body, config)
+    .then((res) =>{ console.log(res);
+      setShowModal(true);
     })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Form data sent successfully");
-        } else {
-          console.error("Error sending form data");
-        }
-      })
-      .catch((error) => console.error(error));
+    .catch((e) => {
+      console.error(e);
+      alert("Error sending details");
+    });
+ 
+
+   
   };
 
   return (
     <div className="contribute-container">
       <div className="left-part">
-        <div className="contribute-text"><h3>Add a service</h3></div>
+        <div className="contribute-text"><h4>Add a service</h4></div>
+        <div className="contribute--add">
+              <p>Add images</p>
+            </div>
         <div className="services--image-container">
         <div className="services--places-container">
           <ul>
@@ -203,6 +231,7 @@ export default function AddServices() {
         </div>
 
         <div className="maps-container">
+        <p className="contribute--addmap">Add place on map</p>
           <MapSection onLocationSelect={handleLocationSelect} />
         </div>
       </div>
@@ -214,21 +243,29 @@ export default function AddServices() {
               type="text"
               name="placeName"
               placeholder="Name of the place"
-              value={placedesc.placeName}
+              value={servicedesc.placeName}
               onChange={handleChange}
             />
+              <input
+               className="services--place-name2"
+               type="text"
+               name="location"
+               placeholder="Location"
+               value={servicedesc.location}
+               onChange={handleChange}
+             />
             <input
               className="services--place-name2"
               type="text"
               name="placeDescription"
               placeholder="Description of the place"
-              value={placedesc.placeDescription}
+              value={servicedesc.placeDescription}
               onChange={handleChange}
             />
-            <div className="services--place-offers-text"><h3>Services provided</h3></div>
-            <div className="reviews">
+            {/* <div className="services--place-offers-text"><h3>Services provided</h3></div> */}
+            {/* <div className="reviews">
               <PlaceOffers onOffersSelected={handleOffersSelected} />
-            </div>
+            </div> */}
 
             <div className="dropdown-container">
               <h3 className="services--selectcategory">Select Category</h3>

@@ -21,11 +21,11 @@ import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-le
 function PlaceInfo(props) {
   const [placeData, setPlaceData] = useState({});
   const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
-
+  
   // const [reviews, setReviews] = useState([])
   const {slug} = useParams()
-
-
+  
+  
   async function getPlaceData() {
     const config = {
       headers: {
