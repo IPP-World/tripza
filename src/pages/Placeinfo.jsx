@@ -23,6 +23,7 @@ function PlaceInfo(props) {
   const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
   const [images, setImages] = useState([])
   const [map, setMap] = useState(null)
+  const [isVerified,setIsverified]=useState(false);
   
   // const [reviews, setReviews] = useState([])
   const {slug} = useParams()
@@ -45,7 +46,8 @@ function PlaceInfo(props) {
       const extractedData = data;
       const lat=Number(data.latitude);
       const lon=Number(data.longitude);
-
+      const is= data.is_verified;
+      setIsverified(is);
       setMapCenter([lat,lon]);
       setImages([...images, data.images.map(i=><img src={`http://localhost:8000${i.image}`}/>)])
       setPlaceData(extractedData);
@@ -106,8 +108,9 @@ function PlaceInfo(props) {
       {currentState}
       <div className="place--header">
         <div className="place--details">
-          <h1 className="place--name">{placeData.name}</h1>
+          <h1 className="place--name">{placeData.name}</h1> 
           <h4 className="place--location">{placeData.location}</h4>
+          <span>{!isVerified?<span>Unverified</span>: <span>Verified</span>}</span>
         </div>
         <div className="place--sharesave">
         

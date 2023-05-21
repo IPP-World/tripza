@@ -107,7 +107,7 @@ const Contribute = () => {
       alert("Please confirm that the information you submitted is legit");
       return;
     }
-    if (!imageAdded) {
+    if (!images) {
       alert("Please select one or more images");
       return;
     }
@@ -196,6 +196,7 @@ const Contribute = () => {
                 <li>
                   <label htmlFor="image-upload" className="add-box">
                     <GrAdd className="image-add" />
+                    </label>
                     <input
                       id="image-upload"
                       type="file"
@@ -203,7 +204,6 @@ const Contribute = () => {
                       onChange={handleImageUpload}
                       style={{ display: "none" }}
                     />
-                  </label>
                 </li>
               </ul>
             </div>
