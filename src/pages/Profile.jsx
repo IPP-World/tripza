@@ -3,14 +3,14 @@ import { Navigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { load_user, logout } from "../actions/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import KhaltiCheckout from "khalti-checkout-web";
 import axios from "axios";
 
 export default function Profile({}) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const contributions = useSelector((state) => state.auth.contributions);
-  
+  console.log(isAuthenticated);
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(load_user());
@@ -22,11 +22,11 @@ export default function Profile({}) {
     navigate("/profile/editprofile");
   };
   const handleSubscribe = () => {
+    console.log(user?.email)
     // const mail=user?.email;
     let config = {
       publicKey: "test_public_key_1bc1b5b65fb14323bd5b06c4938e7e90",
-      productIdentity:
-        "User ko id, jun chai transaction kasle garyo vanne thapauna ko lagi",
+      productIdentity: "jhyau lagne",
       productName: "Tripza",
       productUrl: "https://localhost:8000/subscribe",
       eventHandler: {
@@ -34,13 +34,22 @@ export default function Profile({}) {
           axios.post(`${process.env.REACT_APP_API_URL}/api/hotel/subscribe`, {
             amount: payload.amount,
             token: payload.token,
-            email:payload.user?.email
           });
         },
       },
     };
     const checkout = new KhaltiCheckout(config);
     checkout.show({ amount: 200 * 100 });
+
+    axios
+    .post(`${process.env.REACT_APP_API_URL}/api/`,)
+    .then((res)=>{
+      console.log(res);
+    })
+    .catch((e) => {
+      console.error(e);
+      alert("Error calling api");
+    });
   };
   if (isAuthenticated)
     return (
