@@ -44,6 +44,7 @@ function PlaceInfo(props) {
   
       // Extract name and description
       const extractedData = data;
+      
       const lat=Number(data.latitude);
       const lon=Number(data.longitude);
       const is= data.is_verified;

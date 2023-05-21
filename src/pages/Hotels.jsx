@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Services.css'
 
 const Services = () => {
@@ -7,11 +8,16 @@ const Services = () => {
 
   useEffect(() => {
     // Fetch services from API and update the state
-    fetch('your-api-endpoint')
+    fetch(`http://127.0.0.1:8000/api/hotel/show`)
       .then(response => response.json())
-      .then(data => setServices(data))
+      .then(data =>{
+        setServices(data)
+        
+      })
       .catch(error => console.log(error));
   }, []);
+  
+
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -26,58 +32,64 @@ const Services = () => {
       <div className="services--categories">
         <ul>
           <li
-            onClick={() => handleCategoryClick('category1')}
-            className={selectedCategory === 'category1' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('Room')}
+            className={selectedCategory === 'Room' ? 'selected' : ''}
           >
-            Category 1
+            Room
           </li>
           <li
-            onClick={() => handleCategoryClick('category2')}
-            className={selectedCategory === 'category2' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('Restaurant')}
+            className={selectedCategory === 'Restaurant' ? 'selected' : ''}
           >
-            Category 2
+            Restaurant
           </li>
           <li
-            onClick={() => handleCategoryClick('category3')}
-            className={selectedCategory === 'category3' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('Camping')}
+            className={selectedCategory === 'Camping' ? 'selected' : ''}
           >
-            Category 3
+            Camping
           </li>
           <li
-            onClick={() => handleCategoryClick('category4')}
-            className={selectedCategory === 'category4' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('View Tower')}
+            className={selectedCategory === 'View Tower' ? 'selected' : ''}
           >
-            Category 4
+            View Tower
           </li>
           <li
-            onClick={() => handleCategoryClick('category5')}
-            className={selectedCategory === 'category5' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('Boating')}
+            className={selectedCategory === 'Boating' ? 'selected' : ''}
           >
-            Category 5
+            Boating
           </li>
           <li
-            onClick={() => handleCategoryClick('category6')}
-            className={selectedCategory === 'category6' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('Swimming Pool')}
+            className={selectedCategory === 'Swimming Pool' ? 'selected' : ''}
           >
-            Category 6
+            Swimming Pool
           </li>
           <li
-            onClick={() => handleCategoryClick('category7')}
-            className={selectedCategory === 'category7' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('Bungee')}
+            className={selectedCategory === 'Bungee' ? 'selected' : ''}
           >
-            Category 7
+            Bungee
           </li>
           <li
-            onClick={() => handleCategoryClick('category8')}
-            className={selectedCategory === 'category8' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('Rafting')}
+            className={selectedCategory === 'Rafting' ? 'selected' : ''}
           >
-            Category 8
+            Rafting
           </li>
           <li
-            onClick={() => handleCategoryClick('category9')}
-            className={selectedCategory === 'category9' ? 'selected' : ''}
+            onClick={() => handleCategoryClick('Travel Agency')}
+            className={selectedCategory === 'Travel Agency' ? 'selected' : ''}
           >
-            Category 9
+            Travel Agency
+          </li>
+          <li
+            onClick={() => handleCategoryClick('Tour Operators')}
+            className={selectedCategory === 'Tour Operators' ? 'selected' : ''}
+          >
+            Tour Operators
           </li>
         </ul>
       </div>
@@ -85,7 +97,7 @@ const Services = () => {
         <h2>Selected Category: {selectedCategory || 'All'}</h2>
         {filteredServices.map(service => (
           <div className="service" key={service.id}>
-            <img src={service.image} alt={service.name} />
+            <img src={`http://localhost:8000${service.images[0].image}`} alt={service.name} />
             <p>{service.name}</p>
             <p>{service.location}</p>
           </div>
