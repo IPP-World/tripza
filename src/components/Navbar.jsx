@@ -28,7 +28,7 @@ function Navbar() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/reset-password';
 
   if (hideNavbar) {
     return null; // Don't render the navbar

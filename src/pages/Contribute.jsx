@@ -127,11 +127,6 @@ const Contribute = () => {
     }
     // setShowModal(true);
 
-    // console.log("description:", placedesc);
-    // handleOffersSelected;
-    // handleRating;
-    // console.log('correct metadata:',isWithinCircle);
-
     const config = {
       headers: {
         "Content-Type": "application/json",

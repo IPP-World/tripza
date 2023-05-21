@@ -1,0 +1,73 @@
+*{
+    padding:0;
+    margin:0;
+ }
+ .service--info {
+    display: flex;
+    flex-direction: column;
+    font-family: Poppins;
+    z-index: 0;
+  }
+  
+  .service--header {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    margin: 0 1.5vw;
+    color: #0f4c5c;
+  }
+  .service--details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .service--name {
+    font-size: 1.6em;
+  }
+  .service--location {
+    margin-top: -5px;
+    font-size: 1em;
+    font-weight: 400;
+  }
+  
+  .service--sharesave {
+    padding-top: 15px;
+    color: #0f4c5c;
+  }
+  .service-share {
+    margin-right: 20px;
+  }
+
+  .place-desc-p{
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 10px;
+  }
+  .service--category-tag{
+    width: 150px;
+    padding-left: 15px;
+    border: 1px solid #0f4c5c;
+    border-radius: 8px;
+    background-color: #0f4c5c;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .book--service-price{
+    display: flex;
+    align-items: baseline;
+  }
+  .book-service{
+    border: none;
+  background-color: #0f4c5c;
+  border-radius: 20px;
+  color: white;
+  font-family: Poppins;
+  font-size: 1.1em;
+  width: 140px;
+  height: 45px;
+  letter-spacing: 0.01em;
+font-weight: 350;
+cursor: pointer;
+  }
+
