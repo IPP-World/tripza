@@ -21,7 +21,7 @@ export default function Contribute() {
   const [maplon, setMaplon] = useState(null);
   const [offers, setOffers] = useState({});
 
-  // const [isWithinCircle,setIsWithinCircle]=useState(false);
+  
 
   const [placedetails, setPlacedetails] = useState({
     name: "",
@@ -58,24 +58,6 @@ export default function Contribute() {
             setPhotolat(exifData.latitude);
             setPhotolon(exifData.longitude);
 
-            //   // Check if the photo's location falls within the circular area
-            //   const circleCenterLat = maplat; // Latitude of the circle center
-            //   const circleCenterLng =maplon ; // Longitude of the circle center
-            //   const circleRadius = 5; // Radius of the circle in kilometers
-
-            //   const isWithinCurrentCircle = isPhotoInCircle(
-            //     photolat,
-            //     photolon,
-            //     circleCenterLat,
-            //     circleCenterLng,
-            //     circleRadius
-            //   );
-            //   console.log("Is within circle:", isWithinCurrentCircle);
-
-            //   // Update the flag variable if any photo is within the circle
-            //   if (isWithinCurrentCircle) {
-            //     setIsWithinCircle(true);
-            //   }
           }
 
           const metadata = {
@@ -108,13 +90,6 @@ export default function Contribute() {
   };
 
   const Popup = () => {
-    // const [level, setLevel] = useState(0);
-    // const handleIncreaseLevel = () => {
-    //   setLevel((prevLevel) => prevLevel + 1);
-    // };
-    // useEffect(() => {
-    //   handleIncreaseLevel();
-    // }, []);
     return (
       <>
         <div className="reward-wrapper" onClick={handleCloseModal}></div>
@@ -136,26 +111,6 @@ export default function Contribute() {
     console.log("Selected Location:", position);
     setMaplat(position.latitude);
     setMaplon(position.longitude);
-    // const circleCenterLat = maplat; // Latitude of the circle center
-    // const circleCenterLng = maplon; // Longitude of the circle center
-    // const circleRadius = 5; // Radius of the circle in kilometers
-    // console.log('photo latitude:',photolat);
-    // if(photolat && photolon){
-    // const isWithinCurrentCircle = isPhotoInCircle(
-    //   photolat,
-    //   photolon,
-    //   circleCenterLat,
-    //   circleCenterLng,
-    //   circleRadius
-    // );
-    // console.log("Is within circle:", isWithinCurrentCircle);
-    // if (isWithinCurrentCircle) {
-    //   setIsWithinCircle(true);
-    // }
-    // else{
-    //   setIsWithinCircle(false);
-    // }
-    //}
     setPositionMarked(true);
   };
   const handleOffersSelected = (selectedOffers) => {
@@ -172,29 +127,6 @@ export default function Contribute() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // const circleCenterLat = maplat; // Latitude of the circle center
-    //  const circleCenterLng = maplon; // Longitude of the circle center
-    //  console.log(circleCenterLat);
-    //  console.log(circleCenterLng);
-    //  const circleRadius = 5; // Radius of the circle in kilometers
-    //  console.log('photo latitude:',photolat);
-    //  if(photolat && photolon){
-    //  const isWithinCurrentCircle = isPhotoInCircle(
-    //    photolat,
-    //    photolon,
-    //    circleCenterLat,
-    //    circleCenterLng,
-    //    circleRadius
-    //  );
-    //  console.log("Is within circle:", isWithinCurrentCircle);
-    //  if (isWithinCurrentCircle=='true') {
-    //    setIsWithinCircle(true);
-    //  }
-    //  else{
-    //    setIsWithinCircle(false);
-    //  }
-    //}
-
     if (!positionMarked) {
       alert("Please select a location in the map");
       return;
@@ -211,12 +143,7 @@ export default function Contribute() {
       alert("Please give your ratings");
       return;
     }
-    setShowModal(true);
-
-    // console.log("description:", placedesc);
-    // handleOffersSelected;
-    // handleRating;
-    // console.log('correct metadata:',isWithinCircle);
+   // setShowModal(true);
 
     const config = {
       headers: {

@@ -7,18 +7,21 @@
   display: flex;
   flex-direction: column;
   font-family: Poppins;
-  z-index: 0;
+  z-index: 0; 
 }
 
 .place--header {
   display: flex;
   flex-direction: row;
   margin-top: 20px;
-  justify-content: center;
+  justify-content: space-between;
+  margin: 0 1.5vw;
   color: #0f4c5c;
 }
 .place--details {
-  margin-left: -30px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 .place--name {
   font-size: 1.6em;
@@ -107,7 +110,7 @@
   margin-top: -5px;
   width: 550px;
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
 }
 .place--offerlist {
@@ -229,7 +232,7 @@
   margin-top: 7px;
 }
 
-.place--reviewbutton {
+.placeinfo--place--reviewbutton {
   margin-left: -100px;
   margin-top: 7px;
   border: none;
@@ -243,13 +246,9 @@
   height: 35px;
   letter-spacing: 0.01em;
 }
-.place--reviewbutton:hover {
-  background-color: #bb610d;
+.placeinfo--place--reviewbutton:hover {
   cursor: pointer;
-}
-.place--reviewbutton:active {
-  background-color: #8d520f;
-  color: rgb(29, 89, 112);
+  color: #fff;
 }
 
 .service--add-btn{

@@ -12,5 +12,7 @@ import ResetPasswordConfirm from "./ResetPasswordConfirm";
 import 'leaflet/dist/leaflet.css';
 import EditProfile from "./editProfile";
 import AddServices from "./AddServices";
+import Serviceinfo from "./Serviceinfo";
+import ServiceReviews from "./ServiceReviews";
 
-export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews,Placeinfo,ResetPassword,ResetPasswordConfirm,EditProfile,AddServices}
+export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews,Placeinfo,ResetPassword,ResetPasswordConfirm,EditProfile,AddServices,Serviceinfo,ServiceReviews}

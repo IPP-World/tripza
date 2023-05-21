@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset_password } from '../actions/auth';
+import './Resetpassword.css'
+import bg from "../assets/signupbg.jpg";
 
 const ResetPassword = ({ reset_password }) => {
     const [requestSent, setRequestSent] = useState(false);
@@ -25,8 +27,11 @@ const ResetPassword = ({ reset_password }) => {
     }
 
     return (
-        <div className='container'>
-            <h1>Request Password Reset:</h1>
+        <div className='reset--page'>
+<img className="login--bg" src={bg} alt="logo" />
+        <div className='reset--container'>
+            <div className='reset--glass'></div>
+            <h1 className='reset--text'>Request Password Reset</h1>
             <form onSubmit={e => onSubmit(e)}>
                 <div>
                     <input
@@ -38,8 +43,9 @@ const ResetPassword = ({ reset_password }) => {
                         required
                     />
                 </div>
-                <button type='submit'>Reset Password</button>
+                <button type='submit' className='reset-btn'>Reset Password</button>
             </form>
+        </div>
         </div>
     );
 };
