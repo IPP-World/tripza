@@ -40,36 +40,26 @@ const Contribute = () => {
 
   const handleImageUpload = async (event) => {
     const files = event.target.files;
-    console.log(event.target.files[0]);
-    console.log(event.target);
      for (let i = 0; i < files.length; i++) {
-       const file = files[i];
-      const reader = new FileReader();
-      reader.onload = async () => {
-        const imageData = reader.result;
+        const file = files[i];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = async () => {
+          const imageData = reader.result;
 
         try {
           const exifData = await exifr.gps(imageData);
           if (exifData && exifData.latitude && exifData.longitude) {
             setPhotolat(exifData.latitude);
             setPhotolon(exifData.longitude);
-
           }
 
-          const metadata = {
-            location: { photolat, photolon },
-          };
-
-          console.log("image location:", [photolat, photolon]);
-          const objectURL = URL.createObjectURL(file);
-          const imageWithMetadata = { objectURL, metadata };
-          setImages([...images, imageWithMetadata]);
+          setImages([...images, {file, imageData}]);
         } catch (error) {
           console.error("Error extracting metadata:", error);
         }
       };
       setImageAdded(true);
-      reader.readAsDataURL(file);
     }
   }
 
@@ -129,43 +119,30 @@ const Contribute = () => {
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem("access")}`,
       },
     };
 
-    const body = JSON.stringify({
-      name: placedetails.name,
-      location: placedetails.location,
-      description:placedetails.description,
-      review: placedetails.review,
-      latitude: maplat,
-      longitude: maplon,
-      metalongitude: photolon,
-      metalatitude: photolat,
-      rating: ratingValue
-    });
+    const formData = new FormData();
+    formData.append("name", placedetails.name);
+    formData.append("location", placedetails.location);
+    formData.append("description", placedetails.description);
+    formData.append("latitude", maplat);
+    formData.append("longitude", maplon);
+    formData.append("metalatitude", photolat);
+    formData.append("metalongitude", photolon);
+    formData.append("rating", ratingValue);
+    formData.append("c_review",placedetails.review);
 
-    // const formData = new FormData(e.target);
-    // formData.append("name", placedetails.name);
-    // formData.append("location", placedetails.location);
-    // formData.append("description", placedetails.description);
-    // formData.append("latitude", maplat);
-    // formData.append("longitude", maplon);
-    // formData.append("metalatitude", photolat);
-    // formData.append("metalongitude", photolon);
-    // formData.append("rating", ratingValue);
-    // formData.append("review",review);
-    // formData.append("offering",offers);
+    images.forEach(image=>{
+      formData.append('images', image.file)
+    })
 
-    // for (let i = 0; i < images.length; i++) {
-    // formData.append('images', images);
-    // }
-
-    //console.log('formdata',formData);
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/place/`, body, config)
-      .then((res) =>{ console.log(res);
+      .post(`${process.env.REACT_APP_API_URL}/api/place/`, formData, config)
+      .then((res) =>{
+        console.log(res);
         setShowModal(true);
       })
       .catch((e) => {
@@ -205,7 +182,7 @@ const Contribute = () => {
                 {images.map((imageWithMetadata, index) => (
                   <li key={index} className="contribute--imageContainer">
                     <img
-                      src={imageWithMetadata.objectURL}
+                      src={images[index].imageData}
                       alt={`image-${index}`}
                     />
                     <button

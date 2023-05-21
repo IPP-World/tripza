@@ -1,7 +1,8 @@
 import { GrAdd, GrClose } from "react-icons/Gr";
 import { AiOutlineClose } from "react-icons/Ai";
 import React, { useState, useEffect } from "react";
-import PlaceOffers from "../components/offers";
+// import PlaceOffers from "../components/offers";
+import RatingStars from "../components/ratings";
 import MapSection from "../components/maps";
 import exifr from "exifr";
 import axios from "axios";
@@ -12,21 +13,19 @@ export default function AddServices() {
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
   const [positionMarked, setPositionMarked] = useState(false);
-  const [photolat, setPhotolat] = useState(0);
-  const [photolon, setPhotolon] = useState(0);
+  // const [photolat, setPhotolat] = useState(0);
+  // const [photolon, setPhotolon] = useState(0);
   const [maplat, setMaplat] = useState(null);
   const [maplon, setMaplon] = useState(null);
-  const[offerlist,setOfferList]= useState({})
-  const [offers, setOffers] = useState([
-    { offer: "", rate: "" },
-  ]);
+  // const[offerlist,setOfferList]= useState({})
+  // const [offers, setOffers] = useState({});
+  const [ratingValue, setRatingValue] = useState(null);
 
-  const handleOfferChange = (index, field, value) => {
-    const updatedOffers = [...offers];
-    updatedOffers[index][field] = value;
-    setOffers(updatedOffers);
-  };
-
+  // const handleOfferChange = (value) => {
+  //   const {offers} = value.target;
+  //   const stringOffers = value.split('\n')
+  //   set
+  // };
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -55,7 +54,9 @@ export default function AddServices() {
   const [servicedesc, setServicedesc] = useState({
     placeName: "",
     placeDescription: "",
-    location:""
+    location: "",
+    price:"",
+    review:""
   });
   const handleChange = (e) => {
     setServicedesc({ ...servicedesc, [e.target.name]: e.target.value });
@@ -126,6 +127,10 @@ export default function AddServices() {
     setMaplon(location.longitude);
     setPositionMarked(true);
   };
+  const handleRating = (rating) => {
+    console.log("rating:", rating);
+    setRatingValue(rating);
+  };
 
   // const handleOffersSelected = (selectedOffers) => {
   //   console.log("offers:", selectedOffers);
@@ -139,10 +144,10 @@ export default function AddServices() {
       alert("Please select a location in the map");
       return;
     }
-    // if (!selectedCategory) {
-    //   alert("Please select a category");
-    //   return;
-    // }
+    if (!selectedOption) {
+      alert("Please select a category");
+      return;
+    }
 
     if (!legitChecked) {
       alert("Please confirm that the information you submitted is legit");
@@ -151,12 +156,20 @@ export default function AddServices() {
     if (!images) {
       alert("Please select one or more images");
     }
+    if (!ratingValue) {
+      alert("Please give your ratings");
+      return;
+    }
+    if (!positionMarked) {
+      alert("Please point location in the map");
+      return;
+    }
     // setShowModal(true);
 
     // console.log("selectedcategory:", selectedCategory);
     // console.log("description:", placedesc);
     // handleOffersSelected;
-    
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -167,12 +180,13 @@ export default function AddServices() {
     const body = JSON.stringify({
       name: servicedesc.placeName,
       location: servicedesc.location,
-      description:servicedesc.placeDescription,
-      // review: placedetails.review,
+      description: servicedesc.placeDescription,
+      review: servicedesc.review,
+      price:servicedesc.price,
       latitude: maplat,
       longitude: maplon,
-       offering:offerlist,
-       category:selectedOption
+      category: selectedOption,
+      rating: ratingValue
 
       // metalongitude: photolon,
       // metalatitude: photolat,
@@ -180,58 +194,61 @@ export default function AddServices() {
     });
 
     axios
-    .post(`${process.env.REACT_APP_API_URL}/api/hotel/`, body, config)
-    .then((res) =>{ console.log(res);
-      setShowModal(true);
-    })
-    .catch((e) => {
-      console.error(e);
-      alert("Error sending details");
-    });
- 
-
-   
+      .post(`${process.env.REACT_APP_API_URL}/api/hotel/`, body, config)
+      .then((res) => {
+        console.log(res);
+        setShowModal(true);
+      })
+      .catch((e) => {
+        console.error(e);
+        alert("Error sending details");
+      });
   };
 
   return (
     <div className="contribute-container">
       <div className="left-part">
-        <div className="contribute-text"><h4>Add a service</h4></div>
-        <div className="contribute--add">
-              <p>Add images</p>
-            </div>
-        <div className="services--image-container">
-        <div className="services--places-container">
-          <ul>
-            {images.map((imageWithMetadata, index) => (
-              <li key={index} className="services--imageContainer">
-                <img src={imageWithMetadata.objectURL} alt={`image-${index}`} />
-                <button
-                  className="services--delete-button"
-                  onClick={() => handleImageDelete(index)}
-                >
-                  <GrClose />
-                </button>
-              </li>
-            ))}
-            <li>
-              <label htmlFor="image-upload" className="services--add-box">
-                <GrAdd className="image-add" />
-              </label>
-              <input
-                id="image-upload"
-                type="file"
-                multiple
-                onChange={handleImageUpload}
-                style={{ display: "none" }}
-              />
-            </li>
-          </ul>
+        <div className="contribute-text">
+          <h4>Add a service</h4>
         </div>
+        <div className="contribute--add">
+          <p>Add images</p>
+        </div>
+        <div className="services--image-container">
+          <div className="services--places-container">
+            <ul>
+              {images.map((imageWithMetadata, index) => (
+                <li key={index} className="services--imageContainer">
+                  <img
+                    src={imageWithMetadata.objectURL}
+                    alt={`image-${index}`}
+                  />
+                  <button
+                    className="services--delete-button"
+                    onClick={() => handleImageDelete(index)}
+                  >
+                    <GrClose />
+                  </button>
+                </li>
+              ))}
+              <li>
+                <label htmlFor="image-upload" className="services--add-box">
+                  <GrAdd className="image-add" />
+                </label>
+                <input
+                  id="image-upload"
+                  type="file"
+                  multiple
+                  onChange={handleImageUpload}
+                  style={{ display: "none" }}
+                />
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="maps-container">
-        <p className="contribute--addmap">Add place on map</p>
+          <p className="contribute--addmap">Add place on map</p>
           <MapSection onLocationSelect={handleLocationSelect} />
         </div>
       </div>
@@ -246,14 +263,14 @@ export default function AddServices() {
               value={servicedesc.placeName}
               onChange={handleChange}
             />
-              <input
-               className="services--place-name2"
-               type="text"
-               name="location"
-               placeholder="Location"
-               value={servicedesc.location}
-               onChange={handleChange}
-             />
+            <input
+              className="services--place-name2"
+              type="text"
+              name="location"
+              placeholder="Location"
+              value={servicedesc.location}
+              onChange={handleChange}
+            />
             <input
               className="services--place-name2"
               type="text"
@@ -270,7 +287,7 @@ export default function AddServices() {
             <div className="dropdown-container">
               <h3 className="services--selectcategory">Select Category</h3>
               <input
-              className="services--input"
+                className="services--input"
                 type="text"
                 value={selectedOption}
                 placeholder="Hover to select a category"
@@ -294,27 +311,29 @@ export default function AddServices() {
 
             <div className="pricing-container">
               <h3>Pricing</h3>
-              {offers.map((offer, index) => (
-                <div key={index} className="offer-row">
-                  <input
-                    type="text"
-                    placeholder="Offer"
-                    value={offer.name}
-                    onChange={(e) =>
-                      handleOfferChange(index, "name", e.target.value)
-                    }
-                  />
-                  <input
-                    type="number"
-                    placeholder="Rate (NRS)"
-                    value={offer.rate}
-                    onChange={(e) =>
-                      handleOfferChange(index, "rate", e.target.value)
-                    }
-                  />
-                </div>
-              ))}
+              <div className="offer-row">
+                <input
+                  type="number"
+                  placeholder="Rate (NRS)"
+                  name="price"
+                  value={servicedesc.price}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
+            <div className="review-text">Your review of the service</div>
+              <div className="review">
+                <RatingStars sendRating={handleRating} />
+              </div>
+              <div className="review-box">
+                <input
+                  type="text"
+                  name="review"
+                  placeholder="Review Here"
+                  onChange={handleChange}
+                  value={servicedesc.review}
+                />
+              </div>
 
             <div className="services--checkbox">
               <label required>

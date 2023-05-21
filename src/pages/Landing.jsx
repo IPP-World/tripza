@@ -62,6 +62,7 @@ export default function Landing() {
   // });
 
   const explorePlaces = places.map(place => {
+    
     return (
       <ExplorePlaces key={place.id} Img={place.images[0]} name={place.name} location={place.location} slug={place.slug} latitude={place.latitude} longitude={place.longitude}/>
     )

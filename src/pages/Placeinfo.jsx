@@ -21,11 +21,14 @@ import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-le
 function PlaceInfo(props) {
   const [placeData, setPlaceData] = useState({});
   const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
+  const [images, setImages] = useState([])
+  const [map, setMap] = useState(null)
   
   // const [reviews, setReviews] = useState([])
   const {slug} = useParams()
-  
-  
+    useEffect(()=>{
+      map?.flyTo(mapCenter, 15)
+    }, [mapCenter])
   async function getPlaceData() {
     const config = {
       headers: {
@@ -35,24 +38,17 @@ function PlaceInfo(props) {
     };
   
     try {
-      console.log(slug);
       const response = await axios.get(`http://127.0.0.1:8000/api/place/${slug}`, config);
       const data = await response.data;
-      console.log(data);
   
       // Extract name and description
       const extractedData = data;
       const lat=Number(data.latitude);
       const lon=Number(data.longitude);
-      console.log('datalatlon:',lat);
-      console.log('datalatlon:',lon);
 
       setMapCenter([lat,lon]);
-
-      console.log('data:',extractedData);
-     setPlaceData(extractedData);
-   
-    
+      setImages([...images, data.images.map(i=><img src={`http://localhost:8000${i.image}`}/>)])
+      setPlaceData(extractedData);
     } catch (error) {
       console.log(error);
       throw error;
@@ -103,11 +99,6 @@ function PlaceInfo(props) {
  const handleAddService=()=>{
     navigate('/addservices');
  }
-  const carouselItems = [
-    <img src={place}/>,
-    <img src={place1}/>,
-    <img src={place2}/>,
-  ];
 
   const [currentState, setCurrentState] = useState(states.NONE);
   return (
@@ -134,7 +125,7 @@ function PlaceInfo(props) {
         <div className="place--pic-map">
           <div className="place-pic">
             <AliceCarousel
-              items={carouselItems}
+              items={images[0]}
               // responsive={{ 0: { items: 1 }, 1024: { items: 2 } }}
               mouseTracking = {true}
               // touchTracking = {true}
@@ -148,11 +139,12 @@ function PlaceInfo(props) {
           </div>
           <div className="place-map">
           <MapContainer
-        center={mapCenter}
-        zoom={13}
-        scrollWheelZoom={true}
-        style={{ width: "100%", height: "100%", maxWidth: "600px", maxHeight: "500px" }}
-      >
+            center={mapCenter}
+            zoom={13}
+            scrollWheelZoom={true}
+            style={{ width: "100%", height: "100%", maxWidth: "600px", maxHeight: "500px" }}
+            ref={setMap}
+          >
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Street View">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -213,7 +205,7 @@ function PlaceInfo(props) {
                   <AiFillStar className="place-starlogo" />
                   <h6 className="place-outoffive">{placeData.rating}</h6>
                 </div>
-                <div className="place--userreview"></div>
+                <div className="place--userreview"><p>{placeData.c_review}</p></div>
                 <button
                   className="placeinfo--place--reviewbutton"
                   type="submit"
