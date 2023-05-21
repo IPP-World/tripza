@@ -68,59 +68,41 @@ export default function AddServices() {
 
   const handleImageUpload = async (event) => {
     const files = event.target.files;
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
-
-      reader.onload = async () => {
-        const imageData = reader.result;
+     for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = async () => {
+          const imageData = reader.result;
 
         try {
           const exifData = await exifr.gps(imageData);
-          let latitude, longitude;
           if (exifData && exifData.latitude && exifData.longitude) {
             setPhotolat(exifData.latitude);
             setPhotolon(exifData.longitude);
           }
-          const metadata = {
-            location: { latitude, longitude },
-          };
-          console.log([latitude, longitude]);
-          const objectURL = URL.createObjectURL(file);
-          const imageWithMetadata = { objectURL, metadata };
-          setImages([...images, imageWithMetadata]);
+
+          setImages([...images, {file, imageData}]);
         } catch (error) {
           console.error("Error extracting metadata:", error);
         }
       };
-
-      reader.readAsDataURL(file);
+      setImageAdded(true);
     }
-  };
+  }
 
   const handleImageDelete = (index) => {
     const newImages = [...images];
     newImages.splice(index, 1);
     setImages(newImages);
+    console.log(index);
+    if (index == 0) {
+      setImageAdded(false);
+    } else {
+      setImageAdded(true);
+    }
   };
 
-  const Popup = () => {
-    return (
-      <>
-        <div className="reward-wrapper" onClick={handleCloseModal}></div>
-        <div className="reward-container">
-          <div
-            className="reward--close-btnn"
-            onClick={() => setShowModal(false)}
-          >
-            <AiOutlineClose />
-          </div>
-          <p className="reward--text1">Congratulations</p>
-          <p className="reward--text2">You successfully added a service</p>
-        </div>
-      </>
-    );
-  };
   const handleLocationSelect = (location) => {
     console.log("Selected Location:", location);
     setMaplat(location.latitude);
@@ -140,10 +122,10 @@ export default function AddServices() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (!location) {
-      alert("Please select a location in the map");
-      return;
-    }
+    // if (!position) {
+    //   alert("Please select a location in the map");
+    //   return;
+    // }
     if (!selectedOption) {
       alert("Please select a category");
       return;
@@ -172,29 +154,45 @@ export default function AddServices() {
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem("access")}`,
       },
     };
 
-    const body = JSON.stringify({
-      name: servicedesc.placeName,
-      location: servicedesc.location,
-      description: servicedesc.placeDescription,
-      review: servicedesc.review,
-      price:servicedesc.price,
-      latitude: maplat,
-      longitude: maplon,
-      category: selectedOption,
-      rating: ratingValue
+    // const body = JSON.stringify({
+    //   name: servicedesc.placeName,
+    //   location: servicedesc.location,
+    //   description: servicedesc.placeDescription,
+    //   review: servicedesc.review,
+    //   price:servicedesc.price,
+    //   latitude: maplat,
+    //   longitude: maplon,
+    //   category: selectedOption,
+    //   rating: ratingValue
 
-      // metalongitude: photolon,
-      // metalatitude: photolat,
-      // rating: ratingValue
-    });
+    //   // metalongitude: photolon,
+    //   // metalatitude: photolat,
+    //   // rating: ratingValue
+    // });
+    const formData = new FormData();
+    formData.append("name", servicedesc.placeName);
+    formData.append("location", servicedesc.location);
+    formData.append("description", servicedesc.placeDescription);
+    formData.append("latitude", maplat);
+    formData.append("longitude", maplon);
+    formData.append("rating", ratingValue);
+    formData.append("review",servicedesc.review);
+    formData.append("price",servicedesc.price);
+    formData.append("category",selectedOption);
+
+
+    images.forEach(image=>{
+      formData.append('images', image.file)
+    })
+
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/hotel/`, body, config)
+      .post(`${process.env.REACT_APP_API_URL}/api/hotel/`, formData, config)
       .then((res) => {
         console.log(res);
         setShowModal(true);
@@ -203,6 +201,24 @@ export default function AddServices() {
         console.error(e);
         alert("Error sending details");
       });
+  };
+  
+  const Popup = () => {
+    return (
+      <>
+        <div className="reward-wrapper" onClick={handleCloseModal}></div>
+        <div className="reward-container">
+          <div
+            className="reward--close-btnn"
+            onClick={() => setShowModal(false)}
+          >
+            <AiOutlineClose />
+          </div>
+          <p className="reward--text1">Congratulations</p>
+          <p className="reward--text2">You successfully added a service</p>
+        </div>
+      </>
+    );
   };
 
   return (
@@ -220,7 +236,7 @@ export default function AddServices() {
               {images.map((imageWithMetadata, index) => (
                 <li key={index} className="services--imageContainer">
                   <img
-                    src={imageWithMetadata.objectURL}
+                    src={images[index].imageData}
                     alt={`image-${index}`}
                   />
                   <button
