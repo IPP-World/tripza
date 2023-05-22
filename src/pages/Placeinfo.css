@@ -14,7 +14,8 @@
   display: flex;
   flex-direction: row;
   margin-top: 20px;
-  justify-content: space-between;
+  justify-content:space-between;
+  /* align-items: start; */
   margin: 0 1.5vw;
   color: #0f4c5c;
 }
@@ -32,9 +33,13 @@
   font-weight: 400;
 }
 
+.place--verification{
+  display: flex;
+margin-left: 1.5vw;
+font-size: 0.9em;
+ 
+}
 .place--sharesave {
-  padding-left: 570px;
-  padding-top: 15px;
   color: #0f4c5c;
 }
 .place-share {
@@ -224,12 +229,20 @@
 }
 
 .place--userreview {
-  background-color: #0f4c5c;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f1f1f1;
   width: 500px;
   height: 75px;
   border-radius: 7px;
   margin-left: -100px;
   margin-top: 7px;
+  
+}
+.review--profile{
+  margin-left: 10px;
+  font-size: 1.8em;
 }
 
 .placeinfo--place--reviewbutton {

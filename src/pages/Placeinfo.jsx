@@ -2,7 +2,10 @@ import React, { useState,useEffect } from "react";
 import { CiShare1 } from "react-icons/ci";
 import { BsBookmarkPlus } from "react-icons/Bs";
 import { AiFillStar } from "react-icons/Ai";
-// import place from "../assets/place.jpg";
+import { GoVerified } from "react-icons/Go";
+import { CgProfile } from "react-icons/Cg";
+
+// import place from "../assets/place.jpg"
 // import place2 from "../assets/Khumai2.jpg";
 // import place1 from "../assets/Khumai1.jpg";
 import Reviews from "./Reviews";
@@ -134,8 +137,9 @@ function PlaceInfo(props) {
         <div className="place--details">
           <h1 className="place--name">{placeData.name}</h1> 
           <h4 className="place--location">{placeData.location}</h4>
-          <span>{!isVerified?<span>Unverified</span>: <span>Verified</span>}</span>
+          
         </div>
+      
         <div className="place--sharesave">
         
           <a href="#" className="place-share">
@@ -148,6 +152,7 @@ function PlaceInfo(props) {
           </a>
         </div>
       </div>
+      <span className="place--verification">{!isVerified?'': <span><GoVerified/> Verified</span>}</span>
       <div className="place--body">
         <div className="place--pic-map">
           <div className="place-pic">
@@ -194,7 +199,7 @@ function PlaceInfo(props) {
             <p className="place-desc-p">
             {placeData.description}
             </p>
-            <div className="offers--container">
+            {/* <div className="offers--container">
               <h1 className="place--offers">What this place offers</h1>
               <div className="place--offerlistbox">
                 <span className="place--offerlist">Typical villages</span>
@@ -204,7 +209,7 @@ function PlaceInfo(props) {
                 <span className="place--offerlist">Trekking trail</span>
                 <span className="place--offerlist">Campfire</span>
               </div>
-            </div>
+            </div> */}
             <div className="place--nearby">
               <button
                 className="hotels--nearby"
@@ -225,7 +230,12 @@ function PlaceInfo(props) {
                   <AiFillStar className="place-starlogo" />
                   <h6 className="place-outoffive">{placeData.rating}</h6>
                 </div>
-                <div className="place--userreview"><p>{placeData.c_review}</p></div>
+                <div className="place--userreview">
+                  <div className="review--profile"><CgProfile/></div>
+                  <div>
+                  {placeData.c_review}
+                  </div>
+                  </div>
                 <button
                   className="placeinfo--place--reviewbutton"
                   type="submit"

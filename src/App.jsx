@@ -18,7 +18,8 @@ import {
   EditProfile,
   AddServices,
   Serviceinfo,
-  ServiceReviews
+  ServiceReviews,
+  Booking
 } from "./pages";
 import Facebook from './containers/Facebook';
 import Google from './containers/Google';
@@ -51,6 +52,7 @@ function App() {
           <Route path="/addservices" element={<AddServices />} />
           <Route path="/serviceinfo/:slug" element={<Serviceinfo />} />
           <Route path="/serviceinfo/:slug/reviews" element={<Reviews/>} />
+          <Route path="/booking" element={<Booking/>} />
         </Routes>
       </Router>
     </Provider>
