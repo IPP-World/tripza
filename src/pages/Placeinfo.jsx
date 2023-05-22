@@ -94,7 +94,7 @@ function PlaceInfo(props) {
 
   const states = Object.freeze({
     REVIEWS: <Reviews slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
-    HOTELS: <HotelsNearby closeModal={() => setCurrentState(states.NONE)} />,
+    // HOTELS: <HotelsNearby closeModal={() => setCurrentState(states.NONE)} />,
     AGENCIES: (
       <AgenciesNearby closeModal={() => setCurrentState(states.NONE)} />
     ),

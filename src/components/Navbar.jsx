@@ -23,7 +23,7 @@ function Navbar() {
   
     window.addEventListener('scroll', handleScroll);
   
-    // Cleanup the event listener on component unmount
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -31,7 +31,7 @@ function Navbar() {
   const hideNavbar = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/reset-password';
 
   if (hideNavbar) {
-    return null; // Don't render the navbar
+    return null; 
   }
   
   const handleSearchChange = (event) => {

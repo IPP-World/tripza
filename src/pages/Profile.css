@@ -13,11 +13,19 @@
 }
   
   .profile--pic{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 201px;
     width: 201px;
     background-color: darkgrey;
     border-radius: 50%;
     margin-bottom:12px;
+  }
+  .profile-profile{
+    font-size: 10em;
+    padding-top: 50px;
   }
   .profile--leftpart{
   display: flex;
@@ -109,15 +117,21 @@
 .your-hotel{
   background-color: #0f4c5c;
   width: 120%;
-  height: 20%;
+  /* height: 20%; */
   padding: 10px;
   border-radius: 7px;
   display: flex;
   justify-content: center;
   color: #fff;
 }
-
+.booking--container{
+  margin-top: -50px;
+}
 .profile--booking--list{
+  /* display: flex;
+  flex-direction: column; */
+  justify-content: center;
+  align-items: center;
   background-color: #0f4c5c;
   height: 80%;
   width: 120%;
@@ -127,9 +141,34 @@
   display: flex;
   justify-content: center;
   overflow-y: scroll;
+  /* font-size: 0.5em; */
+}
+.booking--lists--list{
+  font-weight: 400;
+  margin-top: 10px;
+}
+.profile--checkin-nameee{
+  color: #fff;
+  margin-top: 20px;
+  /* font-size: 1em; */
+  /* font-weight: 600; */
+}
+.profile--checkin{
+  color: #fff;
+  font-size: 0.9em;
+  font-weight: 500;
+
+}
+.profile--checkout{
+  color: #fff;
+  font-size: 0.9em;
+  font-weight: 500;
 }
 .booking--lists{
   color: #fff;
+  margin-top: -110px;
+  margin-left: -10px;
+  font-size: 0.9em;
 }
 
 .profile--rightpart{
@@ -139,16 +178,52 @@
 }
 
 .profile--contribution{
+  display: flex;
+  /* align-items: center; */
   background-color: #0f4c5c;
-  height: 50%;
+  height: 89%;
   width: 140%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   border-radius: 7px;
   padding: 10px;
   display: flex;
   justify-content: center;
   overflow-y: scroll;
 }
+/* .profile--contribution{
+  
+} */
+
+.profile--contribution--list ul{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+
+  border-radius: 8px;
+  padding: 10px;
+
+
+}
+
+.profile--contribution--list ul li{
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f1f1;
+  /* margin-top: 30px; */
+  margin-bottom: 5px;
+  margin-left: -155px;
+  /* width: 10vw; */
+  border-radius: 8px;
+  padding: 10px;
+
+}
+.cont--name{
+  margin-top: -5px;
+}
+.cont--add{
+  margin-top: -15px;
+}
+
 .recent-text{
   color: #fff;
 }

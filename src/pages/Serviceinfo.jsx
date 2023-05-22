@@ -73,7 +73,7 @@ function Serviceinfo(props) {
 
   const states = Object.freeze({
     REVIEWS: <ServiceReviews slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
-    BOOK: <Book slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
+     BOOK: <Book slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
    
     NONE: <></>,
   });
@@ -156,17 +156,6 @@ function Serviceinfo(props) {
             
             {/* {placeData.description} */}
             {serviceData.description}</p>
-             <div className="offers--container">
-              <h1 className="place--offers">Services provided</h1>
-              <div className="place--offerlistbox">
-                <span className="place--offerlist">Typical villages</span>
-                <span className="place--offerlist">Mountain View</span>
-                <span className="place--offerlist">Sunset and sunrise</span>
-                <span className="place--offerlist">Snow</span>
-                <span className="place--offerlist">Trekking trail</span>
-                <span className="place--offerlist">Campfire</span>
-              </div>
-            </div>
             <div className="book--service-price">
               <button
                 className="book-service"
@@ -189,7 +178,7 @@ function Serviceinfo(props) {
                   {/* <h6 className="place-outoffive">{placeData.rating}</h6> */}
                   <h6 className="place-outoffive">{serviceData.rating}</h6>
                 </div>
-                <div className="place--userreview"><p>{serviceData.c_review}</p></div>
+                <div className="place--userreview">{serviceData.c_review}</div>
                 <button
                   className="placeinfo--place--reviewbutton"
                   type="submit"

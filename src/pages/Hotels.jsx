@@ -105,7 +105,7 @@ const Services = () => {
         {/* <h2>Selected Category: {selectedCategory || 'All'}</h2> */}
         <div className='container-whole'>
         {filteredServices.map(service => (
-          <div className="service" key={service.id}>
+          <div className="service--details" key={service.id}>
              <Link to={`serviceinfo/${service.slug}`}>
             <img src={`http://localhost:8000${service.images[0].image}`} alt={service.name} /></Link>
             <p>{service.name}</p>

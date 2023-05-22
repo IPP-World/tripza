@@ -6,7 +6,9 @@ body {
 .reviews-section {
     max-height: 500px;
   }
-  
+  .review-input form{
+    padding-top: 1.5rem;
+  }
   .review-card {
     display: flex;
     background-color: #F1F1F1;
