@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Services.css'
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -12,7 +13,8 @@ const Services = () => {
       .then(response => response.json())
       .then(data =>{
         setServices(data)
-        
+        console.log('servicesdata:',services)
+        console.log(services[0].price)
       })
       .catch(error => console.log(error));
   }, []);
@@ -97,7 +99,8 @@ const Services = () => {
         <h2>Selected Category: {selectedCategory || 'All'}</h2>
         {filteredServices.map(service => (
           <div className="service" key={service.id}>
-            <img src={`http://localhost:8000${service.images[0].image}`} alt={service.name} />
+             <Link to={`serviceinfo/${service.slug}`}>
+            <img src={`http://localhost:8000${service.images[0].image}`} alt={service.name} /></Link>
             <p>{service.name}</p>
             <p>{service.location}</p>
           </div>

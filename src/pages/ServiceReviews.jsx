@@ -8,8 +8,8 @@ import ReviewComponent from '../components/ReviewComponent';
 import './Reviews.css';
 // import { BiLike } from "react-icons/Bi";
 //import { BiDislike } from "react-icons/Bi";
-import { AiFillStar } from "react-icons/Ai";
-import { BsPerson } from "react-icons/Bs";
+// import { AiFillStar } from "react-icons/Ai";
+// import { BsPerson } from "react-icons/Bs";
 
 
 

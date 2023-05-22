@@ -23,10 +23,14 @@ import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-le
 function Serviceinfo(props) {
   const [serviceData, setServiceData] = useState({});
   const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
+  const [images, setImages] = useState([])
+  const [map, setMap] = useState(null)
 
   const {slug} = useParams()
 
-
+  useEffect(()=>{
+    map?.flyTo(mapCenter, 15)
+  }, [mapCenter])
   async function getServiceData() {
     const config = {
       headers: {
@@ -50,8 +54,9 @@ function Serviceinfo(props) {
       setMapCenter([lat,lon]);
 
       console.log('data:',extractedData);
-     setServiceData(extractedData);
-   
+      setServiceData(extractedData);
+      console.log(serviceData);
+      setImages([...images, data.images.map(i=><img src={`http://localhost:8000${i.image}`}/>)])
     
     } catch (error) {
       console.log(error);
@@ -68,7 +73,7 @@ function Serviceinfo(props) {
 
   const states = Object.freeze({
     REVIEWS: <ServiceReviews slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
-    BOOK: <Book closeModal={() => setCurrentState(states.NONE)} />,
+    BOOK: <Book slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
    
     NONE: <></>,
   });
@@ -124,6 +129,7 @@ function Serviceinfo(props) {
         zoom={13}
         scrollWheelZoom={true}
         style={{ width: "100%", height: "100%", maxWidth: "600px", maxHeight: "500px" }}
+        ref={setMap}
       >
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Street View">

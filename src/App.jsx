@@ -49,8 +49,8 @@ function App() {
           <Route path="/placeinfo/:slug/reviews" element={<Reviews/>} />
           <Route path="/placeinfo/:slug" element={<Placeinfo />} />
           <Route path="/addservices" element={<AddServices />} />
-          <Route path="/serviceinfo/:slug" element={<Serviceinfo />} />
-          <Route path="/serviceinfo/:slug/reviews" element={<Reviews/>} />
+          <Route path="hotels/serviceinfo/:slug" element={<Serviceinfo />} />
+          <Route path="/serviceinfo/:slug/reviews" element={<ServiceReviews/>} />
         </Routes>
       </Router>
     </Provider>
