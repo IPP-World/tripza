@@ -2,9 +2,9 @@ import React, { useState,useEffect } from "react";
 import { CiShare1 } from "react-icons/ci";
 import { BsBookmarkPlus } from "react-icons/Bs";
 import { AiFillStar } from "react-icons/Ai";
-import place from "../assets/place.jpg";
-import place2 from "../assets/Khumai2.jpg";
-import place1 from "../assets/Khumai1.jpg";
+// import place from "../assets/place.jpg";
+// import place2 from "../assets/Khumai2.jpg";
+// import place1 from "../assets/Khumai1.jpg";
 import Reviews from "./Reviews";
 import HotelsNearby from "./HotelsNearby";
 import AgenciesNearby from "./AgenciesNearby";
@@ -99,9 +99,32 @@ function PlaceInfo(props) {
   });
 
  const navigate=useNavigate();
- const handleAddService=()=>{
-    navigate('/addservices');
- }
+ const handleAddService = async () => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("access")}`,
+    },
+  };
+
+  try {
+    const response = await axios.get(`http://127.0.0.1:8000/api/user/profile`, config);
+    const data = response.data;
+
+    // Extract name and description
+    const subscribedata = data;
+    console.log("data", subscribedata);
+    if (subscribedata.is_subscribed==false){
+              alert("you are not subscribed");
+    }
+    else{
+    navigate('/addservices');}
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 
   const [currentState, setCurrentState] = useState(states.NONE);
   return (
@@ -189,13 +212,6 @@ function PlaceInfo(props) {
                 onClick={() => setCurrentState(states.HOTELS)}
               >
                 Hotels nearby
-              </button>
-              <button
-                className="agencies--nearby"
-                type="submit"
-                onClick={() => setCurrentState(states.AGENCIES)}
-              >
-                Agencies
               </button>
               <button className="service--add-btn" onClick={handleAddService}>Add service</button>
             </div>

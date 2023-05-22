@@ -1,7 +1,7 @@
 import "./Profile.css";
 import { Navigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { load_user, logout } from "../actions/auth";
 import { useNavigate,useParams } from "react-router-dom";
 import KhaltiCheckout from "khalti-checkout-web";
@@ -11,6 +11,8 @@ export default function Profile({}) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const contributions = useSelector((state) => state.auth.contributions);
   console.log(isAuthenticated);
+  const [showModal, setShowModal] = useState(false);
+  const [isSubscribed,setIsSubscribed]=useState(false);
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(load_user());
@@ -21,36 +23,75 @@ export default function Profile({}) {
   const handleEdit = () => {
     navigate("/profile/editprofile");
   };
-  const handleSubscribe = () => {
-    console.log(user?.email)
-    // const mail=user?.email;
-    let config = {
-      publicKey: "test_public_key_1bc1b5b65fb14323bd5b06c4938e7e90",
-      productIdentity: "jhyau lagne",
-      productName: "Tripza",
-      productUrl: "https://localhost:8000/subscribe",
-      eventHandler: {
-        onSuccess(payload) {
-          axios.post(`${process.env.REACT_APP_API_URL}/api/hotel/subscribe`, {
-            amount: payload.amount,
-            token: payload.token,
-          });
-        },
+
+  const handleCloseModal = () => {
+    const mail = user?.email;
+    const formData = new FormData();
+    formData.append("email", mail);
+  
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
       },
     };
-    const checkout = new KhaltiCheckout(config);
-    checkout.show({ amount: 200 * 100 });
-
+  
     axios
-    .post(`${process.env.REACT_APP_API_URL}/api/`,)
-    .then((res)=>{
-      console.log(res);
-    })
-    .catch((e) => {
-      console.error(e);
-      alert("Error calling api");
-    });
+      .post(`${process.env.REACT_APP_API_URL}/api/hotel/sub/`, formData, config)
+      .then((res) => {
+        console.log(res);
+        setIsSubscribed(true);
+      })
+      .catch((e) => {
+        console.error(e);
+        alert("Error calling API");
+      });
+  
+    setShowModal(false);
   };
+  
+  const handleSubscribe = async () => {
+    try {
+      let config = {
+        publicKey: "test_public_key_1bc1b5b65fb14323bd5b06c4938e7e90",
+        productIdentity: "user ko id",
+        productName: "Tripza",
+        productUrl: "https://localhost:8000/subscribe",
+        eventHandler: {
+          onSuccess(payload) {
+            axios.post(`${process.env.REACT_APP_API_URL}/api/hotel/subscribe`, {
+              amount: payload.amount,
+              token: payload.token,
+            })
+            .then(() => {
+              setShowModal(true); // Set showModal to true after successful post request
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+          }
+        }
+      };
+      
+      const checkout = new KhaltiCheckout(config);
+      checkout.show({ amount: 200 * 100 });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  const Popup = () => (
+    <>
+      <div className="reward-wrapper"></div>
+      <div className="reward-container">
+        <p className="reward--text1">Congratulations!</p>
+        <p className="reward--text2">You are now a subscribed user</p>
+        <button onClick={handleCloseModal}>okay</button>
+      </div>
+    </>
+  );
+
+
   if (isAuthenticated)
     return (
       <div className="profile--container">
@@ -61,7 +102,7 @@ export default function Profile({}) {
               {user?.fname + " " + user?.lname}{" "}
             </h4>
 
-            <p className="profile--role">General User</p>
+            <p className="profile--role"></p>
           </div>
           <div className="profile--userinfo">
             <div>
@@ -81,6 +122,7 @@ export default function Profile({}) {
             >
               Subscribe
             </button>
+         {showModal && <Popup/>}
             <button onClick={() => dispatch(logout())} className="logout-btn">
               Logout
             </button>

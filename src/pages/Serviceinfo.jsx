@@ -7,8 +7,8 @@ import place2 from "../assets/Khumai2.jpg";
 import place1 from "../assets/Khumai1.jpg";
 // import Reviews from "./Reviews";
 import ServiceReviews from "./ServiceReviews";
-import HotelsNearby from "./HotelsNearby";
-import AgenciesNearby from "./AgenciesNearby";
+// import HotelsNearby from "./HotelsNearby";
+// import AgenciesNearby from "./AgenciesNearby";
 import Book from "./Book";
 import "./Serviceinfo.css";
 import AliceCarousel from "react-alice-carousel";
@@ -84,13 +84,11 @@ function Serviceinfo(props) {
   const [currentState, setCurrentState] = useState(states.NONE);
   return (
     <div className="service--info">
-      {/* {currentState} */}
+       {currentState}
       <div className="service--header">
         <div className="service--details">
-          {/* <h1 className="place--name">{placeData.name}</h1>
-          <h4 className="place--location">{placeData.location}</h4> */}
-          <h1 className="service--name"></h1>
-          <h4 className="service--location">Service provider's  location</h4>
+          <h1 className="service--name">{serviceData.name}</h1>
+          <h4 className="service--location">{serviceData.location}</h4>
         </div>
         <div className="service--sharesave">
         
@@ -108,7 +106,7 @@ function Serviceinfo(props) {
         <div className="place--pic-map">
           <div className="place-pic">
             <AliceCarousel
-              items={carouselItems}
+              items={images[0]}
               // responsive={{ 0: { items: 1 }, 1024: { items: 2 } }}
               mouseTracking = {true}
               // touchTracking = {true}
@@ -151,8 +149,7 @@ function Serviceinfo(props) {
             {/* <p className="service--category-tag">{}</p> */}
             
             {/* {placeData.description} */}
-            Service DescriptionService DescriptionService DescriptionService DescriptionService DescriptionService DescriptionService Description
-            </p>
+            {serviceData.description}</p>
              <div className="offers--container">
               <h1 className="place--offers">Services provided</h1>
               <div className="place--offerlistbox">
@@ -173,7 +170,7 @@ function Serviceinfo(props) {
                Book service
               </button>
               <span>/Service price</span>
-              {/* <span>{/Service price}</span> */}
+              <span>{serviceData.price}</span>
             </div>
           </div>
           <div className="descreview-divider"></div>
@@ -184,9 +181,9 @@ function Serviceinfo(props) {
                 <div className="place--ratings-stars">
                   <AiFillStar className="place-starlogo" />
                   {/* <h6 className="place-outoffive">{placeData.rating}</h6> */}
-                  <h6 className="place-outoffive">Rating</h6>
+                  <h6 className="place-outoffive">{serviceData.rating}</h6>
                 </div>
-                <div className="place--userreview"></div>
+                <div className="place--userreview"><p>{serviceData.c_review}</p></div>
                 <button
                   className="placeinfo--place--reviewbutton"
                   type="submit"

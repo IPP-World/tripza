@@ -146,3 +146,15 @@ def get_validation_data(request):
     validations = KhaltiValidation.objects.all()
     serializer = KhaltiValidationSerializer(validations, many=True)
     return JsonResponse(serializer.data, safe=False)
+
+from accounts.models import User
+class Subscription(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        user = User.objects.filter(email=email).first()  # Use .first() to get a single instance
+        if user:
+            user.is_subscribed = True
+            user.save()
+            serializer = UserDetailSerializer(user)
+            return Response(serializer.data)
+        return Response({'error': 'User not found'}, status=404)

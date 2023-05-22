@@ -167,3 +167,33 @@
 .profile--savedtext{
   color:#fff;
 }
+.reward-wrapper{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0F4C5C;
+  opacity: 0.5;
+  z-index: 9999;
+  }
+  .reward-container{
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 30vw;
+      height: 20vh;
+      background: #f0f2f3;
+      border-radius: 8px;
+      z-index: 10000;
+  }
+  .reward--text1{
+    margin-left: 20%;
+    font-size: 2em;
+    font-weight: 500;
+}
+.reward--text2{
+    margin-left: 30%;
+    font-size: 1em;
+}
