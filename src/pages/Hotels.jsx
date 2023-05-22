@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './Services.css'
 
 const Services = () => {
@@ -31,6 +31,12 @@ const Services = () => {
     <div className='services--page'>
       <div className="services--categories">
         <ul>
+          <li
+            onClick={() => handleCategoryClick('')}
+            className={selectedCategory === '' ? 'selected' : ''}
+          >
+            All
+          </li>
           <li
             onClick={() => handleCategoryClick('Room')}
             className={selectedCategory === 'Room' ? 'selected' : ''}
@@ -94,15 +100,22 @@ const Services = () => {
         </ul>
       </div>
       <div className="selected-category">
-        <h2>Selected Category: {selectedCategory || 'All'}</h2>
+        {/* <h2>Selected Category: {selectedCategory || 'All'}</h2> */}
+        <div className='container-whole'>
         {filteredServices.map(service => (
-          <div className="service" key={service.id}>
+          <div className='service-container'>
+          <div className="service--details" key={service.id}>
+            {/* <p className='services--categoryname'>{selectedCategory === '' ? service.category : ''}</p> */}
             <img src={`http://localhost:8000${service.images[0].image}`} alt={service.name} />
-            <p>{service.name}</p>
-            <p>{service.location}</p>
+            <p className='service---name'>{service.name}</p>
+            <p className='service---location'>{service.location}</p>
+            
           </div>
+          </div>
+          
         ))}
       </div>
+    </div>
     </div>
   );
 };
