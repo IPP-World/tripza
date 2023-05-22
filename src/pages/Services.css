@@ -10,8 +10,8 @@ body {
   .services--page{
     /* margin-top: 3vh; */
     padding-top: 10px;
-    width: 80%;
-    height: 90%;
+    width: 90%;
+    height: 100%;
     margin: auto;
     /* height: 20vh; */
     /* background-color: #0F4C5C; */
@@ -31,10 +31,11 @@ body {
     margin-bottom: 5px;
     background-color: #fff;
     color: #0F4C5C;
+    
   }
   
   .services--categories li.selected {
-    background-color: #ccc;
+    background-color: #F1F1F1;
     border-radius: 8px;
   }
   
@@ -44,20 +45,61 @@ body {
   }
   
   .selected-category {
+    display: flex;
     margin-top: 5px;
     margin-bottom: 10px;
-    padding: 10px;
-    background-color: #ccc;
-    height: 100vh;
+    padding: 20px;
+    background-color: #F1F1F1;
     border-radius: 8px;
+    height: 100vh;
+  }
+.container-whole{
+  display: flex;
+  gap: 36.4px;
+    flex-wrap: wrap;
+    /* align-items: center; */
+    margin-bottom: 130px;
+}
+  .service-container{
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+   width:20vw; 
+   height: 38vh;
+   margin-bottom: -20px;
+   flex-wrap: wrap;
+   overflow-x: hidden;
   }
   
-  .selected-category img {
-    width: 100%;
-    height: auto;
+  .service--details{
+    /* display: flex; */
+    /* flex-direction: column; */
+    align-items: center;
+    /* width: 22vw; */
+    border-radius: 8px;
+    /* padding: 10px 0px; */
+    background-color:#fff;
+    /* margin-bottom: -0px; */
   }
-  
-  .selected-category p {
-    margin: 5px 0;
+
+  .service--details img{
+    height: 220px;
+    width: 300px;
+    border-radius: 7px 7px 0px 0px;
   }
+  .service--details p{
+    color: #0F4C5C;
+  }
+  .service---name{
+    font-weight: 500;
+    font-size: 1.15em;
+    margin-top: 0.3rem;
+    margin-bottom: -0.4rem;
+  }
+  .service---location{
+    font-weight: 450;
+    font-size: 0.9rem;
+  }
+
+
   

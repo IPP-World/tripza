@@ -45,6 +45,7 @@ body{
     align-items: center;
     margin-bottom: 1rem;
     margin-right: 2rem;
+    margin-left: 1rem;
   }
   
   .review-input label {

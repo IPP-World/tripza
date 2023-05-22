@@ -8,7 +8,8 @@ body {
   }
   
   .review-card {
-    background-color: #dde1e4;
+    display: flex;
+    background-color: #F1F1F1;
     margin: 13px 13px ;
     padding: 10px;
     border-radius: 10px;
@@ -20,13 +21,13 @@ body {
     align-items: center;
   }
   
-  .review--image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+  .review--image2 {
+    font-size: 1.5em;
     margin-right: 10px;
   }
-  
+  .review--two{
+    display: flex;
+  }
   .reviewer--name {
     font-weight: 510;
     font-size: 18px;
@@ -39,7 +40,7 @@ body {
   }
   
   .review--text {
-    margin-top: 10px;
+    /* margin-top: 10px; */
     font-size: 15px;
     color:#0f4c5c;
     font-size:90%;

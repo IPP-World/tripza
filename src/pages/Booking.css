@@ -1,0 +1,66 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+
+  .booking--body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    width: 25vw;
+    margin: auto;
+    border-radius: 8px;
+  }
+  .booking-form, .booking {
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+  }
+  .booking--schedule{
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+  }
+  
+  .booking--body form input {
+    margin-top: 1px;
+    margin-bottom:10px ;
+    padding: 10px 10px;
+    border: solid 1px #255957;
+    width: 300px;
+    height: 17px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 2px 1px #adabab;
+    letter-spacing: 0.03em;
+  }
+  
+  .booking--inputbox label{
+      font-size: 1em;
+      margin-top: 4px;
+      color: #0f4c5c;
+  }
+  
+  .booking--inputbox input[type="date"]{
+      font-family: Poppins;
+      font-size: 1.1rem;
+      color: #0f4c5c;
+  
+  }
+  .book-btn {
+    border: none;
+    background-color: #0f4c5c;
+    border-radius: 7px;
+    color: white;
+    font-family: Poppins;
+    font-size: 1.1em;
+    width: 150px;
+    padding: 6px;
+    letter-spacing: 0.03em;
+    border: 2px solid #0f4c5c;
+    box-shadow: 0px 4px 2px #0f4c5c;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  

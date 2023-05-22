@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './Services.css'
 import { Link } from 'react-router-dom';
 
@@ -33,6 +33,12 @@ const Services = () => {
     <div className='services--page'>
       <div className="services--categories">
         <ul>
+          <li
+            onClick={() => handleCategoryClick('')}
+            className={selectedCategory === '' ? 'selected' : ''}
+          >
+            All
+          </li>
           <li
             onClick={() => handleCategoryClick('Room')}
             className={selectedCategory === 'Room' ? 'selected' : ''}
@@ -96,7 +102,8 @@ const Services = () => {
         </ul>
       </div>
       <div className="selected-category">
-        <h2>Selected Category: {selectedCategory || 'All'}</h2>
+        {/* <h2>Selected Category: {selectedCategory || 'All'}</h2> */}
+        <div className='container-whole'>
         {filteredServices.map(service => (
           <div className="service" key={service.id}>
              <Link to={`serviceinfo/${service.slug}`}>
@@ -104,8 +111,10 @@ const Services = () => {
             <p>{service.name}</p>
             <p>{service.location}</p>
           </div>
+          
         ))}
       </div>
+    </div>
     </div>
   );
 };

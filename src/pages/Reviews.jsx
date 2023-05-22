@@ -107,7 +107,7 @@ function Reviews({ closeModal,slug }) {
             <CgProfile />
           </label>
           <form onSubmit={handleSubmit}>
-          <div className="review">
+          <div className="review--starss">
               <RatingStars sendRating={handleRating} />
             </div>
             <input type='text' name='review' placeholder='Give your review here'></input><button type='submit'>Submit</button>
