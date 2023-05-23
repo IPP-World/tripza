@@ -12,22 +12,7 @@ import a10 from "../assets/a10.jpeg"
 import a11 from "../assets/a11.jpg"
 import axios from "axios";
 
-// async function getPlaceData() {
-//     const config = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${localStorage.getItem("access")}`,
-//       },
-//     };
-  
-//     try {
-//       const response = await axios.get('http://127.0.0.1:8000/api/place/', config);
-//       console.log(response.data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-  
+
 
 export const exdata = [
     {
