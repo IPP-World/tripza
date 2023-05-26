@@ -1,0 +1,466 @@
+{
+	"info": {
+		"_postman_id": "7aed9879-e4e8-4ec0-b20f-5aec2de3a14b",
+		"name": "Hotels",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25800410",
+		"_collection_link": "https://warped-flare-370127.postman.co/workspace/Team-Workspace~ef2d6c8a-c202-4b5d-866c-503458658902/collection/25800410-7aed9879-e4e8-4ec0-b20f-5aec2de3a14b?action=share&creator=25800410&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "register_hotel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0ODA3MzcxLCJpYXQiOjE2ODQ3MjA5NzEsImp0aSI6IjJkMzQwNmQ3ZmM1ZDQ2NjhiY2Y2NGQ4MmQ1ODg0Y2EzIiwidXNlcl9pZCI6MX0.ROckXoGbgYx0HQ-rjmd3Lr3p7DhuzpOg7dauexnI3iY",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"third\",\r\n    \"description\": \"I am third\",\r\n    \"offering\": [\"wifi\", \"lan\", \"girls\"],\r\n    \"latitude\": \"61.654646\",\r\n    \"longitude\": \"89.849700\",\r\n    \"location\": \"pokhara\",\r\n    \"category\": \"lunch\",\r\n    \"c_review\": \"andkndksd\",\r\n    \"price\": \"98.00\",\r\n    \"rating\": \"5.00\",\r\n    \"email\": \"01.tripza@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hotel list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0NjU3MTUxLCJpYXQiOjE2ODQ1NzA3NTEsImp0aSI6IjA3NzFhZTJhNmIwMzQ0MjE4NjQxZWQ4MGVmYjA3YzQ0IiwidXNlcl9pZCI6MX0.UH7FMzhgMYcQfRvkDnEAbSu1OCWvqZ8s2IiRLujDM8I",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/show/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"show",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hotel detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0NTIzMjc0LCJpYXQiOjE2ODQ0MzY4NzQsImp0aSI6ImVhNmM5Mzk2MmY2MTQyNzlhMzRkZjlmYTVjMTA1OTkzIiwidXNlcl9pZCI6Mn0.N9w1DRFEyNel0J9L_Vk2AfabzwaMDb6pUSYiiMdvW7Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/please-vagwan14/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"please-vagwan14",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hotel review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0NjYxMzUyLCJpYXQiOjE2ODQ1NzQ5NTIsImp0aSI6ImYxYzQzNGQ5NmYxNzRjNDZhYjY3ZTQyMDMxZGFhYTgyIiwidXNlcl9pZCI6MX0.YDCQF4uw7EJUU-IpdF8PMM3p-ca4h8keDRYeL2Lj6pA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rating\": \"7\",\r\n    \"description\": \"wow  review\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/fifth-hotel/reviews/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"fifth-hotel",
+						"reviews",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hotel review list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/fifth-hotel/reviews/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"fifth-hotel",
+						"reviews",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subscribe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0NzExMzM2LCJpYXQiOjE2ODQ2MjQ5MzYsImp0aSI6ImI3N2U5NDUwYjBkZTRkODE5ZDI4ZDc4OTdlMGVlYTYxIiwidXNlcl9pZCI6MX0.mbMyuc67vHPYlLnhr-u6Q3L0UL_6-WP9hdVcqnwAQco",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"jkfsgbiuedun\",\r\n    \"amount\": \"45\",\r\n    \"email\" : \"01.tripza@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/hotel/hi/subscribe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"hi",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "nearby places",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/place/yo-feature-hos-vagwan5/nearby-hotels/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"place",
+						"yo-feature-hos-vagwan5",
+						"nearby-hotels",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "trending place",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/trending-places/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"trending-places",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "my hotels",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0ODA3MzcxLCJpYXQiOjE2ODQ3MjA5NzEsImp0aSI6IjJkMzQwNmQ3ZmM1ZDQ2NjhiY2Y2NGQ4MmQ1ODg0Y2EzIiwidXNlcl9pZCI6MX0.ROckXoGbgYx0HQ-rjmd3Lr3p7DhuzpOg7dauexnI3iY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/my-hotels/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"my-hotels",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "total subscription",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0NTg3NTAzLCJpYXQiOjE2ODQ1MDExMDMsImp0aSI6IjI3MDIyYTQ0NjIzZTRjNGY5YjA0NWRlZGMzMzgwZTAxIiwidXNlcl9pZCI6MX0.ayUxsBsvAPac69Vb46eAYOzjmEJ9L_i6TmOwUq5ZRzg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/hotel/hi/subscribe/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"hi",
+						"subscribe",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search hotel",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0NzM4MDc5LCJpYXQiOjE2ODQ2NTE2NzksImp0aSI6ImYzODJiNTZiMTI3MzRlZTliYTg2MWEyOTY4NWYyMTBmIiwidXNlcl9pZCI6Mn0.qLFL8FJYLw26nMhmZDrg--EQ89QMjON8JRv7uyljMSQ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"hOteltripza18\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/search/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"search",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -16,7 +16,7 @@ export default function Profile({}) {
 
 
   const [showModal, setShowModal] = useState(false);
-  const [isSubscribed,setIsSubscribed]=useState(false);
+  const [isSubscribed,setIsSubscribed]=useState(true);
   const [bookings, setBookings] = useState([])
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
@@ -106,7 +106,8 @@ export default function Profile({}) {
               token: payload.token,
             })
             .then(() => {
-              setShowModal(true); // Set showModal to true after successful post request
+              setShowModal(true);
+              setIsSubscribed(true); 
             })
             .catch((error) => {
               console.error(error);
@@ -124,6 +125,7 @@ export default function Profile({}) {
   useEffect(() => {
     bookingList();
     console.log(bookings);
+    console.log('subscriber:',isSubscribed);
   }, [])
   
   const Popup = () => (

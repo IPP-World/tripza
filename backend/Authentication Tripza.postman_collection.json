@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "7d4ecef6-60ee-4cbd-9bd9-fd44d7c0b243",
+		"name": "Authentication Tripza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25800410",
+		"_collection_link": "https://warped-flare-370127.postman.co/workspace/Team-Workspace~ef2d6c8a-c202-4b5d-866c-503458658902/collection/25800410-7d4ecef6-60ee-4cbd-9bd9-fd44d7c0b243?action=share&creator=25800410&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "01.tripza@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "fname",
+							"value": "kamlesh",
+							"type": "text"
+						},
+						{
+							"key": "lname",
+							"value": "ranabhat",
+							"type": "text"
+						},
+						{
+							"key": "number",
+							"value": "9819115285",
+							"type": "text"
+						},
+						{
+							"key": "dob",
+							"value": "2058-03-05",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "tripza123",
+							"type": "text"
+						},
+						{
+							"key": "password2",
+							"value": "tripza123",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/krana/Desktop/to manage 4/to manage3/1.JPG"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "emailverify",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0MzQ2NzAwLCJpYXQiOjE2ODQzNDU1MDAsImp0aSI6IjMwY2I2ODYxZTA4NzQ0ZWJiMTJjNTE5NjlkMzU3N2Y1IiwidXNlcl9pZCI6MX0.MmQBO7gup3slt6nLtXMnLFxKTi8lXnmO200xn0T06_I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/email-verify/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"email-verify",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"01.tripza@gmail.com\",\r\n    \"password\": \"tripza123\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0Nzc4NjI0LCJpYXQiOjE2ODQ2OTIyMjQsImp0aSI6ImMxMzIwMjJlYWUyMjRiMWViN2ExYTk4MThhNTc2OGZjIiwidXNlcl9pZCI6MX0.5uLPscn3IoHsMs2iJTejJ4O4NhvdXI-_4OZesmdLGSY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/profile/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"profile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChangePassword",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0MzQ0Mzc4LCJpYXQiOjE2ODQzNDMxNzgsImp0aSI6IjgxNjU5ZjU5NjM5ZTRmYWM5MWVkYzMxNDAxNTUyZmVjIiwidXNlcl9pZCI6MX0.EdmX8BtU8yJtmWj68D1_zrMnY51Qtu5RI7BErc71aSA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"Tripza123\",\r\n    \"password2\": \"Tripza123\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/changepassword/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"changepassword",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SendPasswordResetRequest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ragedbulls@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/send-reset-password-email/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"send-reset-password-email",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resetPassword",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0MzQ4MTA4LCJpYXQiOjE2ODQzNDY5MDgsImp0aSI6IjYzZWI2MDE5YTAzODQxOTg5NzM1MDYxYTUzNWIzYjI5IiwidXNlcl9pZCI6MX0.Nrai3HhlqKgfV7T5NgdbTOUYA10raEsT0u83GSlw5EA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"tripza123\",\r\n    \"password2\": \"tripza123\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user/reset-password/MQ/bof3b8-a2f50d7859dee92c1474f73ffd5da841/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"reset-password",
+						"MQ",
+						"bof3b8-a2f50d7859dee92c1474f73ffd5da841",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "efe5a66d-6078-462c-bd32-437e1a75d4b1",
+		"name": "Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25800410",
+		"_collection_link": "https://warped-flare-370127.postman.co/workspace/Team-Workspace~ef2d6c8a-c202-4b5d-866c-503458658902/collection/25800410-efe5a66d-6078-462c-bd32-437e1a75d4b1?action=share&creator=25800410&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "book hotel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0ODA3MzcxLCJpYXQiOjE2ODQ3MjA5NzEsImp0aSI6IjJkMzQwNmQ3ZmM1ZDQ2NjhiY2Y2NGQ4MmQ1ODg0Y2EzIiwidXNlcl9pZCI6MX0.ROckXoGbgYx0HQ-rjmd3Lr3p7DhuzpOg7dauexnI3iY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"check_in_date\": \"2058-03-05\",\r\n    \"check_out_date\": \"2058-03-06\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/book/second/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"book",
+						"second",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "booking list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0ODA3MzcxLCJpYXQiOjE2ODQ3MjA5NzEsImp0aSI6IjJkMzQwNmQ3ZmM1ZDQ2NjhiY2Y2NGQ4MmQ1ODg0Y2EzIiwidXNlcl9pZCI6MX0.ROckXoGbgYx0HQ-rjmd3Lr3p7DhuzpOg7dauexnI3iY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/book/list/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"book",
+						"list",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subscription status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0Nzk5NzkxLCJpYXQiOjE2ODQ3MTMzOTEsImp0aSI6ImFmNTk3NmExYjdiNzQzZGFhNTllMDFlNjk2ZDdkMmVlIiwidXNlcl9pZCI6MX0.zhj31D60tYAsD0w_BDo0oQyfPu57FS_rHXe7hRZghzo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"01.tripza@gmail.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hotel/sub/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hotel",
+						"sub",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My bookings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0ODA3MzcxLCJpYXQiOjE2ODQ3MjA5NzEsImp0aSI6IjJkMzQwNmQ3ZmM1ZDQ2NjhiY2Y2NGQ4MmQ1ODg0Y2EzIiwidXNlcl9pZCI6MX0.ROckXoGbgYx0HQ-rjmd3Lr3p7DhuzpOg7dauexnI3iY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/book/my-bookings/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"book",
+						"my-bookings",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
