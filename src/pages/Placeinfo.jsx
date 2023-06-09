@@ -9,7 +9,7 @@ import { CgProfile } from "react-icons/Cg";
 // import place2 from "../assets/Khumai2.jpg";
 // import place1 from "../assets/Khumai1.jpg";
 import Reviews from "./Reviews";
-import HotelsNearby from "./HotelsNearby";
+// import HotelsNearby from "./HotelsNearby";
 import AgenciesNearby from "./AgenciesNearby";
 import "./PlaceInfo.css";
 import AliceCarousel from "react-alice-carousel";
@@ -17,22 +17,72 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { useNavigate, useParams } from 'react-router-dom'; 
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet-routing-machine';
+// import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 
 
+function RoutingControl({ mapCenter, curlat, curlon }) {
+  const map = useMap();
+
+  useEffect(() => {
+    L.Routing.control({
+      waypoints: [
+        L.latLng(curlat, curlon),
+        L.latLng(mapCenter[0], mapCenter[1])
+       
+      ]
+    }).addTo(map);
+  }, [mapCenter, curlat, curlon]);
+   
+  return null;
+}
 
 
 function PlaceInfo(props) {
   const [placeData, setPlaceData] = useState({});
-  const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
+  const [mapCenter, setMapCenter] = useState([0,0]);
   const [images, setImages] = useState([])
   const [map, setMap] = useState(null)
   const [isVerified,setIsverified]=useState(false);
+  const [curlat,setCurlat]=useState(null);
+  const [curlon,setCurlon]=useState(null);
+
+  
+useEffect(() => {
+  const getUserLocation = async () => {
+    try {
+      const position = await getCurrentPosition();
+      const { latitude, longitude } = position.coords;
+      setCurlat(latitude);
+      console.log('curlat:',curlat);
+
+      setCurlon(longitude);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getUserLocation()
+}, []);
+
+const getCurrentPosition = () => {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
+      enableHighAccuracy: true,
+      timeout: 100000,
+      maximumAge: 0
+    });
+  });
+};
+
   
   // const [reviews, setReviews] = useState([])
   const {slug} = useParams()
     useEffect(()=>{
-      map?.flyTo(mapCenter, 15)
+      map?.setView(mapCenter, 15)
     }, [mapCenter])
+
   async function getPlaceData() {
     const config = {
       headers: {
@@ -46,6 +96,7 @@ function PlaceInfo(props) {
       const data = await response.data;
   
       // Extract name and description
+      
       const extractedData = data;
       
       const lat=Number(data.latitude);
@@ -53,6 +104,7 @@ function PlaceInfo(props) {
       const is= data.is_verified;
       setIsverified(is);
       setMapCenter([lat,lon]);
+      console.log('mapcenter:',mapCenter[0]);
       setImages([...images, data.images.map(i=><img src={`http://localhost:8000${i.image}`}/>)])
       setPlaceData(extractedData);
     } catch (error) {
@@ -176,6 +228,7 @@ function PlaceInfo(props) {
             scrollWheelZoom={true}
             style={{ width: "100%", height: "100%", maxWidth: "600px", maxHeight: "500px" }}
             ref={setMap}
+            
           >
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Street View">
@@ -189,7 +242,8 @@ function PlaceInfo(props) {
             />
           </LayersControl.BaseLayer>
         </LayersControl>
-        <Marker position={mapCenter} />
+        {/* <Marker position={mapCenter} /> */}
+        <RoutingControl mapCenter={mapCenter} curlat={curlat} curlon={curlon} />
       </MapContainer>
             
             </div>

@@ -1,4 +1,5 @@
 import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-leaflet';
+// import L from 'leaflet';
 import React, { useState, useEffect } from "react";
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import '../../node_modules/leaflet-geosearch/dist/geosearch.css';
@@ -8,11 +9,22 @@ const Recenter = ({ lat, lng }) => {
   const map = useMap();
   
   useEffect(() => {
-    map.setView([lat, lng]);
+    // map.setView([lat, lng]);
+    map?.flyTo([lat,lng],15)
   }, [map, lat, lng]);
-  
   return null;
 };
+// const Popup = ({ lat, lng }) => {
+//   const map = useMap();
+  
+//   useEffect(() => {
+//     // map.setView([lat, lng]);
+//     L.marker([lat, lng]).addTo(map)
+//     .bindPopup('latitude and longitude')
+//     .openPopup();
+//   }, []);
+//   return null;
+// };
 
 const provider= new OpenStreetMapProvider();
 const searchControl = new GeoSearchControl({
@@ -29,7 +41,7 @@ const Search = () =>{
 
 
 const MapSection = ({ onLocationSelect }) => {
-  const [mapCenter, setMapCenter] = useState([28.390591999999998, 83.93487197222223]);
+  const [mapCenter, setMapCenter] = useState([28.256218726304628,83.97951900959016]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
@@ -100,6 +112,7 @@ const MapSection = ({ onLocationSelect }) => {
         <Search/>
         <MapClickHandler onMapClick={handleMapClick} />
         {selectedLocation && <Marker position={selectedLocation} />}
+        {/* {<Popup lat={mapCenter[0]} lng={mapCenter[1]} />} */}
         {mapCenter && <Recenter lat={mapCenter[0]} lng={mapCenter[1]} />}
       </MapContainer>
     </>

@@ -93,6 +93,9 @@ function Navbar() {
       <Link className="nav--links" to="/contribute">
         Contribute
       </Link>
+      <Link className="nav--links" to="/map">
+        Map
+      </Link>
       {renderAuthLinks()}
     </div>
   );

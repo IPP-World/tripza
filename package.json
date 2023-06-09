@@ -21,6 +21,7 @@
     "leaflet": "^1.9.3",
     "leaflet-control-geocoder": "^2.4.0",
     "leaflet-geosearch": "^3.8.0",
+    "leaflet-routing-machine": "^3.2.12",
     "leaflet.locatecontrol": "^0.79.0",
     "query-string": "^8.1.0",
     "react": "^18.2.0",

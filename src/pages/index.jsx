@@ -15,5 +15,6 @@ import AddServices from "./AddServices";
 import Serviceinfo from "./Serviceinfo";
 import ServiceReviews from "./ServiceReviews";
 import Booking from "./Booking";
+import EntireMap from "./EntireMap";
 
-export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews,Placeinfo,ResetPassword,ResetPasswordConfirm,EditProfile,AddServices,Serviceinfo,ServiceReviews,Booking}
+export {Signup, Login, Agencies, Contribute, Hotels, Profile, Landing,Reviews,Placeinfo,ResetPassword,ResetPasswordConfirm,EditProfile,AddServices,Serviceinfo,ServiceReviews,Booking,EntireMap}

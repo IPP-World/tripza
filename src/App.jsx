@@ -19,7 +19,8 @@ import {
   AddServices,
   Serviceinfo,
   ServiceReviews,
-  Booking
+  Booking,
+  EntireMap
 } from "./pages";
 import Facebook from './containers/Facebook';
 import Google from './containers/Google';
@@ -53,6 +54,7 @@ function App() {
           <Route path="hotels/serviceinfo/:slug" element={<Serviceinfo />} />
           <Route path="/serviceinfo/:slug/reviews" element={<ServiceReviews/>} />
           <Route path="/booking" element={<Booking/>} />
+          <Route path="/map" element={<EntireMap/>} />
         </Routes>
       </Router>
     </Provider>
