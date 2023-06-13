@@ -42,4 +42,12 @@
     margin-top: 10px;
     text-align: center;
   }
-  
+  .hotelsnearby--image{
+    display: flex;
+    height:100px;
+    width:100px;
+  }
+  .hotels--image{
+    height: 100px;
+    width:100px;
+  }

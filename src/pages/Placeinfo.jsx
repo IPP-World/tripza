@@ -1,16 +1,11 @@
 import React, { useState,useEffect } from "react";
 import { CiShare1 } from "react-icons/ci";
 import { BsBookmarkPlus } from "react-icons/Bs";
-import { AiFillStar } from "react-icons/Ai";
+import { AiFillStar,AiOutlineClose } from "react-icons/Ai";
 import { GoVerified } from "react-icons/Go";
 import { CgProfile } from "react-icons/Cg";
-
-// import place from "../assets/place.jpg"
-// import place2 from "../assets/Khumai2.jpg";
-// import place1 from "../assets/Khumai1.jpg";
 import Reviews from "./Reviews";
-// import HotelsNearby from "./HotelsNearby";
-import AgenciesNearby from "./AgenciesNearby";
+import HotelsNearby from "./HotelsNearby";
 import "./PlaceInfo.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -19,22 +14,54 @@ import axios from "axios";
 import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
-// import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
+
+import currentLocationIcon from '../assets/current-location-icon.png'
+import placeicon from '../assets/place-icon.png';
 
 
 function RoutingControl({ mapCenter, curlat, curlon }) {
+  const currentIcon = L.icon({
+    iconUrl: currentLocationIcon,
+    iconSize: [32, 32],
+  });
+
+  const goalIcon = L.icon({
+    iconUrl: placeicon,
+    iconSize: [32, 32],
+  });
+
   const map = useMap();
+  const current = L.latLng(curlat, curlon);
+  const goal = L.latLng(mapCenter[0], mapCenter[1]);
 
   useEffect(() => {
-    L.Routing.control({
-      waypoints: [
-        L.latLng(curlat, curlon),
-        L.latLng(mapCenter[0], mapCenter[1])
-       
-      ]
-    }).addTo(map);
-  }, [mapCenter, curlat, curlon]);
-   
+    if (map && curlat && curlon) {
+      L.Routing.control({
+        waypoints: [current, goal],
+        createMarker: function (i, waypoint, n) {
+          var marker_icon = null;
+          if (i === 0) {
+            marker_icon = currentIcon;
+          } else if (i === n - 1) {
+            marker_icon = goalIcon;
+          }
+
+          var marker = L.marker(waypoint.latLng, {
+            draggable: false,
+            bounceOnAdd: true,
+            bounceOnAddOptions: {
+              duration: 1000,
+              height: 800,
+            },
+            icon: marker_icon,
+          });
+
+          return marker;
+        },
+      }).addTo(map);
+    }
+  }, [map, mapCenter, curlat, curlon]);
+
   return null;
 }
 
@@ -47,7 +74,8 @@ function PlaceInfo(props) {
   const [isVerified,setIsverified]=useState(false);
   const [curlat,setCurlat]=useState(null);
   const [curlon,setCurlon]=useState(null);
-
+  const [showMap, setShowMap] = useState(false);
+  
   
 useEffect(() => {
   const getUserLocation = async () => {
@@ -76,8 +104,6 @@ const getCurrentPosition = () => {
   });
 };
 
-  
-  // const [reviews, setReviews] = useState([])
   const {slug} = useParams()
     useEffect(()=>{
       map?.setView(mapCenter, 15)
@@ -87,16 +113,12 @@ const getCurrentPosition = () => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        // Authorization: `Bearer ${localStorage.getItem("access")}`,
       },
     };
   
     try {
       const response = await axios.get(`http://127.0.0.1:8000/api/place/${slug}`, config);
       const data = await response.data;
-  
-      // Extract name and description
-      
       const extractedData = data;
       
       const lat=Number(data.latitude);
@@ -104,7 +126,6 @@ const getCurrentPosition = () => {
       const is= data.is_verified;
       setIsverified(is);
       setMapCenter([lat,lon]);
-      console.log('mapcenter:',mapCenter[0]);
       setImages([...images, data.images.map(i=><img src={`http://localhost:8000${i.image}`}/>)])
       setPlaceData(extractedData);
     } catch (error) {
@@ -113,43 +134,13 @@ const getCurrentPosition = () => {
     }
   }
 
-  // async function getReviews() {
-  //   const config = {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       // Authorization: `Bearer ${localStorage.getItem("access")}`,
-  //     },
-  //   };
-  
-  //   try {
-  //     console.log(slug);
-  //     const response = await axios.get(`http://127.0.0.1:8000/api/place/${slug}/reviews/`, config);
-  //     const data = await response.data;
-  
-  //     // Extract name and description
-  //     const extractedData = data;
-  //     console.log(extractedData);
-  
-  //    setReviews(extractedData);
-  //   } catch (error) {
-  //     console.log(error);
-  //     throw error;
-  //   }
-  // }
-
   useEffect(() => {
     getPlaceData();
-    
- 
-    //getReviews();
   }, []);
 
   const states = Object.freeze({
     REVIEWS: <Reviews slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
-    // HOTELS: <HotelsNearby closeModal={() => setCurrentState(states.NONE)} />,
-    AGENCIES: (
-      <AgenciesNearby closeModal={() => setCurrentState(states.NONE)} />
-    ),
+    HOTELS: <HotelsNearby slug={slug} closeModal={() => setCurrentState(states.NONE)} />,
     NONE: <></>,
   });
 
@@ -170,7 +161,7 @@ const getCurrentPosition = () => {
     const subscribedata = data;
     console.log("data", subscribedata);
     if (subscribedata.is_subscribed==false){
-              alert("you are not subscribed");
+      alert("you are not subscribed");
     }
     else{
     navigate('/addservices');}
@@ -182,6 +173,48 @@ const getCurrentPosition = () => {
 
 
   const [currentState, setCurrentState] = useState(states.NONE);
+
+  const handlemapclick=()=>{
+    console.log('map clicked');
+    setShowMap(true);
+  }
+
+  const Popup = () => (
+    <>
+      <div className="map-wrapper"  onClick={() => setShowMap(false)}></div>
+      <div className="map-container">
+        <div
+          className="map--close-btnn"
+          onClick={() => setShowMap(false)}
+        >
+          <AiOutlineClose />
+        </div>
+        <MapContainer
+            center={mapCenter}
+            zoom={13}
+            scrollWheelZoom={true}
+            style={{ width: "100%", height: "100%", maxWidth: "1000px", maxHeight: "1000px" }}
+           
+            // ref={setMap}  
+          >
+        <LayersControl position="topright">
+          <LayersControl.BaseLayer checked name="Street View">
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="Satellite View">
+            <TileLayer
+              url="http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+              maxZoom={20}
+              subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+            />
+          </LayersControl.BaseLayer>
+        </LayersControl>
+        <RoutingControl mapCenter={mapCenter} curlat={curlat} curlon={curlon} />
+      </MapContainer>     
+      </div>
+    </>
+  );
+
   return (
     <div className="PlaceInfo">
       {currentState}
@@ -228,8 +261,7 @@ const getCurrentPosition = () => {
             scrollWheelZoom={true}
             style={{ width: "100%", height: "100%", maxWidth: "600px", maxHeight: "500px" }}
             ref={setMap}
-            
-          >
+            >
         <LayersControl position="topright">
           <LayersControl.BaseLayer checked name="Street View">
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -242,12 +274,16 @@ const getCurrentPosition = () => {
             />
           </LayersControl.BaseLayer>
         </LayersControl>
-        {/* <Marker position={mapCenter} /> */}
-        <RoutingControl mapCenter={mapCenter} curlat={curlat} curlon={curlon} />
+        <Marker position={mapCenter} />
       </MapContainer>
-            
             </div>
         </div>
+
+        <div className="view-map">
+          <button className="map--button" onClick={handlemapclick}>View full map</button>
+          {showMap && <Popup/>}
+        </div>
+
         <div className="place--desc-reviews">
           <div className="place-desc">
             <p className="place-desc-p">

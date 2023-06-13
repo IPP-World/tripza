@@ -279,3 +279,32 @@ font-size: 0.9em;
 
   font-weight: 400;
 }
+.map-wrapper{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0F4C5C;
+  opacity: 0.5;
+  z-index: 9999;
+  }
+  .map-container{
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 50vw;
+      height: 50vh;
+      background: #f0f2f3;
+      border-radius: 8px;
+      z-index: 10000;
+  }
+  
+  .map--close-btnn {
+      padding: 8px;
+      font-size: 20px;
+      color: #0F4C5C;
+      text-align:right;
+      cursor: pointer;
+    }

@@ -1,16 +1,41 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {AiOutlineClose} from 'react-icons/Ai'
-import NearbyData from '../components/NearbyData';
 import NearbyComponent from '../components/NearbyComponent';
 import "./HotelsNearbynew.css"
-function HotelsNearby({closeModal}) {
-    const nearbySection = NearbyData.map((near) => {
+import axios from 'axios';
+
+function HotelsNearby({slug,closeModal}) {
+  const [nearbyData,setNearbyData]=useState([]);
+
+  async function getNearbyData(){
+     const Slug=slug;
+     const config = {
+      headers: {
+        "Content-Type": "application/json"
+      },
+    };
+         try{
+          const response= await axios.get(`http://127.0.0.1:8000/api/place/${Slug}/nearby-hotels/`,config);
+          const data=response.data;
+          setNearbyData(data);
+          console.log('nearby data:',nearbyData);
+         }
+         catch(error){
+          console.log(error);
+         }
+    }
+    useEffect(() => {
+      getNearbyData();
+    }, []);
+
+    const nearbySection = nearbyData.map((near) => {
         return (
           <NearbyComponent
             key={near.id}
-            Img={near.Img}
+            Img={near.images}
             name={near.name}
             location={near.location}
+            slug={near.slug}
           />
         );
       });

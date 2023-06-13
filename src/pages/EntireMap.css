@@ -9,3 +9,12 @@ top:70px;
 right:0;
 z-index: 999;
 }
+.place-images{
+    height:100px ;
+    width:100px;
+}
+.service-images{
+    height:100px ;
+    width:100px;
+}
+

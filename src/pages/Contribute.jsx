@@ -107,7 +107,7 @@ const Contribute = () => {
       alert("Please confirm that the information you submitted is legit");
       return;
     }
-    if (!images) {
+    if (!imageAdded) {
       alert("Please select one or more images");
       return;
     }
