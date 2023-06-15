@@ -35,7 +35,7 @@ function RoutingControl({ mapCenter, curlat, curlon }) {
   const goal = L.latLng(mapCenter[0], mapCenter[1]);
 
   useEffect(() => {
-    if (map && curlat && curlon) {
+    if (curlat && curlon) {
       L.Routing.control({
         waypoints: [current, goal],
         createMarker: function (i, waypoint, n) {
@@ -60,13 +60,16 @@ function RoutingControl({ mapCenter, curlat, curlon }) {
         },
       }).addTo(map);
     }
+   else{
+    return ;
+   }
   }, [map, mapCenter, curlat, curlon]);
 
   return null;
 }
 
 
-function PlaceInfo(props) {
+function PlaceInfo() {
   const [placeData, setPlaceData] = useState({});
   const [mapCenter, setMapCenter] = useState([0,0]);
   const [images, setImages] = useState([])

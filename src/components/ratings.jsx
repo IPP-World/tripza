@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { AiFillStar, AiOutlineStar } from 'react-icons/Ai';
 
-const RatingStars= ({sendRating})=>{
+const RatingStars = ({ sendRating }) => {
   const [rating, setRating] = useState(0);
 
   const handleClick = (event, newRating) => {
     event.preventDefault();
     setRating(newRating);
+    sendRating(newRating);
   };
-  sendRating(rating);
 
   return (
     <div className="rating">
@@ -26,6 +26,7 @@ const RatingStars= ({sendRating})=>{
       })}
     </div>
   );
-}
+};
 
 export default RatingStars;
+
