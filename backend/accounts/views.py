@@ -46,6 +46,24 @@ class RegisterView(generics.GenericAPIView):
         Util.send_email(data)
 
         return Response(user_data, status=status.HTTP_201_CREATED)
+    
+class EditProfile(generics.GenericAPIView):
+    serializer_class= UserDetailSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def put(self, request):
+        user=request.user
+        self.photo=request.data['photo']
+        serializer = UserDetailSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    # def delete(self, request, slug):
+    #     hotel = self.get_object(slug)
+    #     hotel.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 class VerifyEmail(generics.GenericAPIView):
     serializer_class = EmailVerificationSerializer
