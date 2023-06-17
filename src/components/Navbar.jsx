@@ -4,9 +4,13 @@ import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
 import "./Navbar.css";
+import { SearchBar } from "./SearchBar";
+import { SearchResultsList } from "./SearchResultList";
 
 function Navbar() {
-  const [searchValue, setSearchValue] = useState("");
+  const [placeResult, setPlaceResult] = useState([]);
+  const [serviceResult, setServiceResult] = useState([]);
+
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const location=useLocation();
   useEffect(() => {
@@ -33,18 +37,6 @@ function Navbar() {
   if (hideNavbar) {
     return null; 
   }
-  
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
-  };
-
-  const clearSearch = () => {
-    setSearchValue("");
-  };
-
-  const search = () => {
-    console.log(`Searching for: ${searchValue}`);
-  };
 
   const renderAuthLinks = () => {
     if (isAuthenticated) {
@@ -73,19 +65,10 @@ function Navbar() {
       <Link to="/">
         <img className="nav--logo" src={logo} alt="Logo" />
       </Link>
-      <div className="nav--search-container">
-        <input
-          className="nav--search"
-          type="text"
-          placeholder="&#xf002; Search for places/destinations"
-          value={searchValue}
-          onChange={handleSearchChange}
-        />
-        {searchValue && (
-          <button className="nav--search-clear" onClick={clearSearch}>
-            &#xD7;
-          </button>
-        )}
+      <div className="searchbar">
+      <SearchBar setPlaceResult={setPlaceResult} setServiceResult={setServiceResult} />
+      <SearchResultsList results={placeResult} />
+      <SearchResultsList results={serviceResult} />
       </div>
       <Link className="nav--links" to="/hotels">
         Services
