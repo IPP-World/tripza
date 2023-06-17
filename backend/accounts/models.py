@@ -42,9 +42,9 @@ class User(AbstractBaseUser):
     dob=models.DateField()
     photo = models.ImageField(upload_to='photos', null=True, blank=True, verbose_name="photo")
     is_verified=models.BooleanField(default=False)
-    is_subscribed=models.BooleanField(default=False)
+    is_subscribed=models.IntegerField(default=0)
     
-    is_subscribed=models.BooleanField(default=False)
+    # is_subscribed=models.BooleanField(default=False)
     
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)

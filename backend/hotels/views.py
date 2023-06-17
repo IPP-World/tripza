@@ -289,7 +289,8 @@ class Subscription(APIView):
         email = request.data.get('email')
         user = User.objects.filter(email=email).first()  # Use .first() to get a single instance
         if user:
-            user.is_subscribed = True
+            user.is_subscribed = user.is_subscribed + 1
+            print(user.is_subscribed)
             user.save()
             serializer = UserDetailSerializer(user)
             return Response(serializer.data)
