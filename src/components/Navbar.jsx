@@ -7,12 +7,14 @@ import "./Navbar.css";
 import { SearchBar } from "./SearchBar";
 import { SearchResultsList } from "./SearchResultList";
 
+
 function Navbar() {
   const [placeResult, setPlaceResult] = useState([]);
   const [serviceResult, setServiceResult] = useState([]);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const location=useLocation();
+ 
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('.nav--container');
@@ -59,6 +61,22 @@ function Navbar() {
       );
     }
   };
+  
+  const handlePlaceResultClick = (slug) => {
+    navigateToPlace(slug);
+  };
+
+  const handleServiceResultClick = (slug) => {
+   navigateToService(slug);
+  };
+
+  const navigateToPlace = (slug) => {
+    window.location.href = `/placeinfo/${slug}`;
+  };
+
+  const navigateToService = (slug) => {
+   window.location.href = `/hotels/serviceinfo/${slug}`;
+  };
 
   return (
     <div className="nav--container">
@@ -67,8 +85,8 @@ function Navbar() {
       </Link>
       <div className="searchbar">
       <SearchBar setPlaceResult={setPlaceResult} setServiceResult={setServiceResult} />
-      <SearchResultsList results={placeResult} />
-      <SearchResultsList results={serviceResult} />
+      <SearchResultsList results={placeResult} handleClick={handlePlaceResultClick}/>
+      <SearchResultsList results={serviceResult} handleClick={handleServiceResultClick}/>
       </div>
       <Link className="nav--links" to="/hotels">
         Services

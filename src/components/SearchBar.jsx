@@ -7,6 +7,7 @@ export const SearchBar = ({ setPlaceResult,setServiceResult }) => {
   const [placeinput, setPlaceInput] = useState("");
   const [serviceinput, setServiceInput] = useState("");
 
+
   const fetchPlaceData = (value) => {
     fetch("http://127.0.0.1:8000/api/place/show/")
       .then((response) => response.json())
