@@ -15,6 +15,8 @@ export default function Profile({}) {
   const [showModal, setShowModal] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState();
   const [bookings, setBookings] = useState([]);
+  const [myservices,setMyServices]=useState([]);
+
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(load_user());
@@ -117,6 +119,28 @@ useEffect(() => {
     setShowModal(false);
   };
 
+  const ServiceList = async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    };
+
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/hotel/my-hotels/`,
+        config
+      );
+      const data = await response.data;
+      console.log("my services:", data);
+      setMyServices(data);
+    } catch (error) {
+      console.log(error);
+      alert('error loading services');
+    }
+  };
+
   const handleSubscribe = async () => {
     try {
       let config = {
@@ -149,6 +173,7 @@ useEffect(() => {
   };
   useEffect(() => {
     bookingList();
+    ServiceList();
     console.log(bookings);
     console.log("subscriber:", isSubscribed);
   }, []);
@@ -232,6 +257,34 @@ useEffect(() => {
         </div>
         <div className="profile--middlepart">
           <div className="your-hotel">Subscribe to add a service</div>
+          <div className="booking-container">
+                {myservices.map((service) => {
+                  return (
+                    <div
+                      key={service.id}
+                      onClick={() => handleBookingClick(service.slug)}
+                    >
+                      <span className="image-span">
+                        {service.images &&
+                          service.images.map((img, index) => (
+                            <img
+                              key={index}
+                              src={`http://localhost:8000${img.image}`}
+                              alt="hotel"
+                              className="hotels--image"
+                            />
+                          ))}
+                      </span>
+                      <h2 className="profile--checkin-nameee">
+                        {service.name}
+                      </h2>
+                      <h2 className="profile--checkin">
+                        {service.location}
+                      </h2>
+                    </div>
+                  );
+                })}
+              </div>
           <h5 className="recent-text-booking">Booking List</h5>
           <div className="profile-book--glass"></div>
           <div className="profile--booking--list">

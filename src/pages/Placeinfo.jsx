@@ -20,7 +20,6 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet-routing-machine";
-import EditPlace from "./EditPlaceinfo";
 import currentLocationIcon from "../assets/current-location-icon.png";
 import placeicon from "../assets/place-icon.png";
 
@@ -83,6 +82,7 @@ function PlaceInfo() {
   const [showMap, setShowMap] = useState(false);
   const [contributorname, setContributorName] = useState(false);
   const [contributorflag, setContributorFlag] = useState(false);
+
 
   const { slug } = useParams();
 
@@ -277,11 +277,10 @@ function PlaceInfo() {
       </div>
     </>
   );
-const handleEditClick=()=>{
-  return(
-    <Link to={`/editplace?slug=${slug}`} />
-  );
-}
+  const handleEditClick = () => {
+    navigate(`/editplace/${slug}`);
+  };
+  
   return (
     <div className="PlaceInfo">
       {currentState}

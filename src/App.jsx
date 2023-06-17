@@ -53,7 +53,7 @@ function App() {
           <Route path="hotels/serviceinfo/:slug" element={<Serviceinfo />} />
           <Route path="/serviceinfo/:slug/reviews" element={<ServiceReviews/>} />
           <Route path="/booking" element={<Booking/>} />
-          <Route path="/editplace" element={<EditPlace/>} />
+          <Route path="/editplace/:slug" element={<EditPlace/>} />
           <Route path="/map" element={<EntireMap/>} />
         </Routes>
       </Router>

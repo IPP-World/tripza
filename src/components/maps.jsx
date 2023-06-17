@@ -1,47 +1,41 @@
-import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-leaflet';
-// import L from 'leaflet';
 import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, useMap, LayersControl } from 'react-leaflet';
 import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
-import '../../node_modules/leaflet-geosearch/dist/geosearch.css';
-import "../components/maps.css"
+import 'leaflet-geosearch/dist/geosearch.css';
+import '../components/maps.css';
 
 const Recenter = ({ lat, lng }) => {
   const map = useMap();
-  
+
   useEffect(() => {
-    // map.setView([lat, lng]);
-    map?.flyTo([lat,lng],15)
+    map.flyTo([lat, lng], 15);
   }, [map, lat, lng]);
+
   return null;
 };
-// const Popup = ({ lat, lng }) => {
-//   const map = useMap();
-  
-//   useEffect(() => {
-//     // map.setView([lat, lng]);
-//     L.marker([lat, lng]).addTo(map)
-//     .bindPopup('latitude and longitude')
-//     .openPopup();
-//   }, []);
-//   return null;
-// };
 
-const provider= new OpenStreetMapProvider();
-const searchControl = new GeoSearchControl({
-  provider: provider,
-  // style: 'bar',
-  showMarker: false,
-});
-const Search = () =>{
-  const map=useMap();
-  useEffect(()=>{
+const Search = () => {
+  const map = useMap();
+
+  useEffect(() => {
+    const provider = new OpenStreetMapProvider();
+    const searchControl = new GeoSearchControl({
+      provider: provider,
+      showMarker: false,
+    });
+
     map.addControl(searchControl);
-  })
-}
 
+    return () => {
+      map.removeControl(searchControl);
+    };
+  }, [map]);
 
-const MapSection = ({ onLocationSelect }) => {
-  const [mapCenter, setMapCenter] = useState([28.256218726304628,83.97951900959016]);
+  return null;
+};
+
+const MapSection = ({ onLocationSelect, initialLatitude, initialLongitude }) => {
+  const [mapCenter, setMapCenter] = useState([28.256218726304628, 83.97951900959016]);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
@@ -57,8 +51,15 @@ const MapSection = ({ onLocationSelect }) => {
       }
     };
 
-    getUserLocation()
-  }, []);
+    if (!initialLatitude && !initialLongitude) {
+      getUserLocation();
+    }
+    else {
+      setMapCenter([initialLatitude, initialLongitude]);
+      setSelectedLocation([initialLatitude, initialLongitude]);
+      onLocationSelect({ latitude: initialLatitude, longitude: initialLongitude });
+    }
+  }, [initialLatitude, initialLongitude, onLocationSelect]);
 
   const getCurrentPosition = () => {
     return new Promise((resolve, reject) => {
@@ -75,20 +76,21 @@ const MapSection = ({ onLocationSelect }) => {
     setSelectedLocation([lat, lng]);
     onLocationSelect({ latitude: lat, longitude: lng });
   };
+
   const MapClickHandler = ({ onMapClick }) => {
     const map = useMap();
-  
+
     useEffect(() => {
       map.on('click', onMapClick);
-  
+
       return () => {
         map.off('click', onMapClick);
       };
     }, [map, onMapClick]);
-  
+
     return null;
   };
-  
+
   return (
     <>
       <MapContainer
@@ -109,10 +111,9 @@ const MapSection = ({ onLocationSelect }) => {
             />
           </LayersControl.BaseLayer>
         </LayersControl>
-        <Search/>
+        <Search />
         <MapClickHandler onMapClick={handleMapClick} />
         {selectedLocation && <Marker position={selectedLocation} />}
-        {/* {<Popup lat={mapCenter[0]} lng={mapCenter[1]} />} */}
         {mapCenter && <Recenter lat={mapCenter[0]} lng={mapCenter[1]} />}
       </MapContainer>
     </>
@@ -120,4 +121,5 @@ const MapSection = ({ onLocationSelect }) => {
 };
 
 export default MapSection;
+
  
