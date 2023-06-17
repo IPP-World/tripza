@@ -24,10 +24,15 @@ class BookingListCreateAPIView(APIView):
     #     queryset = Booking.objects.filter(hotel=hotel)
     #     return queryset
 
-    def get(self, request):
-        bookings = Booking.objects.all()
+    def get(self, request, hotel_slug):
+        hotel = Hotel.objects.filter(slug=hotel_slug).first()  # Retrieve the hotel with the given slug
+        if not hotel:
+            return Response({"message": "Hotel not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        bookings = Booking.objects.filter(hotel=hotel)  # Retrieve all bookings related to the hotel
         serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data)
+
     
     def post(self, request, hotel_slug):
         data = request.data.copy()
@@ -57,3 +62,22 @@ class UserBookingsApiView(APIView):
         bookings=Booking.objects.filter(user_id=user_id)
         serializer=BookingSerializer(bookings, many=True)
         return Response(serializer.data)
+    
+class BookingResponseApiView(APIView):
+    def put(self, request, id):
+        try:
+            booking=Booking.objects.get(id=id)
+        except Booking.DoesNotExist:
+            return Response({"error": "Booking not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = BookingSerializer(booking, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            print(booking.status)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    
+

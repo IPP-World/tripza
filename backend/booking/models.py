@@ -8,10 +8,9 @@ class Booking(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
-    # status=models.CharField(max_length=50, default="pending")
-    # Add other fields for booking details like number of guests, room type, etc.
     guest_no=models.IntegerField(default=1)
     room_no=models.IntegerField(default=1)
+    status=models.CharField(max_length=50, default="pending")
     h_name=models.CharField(max_length=255, default="Hotel Pokhara")
     def save(self, *args, **kwargs):
         self.h_name=self.hotel.name
