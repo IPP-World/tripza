@@ -308,3 +308,21 @@ font-size: 0.9em;
       text-align:right;
       cursor: pointer;
     }
+
+    .map--button {
+      border: none;
+      background-color: #fb8b24;
+      border-radius: 7px;
+      color: white;
+      font-family: Poppins;
+      font-size: 1em;
+      width:65vh;
+      padding: 6px;
+      letter-spacing: 0.03em;
+      border: 2px solid #0f4c5c;
+      box-shadow: 0px 4px 2px #0f4c5c;
+      cursor: pointer;
+      margin-bottom: 15px;
+      margin-left: 5px;
+      margin-top: 2px;
+    }

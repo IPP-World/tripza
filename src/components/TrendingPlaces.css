@@ -11,8 +11,10 @@
 }
 
 .trending--image{
+  box-sizing: border-box;
+
     height: 220px;
-    /* width: 300px; */
+    width: 300px;
     border-radius: 7px;
     margin-left: 15px;
     

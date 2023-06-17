@@ -68,16 +68,6 @@ export default function Landing() {
       <TrendingPlaces key={place.id} Img={place.images[0]} name={place.name} location={place.location} slug={place.slug} latitude={place.latitude} longitude={place.longitude}/>
     )
   })
-  // const explorePlaces = exdata.map((other) => {
-  //   return (
-  //     <ExplorePlaces
-  //       key={other.id}
-  //       Img={other.Img}
-  //       name={other.name}
-  //       location={other.location}
-  //     />
-  //   );
-  // });
 
   const explorePlaces = places.map(place => {
     return (
@@ -90,7 +80,7 @@ export default function Landing() {
       <h3 className="trending--text">Trending Places</h3>
       <AliceCarousel
               items={trendingPlaces}
-              responsive={{ 0:{ items: 4 }, 768: { items: 4} }}
+              responsive={{ 0:{ items: 2 }, 600: { item: 2},  768: { items: 4} }}
               disableDotsControls
               autoPlay= {true}
               autoPlayInterval={2500}

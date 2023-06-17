@@ -7,7 +7,7 @@ from .verify import haversine_distance
 
     
 class Place(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     description = models.TextField()
     latitude = models.DecimalField(max_digits=40, decimal_places=30)
     longitude = models.DecimalField(max_digits=40, decimal_places=30)
