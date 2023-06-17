@@ -13,13 +13,15 @@
     display: flex;
     flex-direction: row;
     margin-top: 20px;
-    justify-content: space-between;
+    justify-content:space-between;
+    /* align-items: start; */
     margin: 0 1.5vw;
     color: #0f4c5c;
   }
   .service--details {
     display: flex;
     flex-direction: column;
+    align-items:flex-start;
     gap: 2px;
   }
   .service--name {
@@ -32,7 +34,6 @@
   }
   
   .service--sharesave {
-    padding-top: 15px;
     color: #0f4c5c;
   }
   .service-share {

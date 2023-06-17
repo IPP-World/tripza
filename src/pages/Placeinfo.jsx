@@ -23,6 +23,7 @@ import "leaflet-routing-machine";
 import EditPlace from "./EditPlaceinfo";
 import currentLocationIcon from "../assets/current-location-icon.png";
 import placeicon from "../assets/place-icon.png";
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 function RoutingControl({ mapCenter, curlat, curlon }) {
   const currentIcon = L.icon({
@@ -408,18 +409,20 @@ const handleEditClick=()=>{
                 >
                   More
                 </button>
-                <div className="contributor-name">
+                
+              </div>
+              
+            </div>
+          </div>
+          <div className="contributor-name">
                   Contributed by <span></span>
                   {contributorname}
                 </div>
                 {contributorflag && (
                   <div className="edit-place">
-                    <button onClick={handleEditClick}>Edit Place Info</button>
+                    <button className="editPlace--btn" onClick={handleEditClick}>Edit Place Info</button>
                   </div>
                 )}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
