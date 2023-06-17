@@ -202,7 +202,7 @@ font-size: 0.9em;
   font-family: Poppins;
   font-size: 1.1em;
   width: 75px;
-  height: 25px;
+  height: 20px;
   padding: 8px 10px;
   letter-spacing: 0.03em;
   border: 2px solid #0f4c5c;
@@ -238,6 +238,7 @@ font-size: 0.9em;
   border-radius: 7px;
   margin-left: -100px;
   margin-top: 7px;
+  padding: 10px;
   
 }
 .review--profile{
@@ -251,7 +252,7 @@ font-size: 0.9em;
   border: none;
   background-color: #fb8b24;
   border-radius: 25px;
-  color: #0f4c5c;
+  color: #fff;
   font-family: Poppins;
   font-size: 1.1em;
   font-weight: 500;
@@ -294,8 +295,8 @@ font-size: 0.9em;
       top: 50%;
       left: 50%;
       transform: translate(-50%,-50%);
-      width: 50vw;
-      height: 50vh;
+      width: 55vw;
+      height: 55vh;
       background: #f0f2f3;
       border-radius: 8px;
       z-index: 10000;
@@ -317,6 +318,27 @@ font-size: 0.9em;
       font-family: Poppins;
       font-size: 1em;
       width:65vh;
+      padding: 6px;
+      letter-spacing: 0.03em;
+      border: 2px solid #0f4c5c;
+      box-shadow: 0px 4px 2px #0f4c5c;
+      cursor: pointer;
+      margin-bottom: 15px;
+      margin-left: 5px;
+      margin-top: 2px;
+    }
+
+    .contributor-name{
+      margin-top: 3vh;
+    }
+    .editPlace--btn{
+      border: none;
+      background-color: #fb8b24;
+      border-radius: 7px;
+      color: white;
+      font-family: Poppins;
+      font-size: 1em;
+      width:30vh;
       padding: 6px;
       letter-spacing: 0.03em;
       border: 2px solid #0f4c5c;

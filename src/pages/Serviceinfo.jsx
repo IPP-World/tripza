@@ -15,6 +15,7 @@ import 'leaflet-routing-machine';
 
 import currentLocationIcon from '../assets/current-location-icon.png'
 import serviceicon from '../assets/service-icon.png';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 
 function RoutingControl({ mapCenter, curlat, curlon }) {
@@ -259,10 +260,10 @@ function Serviceinfo(props) {
       </MapContainer>
             
             </div>
-        </div>
-        <div className="view-map">
+            <div className="view-map">
           <button className="map--button" onClick={handlemapclick}>View full map</button>
           {showMap && <Popup/>}
+        </div>
         </div>
         <div className="place--desc-reviews">
           <div className="place-desc">

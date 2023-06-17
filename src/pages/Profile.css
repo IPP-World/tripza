@@ -224,7 +224,7 @@ background: linear-gradient(90deg, rgba(218,165,32,1) 0%, rgba(0,212,255,1) 100%
 } */
 .profile-contr--glass{
   height: 71.4%;
-  width: 21.3%;
+  width: 24.3%;
   margin-left: 4px;
   margin-top:-10px;
   border-radius: 7px;
@@ -243,6 +243,7 @@ background: linear-gradient(90deg, rgba(218,165,32,1) 0%, rgba(0,212,255,1) 100%
 
   border-radius: 8px;
   padding-top: 10px;
+  cursor: pointer;
   /* padding-left: -20px; */
 
 
@@ -258,13 +259,23 @@ background: linear-gradient(90deg, rgba(218,165,32,1) 0%, rgba(0,212,255,1) 100%
   /* width: 10vw; */
   border-radius: 8px;
   padding: 10px;
+  cursor: pointer;
 
+}
+.image-span{
+  width: 100%;
+  height: 110px;
+  overflow-y: scroll;
+}
+.image-span img{
+  width: 100%;
+  
 }
 .cont--name{
   margin-top: -5px;
 }
 .cont--add{
-  margin-top: -15px;
+  margin-top: -25px;
 }
 
 .recent-text{

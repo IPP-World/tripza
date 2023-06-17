@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "./EditProfile.css"
 
 const EditProfile = () => {
   const [firstName, setFirstName] = useState('');
@@ -84,9 +85,10 @@ const EditProfile = () => {
   };
 
   return (
-    <div>
-      <h2>Edit Profile</h2>
-      <form onSubmit={handleSubmit}>
+    <div className='editProfile--page'>
+      <h2 className='editProfile--header'>Edit Profile</h2>
+      <div className='editProfile--form'>
+      <form className='editProfile--editor' onSubmit={handleSubmit}>
       <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -126,12 +128,13 @@ const EditProfile = () => {
             onChange={handlePhoneNumberChange}
           />
         </div>
-        <div>
+        <div className='editSave--upload'>
           <label htmlFor="photo">Photo:</label>
-          <input type="file" id="photo" onChange={handlePhotoChange} />
+          <input className='editSave--file' type="file" id="photo" onChange={handlePhotoChange} />
         </div>
-        <button type="submit">Save</button>
+        <button className='editSave--btn' type="submit">Save</button>
       </form>
+      </div>
     </div>
   );
 };
