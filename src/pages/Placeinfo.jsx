@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { CiShare1 } from "react-icons/ci";
 import { BsBookmarkPlus } from "react-icons/Bs";
 import { AiFillStar, AiOutlineClose } from "react-icons/Ai";
@@ -10,7 +9,7 @@ import HotelsNearby from "./HotelsNearby";
 import "./PlaceInfo.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {
   MapContainer,
@@ -21,7 +20,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet-routing-machine";
-
+import EditPlace from "./EditPlaceinfo";
 import currentLocationIcon from "../assets/current-location-icon.png";
 import placeicon from "../assets/place-icon.png";
 
@@ -217,10 +216,9 @@ function PlaceInfo() {
       );
       const data = response.data;
 
-      // Extract name and description
       const subscribedata = data;
       console.log("data", subscribedata);
-      if (subscribedata.is_subscribed == false) {
+      if (subscribedata.is_subscribed == 0) {
         alert("you are not subscribed");
       } else {
         navigate("/addservices");
@@ -279,7 +277,11 @@ function PlaceInfo() {
       </div>
     </>
   );
-
+const handleEditClick=()=>{
+  return(
+    <Link to={`/editplace?slug=${slug}`} />
+  );
+}
   return (
     <div className="PlaceInfo">
       {currentState}
@@ -412,7 +414,7 @@ function PlaceInfo() {
                 </div>
                 {contributorflag && (
                   <div className="edit-place">
-                    <button>Edit Place Info</button>
+                    <button onClick={handleEditClick}>Edit Place Info</button>
                   </div>
                 )}
               </div>

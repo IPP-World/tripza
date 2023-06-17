@@ -13,12 +13,38 @@ export default function Profile({}) {
   const [allContributors, setAllContributors] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(true);
+  const [isSubscribed, setIsSubscribed] = useState();
   const [bookings, setBookings] = useState([]);
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(load_user());
   }, []);
+
+ 
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/user/profile", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch profile data");
+      }
+
+      const data = await response.json();
+      setIsSubscribed(data.is_subscribed);
+    } catch (error) {
+      console.error("Error fetching profile data:", error);
+    }
+  };
+
+  fetchData();
+}, []);
+
 
   useEffect(() => {
     axios
@@ -57,7 +83,7 @@ export default function Profile({}) {
       .post(`${process.env.REACT_APP_API_URL}/api/hotel/sub/`, formData, config)
       .then((res) => {
         console.log(res);
-        setIsSubscribed(true);
+        // setIsSubscribed(true);
       })
       .catch((e) => {
         console.error(e);
@@ -107,7 +133,6 @@ export default function Profile({}) {
               })
               .then(() => {
                 setShowModal(true);
-                setIsSubscribed(true);
               })
               .catch((error) => {
                 console.error(error);
@@ -129,6 +154,7 @@ export default function Profile({}) {
   }, []);
 
   const handleRecentClick = (slug) => {
+    console.log('loading');
     navigateToPlace(slug);
   };
 
@@ -170,7 +196,7 @@ export default function Profile({}) {
             </h4>
 
             <p className="profile--role">
-              {!isSubscribed ? (
+              {!isSubscribed==1 ? (
                 ""
               ) : (
                 <span>

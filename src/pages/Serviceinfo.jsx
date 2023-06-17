@@ -9,7 +9,7 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { useParams } from 'react-router-dom'; 
 import axios from "axios";
-import { MapContainer, TileLayer, Marker, useMap,  LayersControl} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap,LayersControl} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 
@@ -76,6 +76,7 @@ function Serviceinfo(props) {
   const [curlat,setCurlat]=useState(null);
   const [curlon,setCurlon]=useState(null);
   const [showMap, setShowMap] = useState(false);
+  const {slug} = useParams()
 
   
   useEffect(() => {
@@ -105,7 +106,6 @@ function Serviceinfo(props) {
     });
   };
   
-  const {slug} = useParams()
 
   useEffect(()=>{
     map?.flyTo(mapCenter, 15)
