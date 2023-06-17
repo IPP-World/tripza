@@ -334,7 +334,7 @@ const EditPlace = ({ slug }) => {
   useEffect(() => {
     const fetchPlaceData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/place/${slug}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/place/khumai-dada-1`);
         const data = await response.json();
         const imagesData = data.images.map((image) => {
             return { file: null, imageData: image };
