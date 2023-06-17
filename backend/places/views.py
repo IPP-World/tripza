@@ -45,6 +45,8 @@ class PlaceShowAPIView(APIView):
         places = Place.objects.all()
         serializer = PlaceSerializer(places, many=True)
         return Response(serializer.data)
+    
+from django.utils.text import slugify
 class PlaceDetailAPIView(APIView):
     # permission_classes = [IsAuthenticated]
     def get_object(self, slug):
@@ -59,15 +61,32 @@ class PlaceDetailAPIView(APIView):
         return Response(serializer.data)
     
     def put(self, request, slug):
-        contributor = request.user  # Get the authenticated user
-        request.data['contributor'] = contributor.id
-        place = self.get_object(slug)
+        try:
+            place = Place.objects.get(slug=slug)
+            base_slug = slugify(place.name)
+            counter= 0
+
+        except Place.DoesNotExist:
+            return Response({"error": "Place not found"}, status=status.HTTP_404_NOT_FOUND)
+
+
         serializer = PlaceSerializer(place, data=request.data)
+        places=Place.objects.filter(name= place.name)
+        for place in places:
+            counter +=1
+        if counter==1:
+            place.slug=slug
+        else:
+            place.slug = f"{base_slug}-{counter}"
+
+        
+        
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     def delete(self, request, slug):
         place = self.get_object(slug)
         place.delete()

@@ -10,7 +10,7 @@ from django.db.models import JSONField
 
     
 class Hotel(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     description = models.TextField(unique=True)
     latitude = models.DecimalField(max_digits=20, decimal_places=17)
     longitude = models.DecimalField(max_digits=20, decimal_places=17)
