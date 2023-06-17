@@ -3,11 +3,10 @@ import { Navigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { load_user, logout } from "../actions/auth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import KhaltiCheckout from "khalti-checkout-web";
 import { GoVerified } from "react-icons/Go";
 import axios from "axios";
-import { CgProfile } from "react-icons/Cg";
 
 export default function Profile({}) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -27,7 +26,7 @@ export default function Profile({}) {
         headers: {
           "Content-Type": "application/form-data",
           Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
+        }
       })
       .then((obtained) => {
         setAllContributors(obtained.data);

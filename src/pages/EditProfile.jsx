@@ -62,6 +62,9 @@ const EditProfile = () => {
     if (photo) {
       formData.append('photo', photo);
     }
+    else{
+      formData.append('photo');
+    }
 
     const config = {
       headers: {
