@@ -206,10 +206,12 @@ export default function Profile({}) {
         </div>
         <div className="profile--middlepart">
           <div className="your-hotel">Subscribe to add a service</div>
-          <div className="profile--glass"></div>
+          <h5 className="recent-text-booking">Booking List</h5>
+          <div className="profile-book--glass"></div>
           <div className="profile--booking--list">
+         
             <div className="booking--lists">
-              <span className="booking--lists--list"> Booking List</span>
+            
               <div className="booking-container">
                 {bookings.map((booking) => {
                   return (
@@ -235,6 +237,7 @@ export default function Profile({}) {
         </div>
         <div className="profile--rightpart">
           <div className="profile--contribution">
+          <div className="profile-contr--glass"></div>
             <h5 className="recent-text">Recent Contributions</h5>
             <div className="profile--contribution--list">
               <ul>

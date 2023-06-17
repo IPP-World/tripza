@@ -12,6 +12,8 @@ from django.db.models import Avg
 from places.verify import haversine_distance
 from places.serializers import PlaceSerializer
 from places.models import Place
+from django.utils.text import slugify
+
 
 
 
@@ -80,20 +82,64 @@ class HotelDetailAPIView(APIView):
         serializer = HotelSerializer(hotel)
         return Response(serializer.data)
     
+    
     def put(self, request, slug):
-        owner = request.user  # Get the authenticated user
-        request.data['owner'] = owner.id
-        hotel = self.get_object(slug)
-        serializer = HotelSerializer(hotel, data=request.data)
+        try:
+            hotel = Hotel.objects.get(slug=slug)
+            name = request.data['name']
+            if hotel.name==name:
+                pass
+            else:
+                base_slug = slugify(name)
+                print(name)
+                counter = 1
+                for existing_hotel in Hotel.objects.filter(name=name):
+                    print(existing_hotel.name)
+                    base_slug = slugify(existing_hotel.name)
+                    counter += 1
+
+                if counter==1:
+                    hotel.slug = base_slug
+                else:
+                    try:
+                        hotel.slug = f"{base_slug}-{counter}"
+                    except Exception as e:
+                        try:
+                            hotel.slug = f"{base_slug}-{counter+1}"
+                        except Exception as e:
+                            try:
+                                hotel.slug = f"{base_slug}-{counter+2}"
+                            except Exception as e:
+                                try:
+                                    hotel.slug = f"{base_slug}-{counter+3}"
+                                except Exception as e:
+                                    try:
+                                        hotel.slug = f"{base_slug}-{counter+4}"
+                                    except Exception as e:
+                                        hotel.slug = f"{base_slug}-{counter+5}"
+
+
+                hotel.save()  # Save the updated hotel object
+
+        except Hotel.DoesNotExist:
+            return Response({"error": "Hotel not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = HotelSerializer(hotel, data=request.data, partial=True)
+
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     def delete(self, request, slug):
-        hotel = self.get_object(slug)
-        hotel.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        try:
+            hotel = self.get_object(slug)
+            hotel.delete()
+            return Response({"Success": "Hotel successfully deleted."}, status=status.HTTP_200_OK)
+        except Hotel.DoesNotExist:
+            return Response({"error": "Hotel not found"}, status=status.HTTP_404_NOT_FOUND)
+
     
     
 
