@@ -1,52 +1,126 @@
-import React, { useState } from 'react';
-import AvatarEdit from 'react-avatar-edit';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const EditProfile = () => {
-  const [preview, setPreview] = useState(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dob, setDOB] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [photo, setPhoto] = useState(null);
 
-  const handleImageChange = (data) => {
-    if (data) {
-      setPreview(data);
-    }
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+      },
+    };
+
+    fetch('http://127.0.0.1:8000/api/user/profile', config)
+      .then((response) => response.json())
+      .then((data) => {
+        setFirstName(data.fname);
+        setLastName(data.lname);
+        setDOB(data.dob);
+        setPhoneNumber(data.number);
+      })
+      .catch((error) => {
+        console.error('Error fetching profile data:', error);
+      });
+  }, []);
+
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
   };
 
-  const handleCrop = (preview) => {
-    setPreview(preview);
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+  };
+
+  const handleDOBChange = (e) => {
+    setDOB(e.target.value);
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    setPhoto(file);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform form submission with name and preview image
-    console.log('Preview Image:', preview);
-    // Reset form fields and preview image state
-    setPreview(null);
+    const formData = new FormData();
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('dob', dob);
+    formData.append('phoneNumber', phoneNumber);
+    if (photo) {
+      formData.append('photo', photo);
+    }
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${localStorage.getItem('access')}`,
+      },
+    };
+    
+    axios
+      .post(`http://127.0.0.1:8000/api/user/edit/profile`, formData, config)
+      .then((response) => {
+        console.log('Profile updated successfully:', response.data);
+      })
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+      });
   };
 
   return (
     <div>
+      <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
-        <br />
-        <label>
-          Picture:
-          <AvatarEdit
-            width={200}
-            height={200}
-            onCrop={handleCrop}
-            onClose={() => setPreview(null)}
-            onFileLoad={handleImageChange}
-          />
-        </label>
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-      {preview && (
         <div>
-          <h2>Preview:</h2>
-          <img src={preview} alt="Preview" />
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            type="text"
+            id="firstName"
+            value={firstName}
+            onChange={handleFirstNameChange}
+          />
         </div>
-      )}
+        <div>
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            value={lastName}
+            onChange={handleLastNameChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="dob">Date of Birth:</label>
+          <input type="date" id="dob" value={dob} onChange={handleDOBChange} />
+        </div>
+        <div>
+          <label htmlFor="phoneNumber">Phone Number:</label>
+          <input
+            type="text"
+            id="phoneNumber"
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="photo">Photo:</label>
+          <input type="file" id="photo" onChange={handlePhotoChange} />
+        </div>
+        <button type="submit">Save</button>
+      </form>
     </div>
   );
 };
 
 export default EditProfile;
+
