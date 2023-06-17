@@ -170,10 +170,11 @@ class ReviewListCreateAPIView(generics.ListCreateAPIView):
         place.save()
         serializer.save(place=place, reviewer=reviewer)
 
+from .models import User
 class ContributedAPIView(APIView):
     def get(self, request):
-        email = request.data.get('email')
-        places = Place.objects.filter(email=email)
+        user=request.user
+        places = Place.objects.filter(contributor=user)
         serializer = PlaceSerializer(places, many=True)
         return Response(serializer.data)
     
