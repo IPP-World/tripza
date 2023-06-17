@@ -280,11 +280,10 @@ const getCurrentPosition = () => {
         <Marker position={mapCenter} />
       </MapContainer>
             </div>
-        </div>
-
-        <div className="view-map">
-          <button className="map--button" onClick={handlemapclick}>View full map</button>
+            <div className="view-map">
+          <button className="map--button" onClick={handlemapclick}>View Route</button>
           {showMap && <Popup/>}
+        </div>
         </div>
 
         <div className="place--desc-reviews">

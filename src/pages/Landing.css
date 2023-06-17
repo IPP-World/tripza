@@ -21,6 +21,7 @@
   margin: 4vh 0vw 0px 4vw;
   height: 48vh;
   width: 88vw;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   background-color: #0f4c5c;
@@ -36,7 +37,9 @@
 }
 
 .landing--trendingCar .alice-carousel img {
-  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  /* height: auto; */
 }
 .landing--trendingCar .alice-carousel__prev-btn-wrapper {
   position: absolute;
@@ -116,3 +119,4 @@
   margin-left: 2.5vw;
   margin-bottom: 15px;
 }
+

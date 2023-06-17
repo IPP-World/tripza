@@ -180,6 +180,7 @@ export default function Profile({}) {
         </div>
         <div className="profile--middlepart">
           <div className="your-hotel">Subscribe to add a service</div>
+          <div className="profile--glass"></div>
           <div className="profile--booking--list">
             <div className="booking--lists"> 
              <span className="booking--lists--list"> Booking List</span>

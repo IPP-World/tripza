@@ -8,10 +8,15 @@
     flex-direction: row;
     font-family: Poppins;
   }
+  .explore--card{
+    height: 20%;
+  }
   
   .explore--image{
-      height: 220px;
-      /* width: 250px; */
+      height: 30vh;
+      width: 18.6vw;
+      /* max-width: 100%; */
+      object-fit: cover;
       border-radius: 7px;
       margin-left: 15px;
   }
