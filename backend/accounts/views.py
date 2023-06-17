@@ -52,18 +52,20 @@ class EditProfile(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
     
     def put(self, request):
-        user=request.user
-        self.photo=request.data['photo']
-        serializer = UserDetailSerializer(user, data=request.data)
+        user = request.user
+        allowed_fields = ['photo', 'fname', 'lname', 'dob', 'number']  # Add the fields that users are allowed to edit
+
+        data = {}
+        for field in allowed_fields:
+            if field in request.data:
+                data[field] = request.data[field]
+
+        serializer = UserDetailSerializer(user, data=data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    # def delete(self, request, slug):
-    #     hotel = self.get_object(slug)
-    #     hotel.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 class VerifyEmail(generics.GenericAPIView):
     serializer_class = EmailVerificationSerializer

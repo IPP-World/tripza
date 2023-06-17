@@ -1,5 +1,6 @@
 from places.verify import haversine_distance
 from hotels.models import Hotel
+from django.utils.text import slugify
 from hotels.serializers import HotelSerializer
 from django.http import Http404
 from rest_framework.views import APIView
@@ -46,7 +47,6 @@ class PlaceShowAPIView(APIView):
         serializer = PlaceSerializer(places, many=True)
         return Response(serializer.data)
     
-from django.utils.text import slugify
 class PlaceDetailAPIView(APIView):
     # permission_classes = [IsAuthenticated]
     def get_object(self, slug):
@@ -63,24 +63,45 @@ class PlaceDetailAPIView(APIView):
     def put(self, request, slug):
         try:
             place = Place.objects.get(slug=slug)
-            base_slug = slugify(place.name)
-            counter= 0
+            name = request.data['name']
+            if place.name==name:
+                pass
+            else:
+                base_slug = slugify(name)
+                print(name)
+                counter = 1
+                for existing_place in Place.objects.filter(name=name):
+                    print(existing_place.name)
+                    base_slug = slugify(existing_place.name)
+                    counter += 1
+
+                if counter==1:
+                    place.slug = base_slug
+                else:
+                    try:
+                        place.slug = f"{base_slug}-{counter}"
+                    except Exception as e:
+                        try:
+                            place.slug = f"{base_slug}-{counter+1}"
+                        except Exception as e:
+                            try:
+                                place.slug = f"{base_slug}-{counter+2}"
+                            except Exception as e:
+                                try:
+                                    place.slug = f"{base_slug}-{counter+3}"
+                                except Exception as e:
+                                    try:
+                                        place.slug = f"{base_slug}-{counter+4}"
+                                    except Exception as e:
+                                        place.slug = f"{base_slug}-{counter+5}" 
+                
+                place.save()# Save the updated place object
 
         except Place.DoesNotExist:
             return Response({"error": "Place not found"}, status=status.HTTP_404_NOT_FOUND)
 
+        serializer = PlaceSerializer(place, data=request.data, partial=True)
 
-        serializer = PlaceSerializer(place, data=request.data)
-        places=Place.objects.filter(name= place.name)
-        for place in places:
-            counter +=1
-        if counter==1:
-            place.slug=slug
-        else:
-            place.slug = f"{base_slug}-{counter}"
-
-        
-        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -88,8 +109,13 @@ class PlaceDetailAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, slug):
-        place = self.get_object(slug)
-        place.delete()
+        try:
+            place = self.get_object(slug)
+            place.delete()
+            return Response({"Success": "Place successfully deleted."}, status=status.HTTP_200_OK)
+        except Place.DoesNotExist:
+            return Response({"error": "Place not found"}, status=status.HTTP_404_NOT_FOUND)
+
 
 class NearbyHotelsView(APIView):
 
