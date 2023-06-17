@@ -127,7 +127,17 @@ class HotelDetailAPIView(APIView):
         serializer = HotelSerializer(hotel, data=request.data, partial=True)
 
         if serializer.is_valid():
+            images_data = request.FILES.getlist('images')
             serializer.save()
+            existing_images = hotel.images.all()  # Retrieve existing images associated with the hotel
+            for image in existing_images:
+                image.delete()  # Delete existing images
+
+            for image_data in images_data:
+                image = HotelImage.objects.create(hotel=hotel, image=image_data)
+                existing_images =HotelImage.objects.filter(id=image.id)  # Concatenate new image with existing images
+            hotel.images.set(existing_images)
+
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
