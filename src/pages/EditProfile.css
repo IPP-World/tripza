@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+
+.editProfile--page{
+    /* background-color: aquamarine; */
+    margin: auto;
+    max-width:20%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    
+
+}
+
+  .editProfile--header {
+    color: #255957;
+    font-size: 1.3em;
+    letter-spacing: 0.03em;
+  }
+  
+  .editProfile--editor {
+    display: flex;
+    flex-direction: column;
+    border-radius: 7px;
+  }
+  
+  .editProfile--page .editProfile--form form input {
+    margin-top: 1px;
+    padding: 10px 10px;
+    border: solid 1px #255957;
+    width: 300px;
+    height: 17px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 2px 1px #adabab;
+    letter-spacing: 0.03em;
+  }
+  
+  .editProfile--page .editProfile--form .editProfile--editor label{
+      font-size: 1.1em;
+      /* margin-top: 100px; */
+      color: #0f4c5c;
+  }
+  
+  .editProfile--page .editProfile--form .editProfile--editor input[type="date"]{
+      font-family: Poppins;
+      font-size: 1.1em;
+      color: #0f4c5c;
+  
+  }
+ .editSave--upload input[type="file"]::file-selector-button{
+    padding: .0em .4em;
+    border-radius: .2em;
+    transition: 1s;
+}
+  .editSave--btn {
+    border: none;
+    background-color: #0f4c5c;
+    border-radius: 7px;
+    color: white;
+    font-family: Poppins;
+    font-size: 1.1em;
+    width: 150px;
+    padding: 6px;
+    letter-spacing: 0.03em;
+    border: 2px solid #0f4c5c;
+    box-shadow: 0px 4px 2px #0f4c5c;
+    cursor: pointer;
+    margin-top: 15px;
+  }
