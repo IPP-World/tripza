@@ -1,8 +1,6 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import TrendingPlaces from "./components/TrendingPlaces";
-import ExplorePlaces from "./components/ExplorePlaces";
 import {
   Landing,
   Signup,

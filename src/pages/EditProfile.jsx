@@ -6,6 +6,7 @@ const EditProfile = () => {
   const [lastName, setLastName] = useState('');
   const [dob, setDOB] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const EditProfile = () => {
         setLastName(data.lname);
         setDOB(data.dob);
         setPhoneNumber(data.number);
+        setEmail(data.email);
       })
       .catch((error) => {
         console.error('Error fetching profile data:', error);
@@ -52,10 +54,11 @@ const EditProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
+    formData.append('fname', firstName);
+    formData.append('lname', lastName);
     formData.append('dob', dob);
-    formData.append('phoneNumber', phoneNumber);
+    formData.append('number', phoneNumber);
+    formData.append('email', email);
     if (photo) {
       formData.append('photo', photo);
     }
@@ -68,7 +71,7 @@ const EditProfile = () => {
     };
     
     axios
-      .post(`http://127.0.0.1:8000/api/user/edit/profile`, formData, config)
+      .put(`http://127.0.0.1:8000/api/user/edit-profile/`, formData, config)
       .then((response) => {
         console.log('Profile updated successfully:', response.data);
       })
@@ -81,6 +84,14 @@ const EditProfile = () => {
     <div>
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
+      <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            id="email"
+            value={email}
+            readOnly
+          />
+        </div>
         <div>
           <label htmlFor="firstName">First Name:</label>
           <input

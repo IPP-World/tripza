@@ -78,6 +78,7 @@ function PlaceInfo() {
   const [curlat,setCurlat]=useState(null);
   const [curlon,setCurlon]=useState(null);
   const [showMap, setShowMap] = useState(false);
+  const [contributorname, setContributorName] = useState(false);
   
   
 useEffect(() => {
@@ -131,6 +132,7 @@ const getCurrentPosition = () => {
       setMapCenter([lat,lon]);
       setImages([...images, data.images.map(i=><img src={`http://localhost:8000${i.image}`}/>)])
       setPlaceData(extractedData);
+      setContributorName(extractedData.contributor_name)
     } catch (error) {
       console.log(error);
       throw error;
@@ -335,6 +337,9 @@ const getCurrentPosition = () => {
                 >
                   More
                 </button>
+                <div className="contributor-name">
+                  Contributed by <span><CgProfile/></span>{contributorname}
+                </div>
               </div>
             </div>
           </div>

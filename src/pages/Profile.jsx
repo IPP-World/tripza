@@ -19,9 +19,6 @@ export default function Profile({}) {
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(load_user());
-    // bookingList();
-
-    // console.log(bookings);
   }, []);
 
   useEffect(() => {
@@ -37,6 +34,7 @@ export default function Profile({}) {
       });
   }, []);
   console.log("contributions:", allContributors);
+  console.log('user:',user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -164,7 +162,7 @@ export default function Profile({}) {
         <div className="profile--leftpart">
           <div className="profile--pic">
             <div className="profile-profile">
-              <CgProfile />
+            <img src={`http://localhost:8000${user?.photo}`} alt="User Profile" className="user-photo"/>
             </div>
           </div>
           <div className="profile--content">
@@ -240,20 +238,6 @@ export default function Profile({}) {
           <div className="profile--contribution">
             <h5 className="recent-text">Recent Contributions</h5>
             <div className="profile--contribution--list">
-              {/* <ul >
-                {allContributors?.length &&
-                  allContributors?.map((c) => {
-                    return (
-                      <li  key={c.id}
-                      onClick={() => handleRecentClick(c.slug)}>
-                        <p className="cont--name">{c.name || "Title here"}</p>
-                        <br />
-                        <p className="cont--add">{c.location || "Address here"}</p>
-
-                      </li>
-                    );
-                  })}
-              </ul> */}
               <ul>
                 {allContributors?.length &&
                   allContributors?.map((c) => (
