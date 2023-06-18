@@ -16,6 +16,8 @@ export default function Profile({}) {
   const [isSubscribed, setIsSubscribed] = useState();
   const [bookings, setBookings] = useState([]);
   const [myservices,setMyServices]=useState([]);
+  const [showBookModal, setShowBookModal] = useState(false);
+
 
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
@@ -205,6 +207,19 @@ useEffect(() => {
       </div>
     </>
   );
+  const BookPopup = () => (
+    <>
+      <div className="reward-wrapper"></div>
+      <div className="reward-container">
+        <p className="reward--text1">Congratulations!</p>
+        <p className="reward--text2">You are now a subscribed user</p>
+        <button onClick={handleBookCloseModal}>close</button>
+      </div>
+    </>
+  );
+  const handleBookCloseModal=()=>{
+    setShowBookModal(false);
+  } 
 
   if (isAuthenticated)
     return (
@@ -262,7 +277,6 @@ useEffect(() => {
                   return (
                     <div
                       key={service.id}
-                     
                     >
                       <span className="your-image-span"
                        onClick={() => handleBookingClick(service.slug)}>
@@ -283,8 +297,6 @@ useEffect(() => {
                             />
                            }
                       </span>
-                     
-                    
                       <h5 className="your-nameee">
                         {service.name}
                       </h5>
