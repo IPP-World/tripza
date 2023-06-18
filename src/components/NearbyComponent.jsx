@@ -10,6 +10,7 @@ function NearbyComponent(props) {
   };
 
   return (
+    <div className='nearbyservices'>
     <div className="nearbyhotels-section" onClick={() => handlenearby(props.slug)}>
       <div className="nearbyhotels-card">
         <span className="nearbyhotels--name">{props.name}</span>
@@ -21,6 +22,7 @@ function NearbyComponent(props) {
             ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }

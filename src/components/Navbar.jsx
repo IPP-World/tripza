@@ -83,10 +83,10 @@ function Navbar() {
       <Link to="/">
         <img className="nav--logo" src={logo} alt="Logo" />
       </Link>
-      <div className="searchbar">
+      <div className="nav--search">
       <SearchBar setPlaceResult={setPlaceResult} setServiceResult={setServiceResult} />
-      <SearchResultsList results={placeResult} handleClick={handlePlaceResultClick}/>
-      <SearchResultsList results={serviceResult} handleClick={handleServiceResultClick}/>
+      <SearchResultsList className='search---result' results={placeResult} handleClick={handlePlaceResultClick}/>
+      <SearchResultsList className='search---result' results={serviceResult} handleClick={handleServiceResultClick}/>
       </div>
       <Link className="nav--links" to="/hotels">
         Services

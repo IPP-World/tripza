@@ -52,14 +52,14 @@ export const SearchBar = ({ setPlaceResult,setServiceResult }) => {
 
   return (
     <div className="input-wrapper">
-      <FaSearch id="search-icon" />
+      {/* <FaSearch id="search-icon" /> */}
       <input
-        placeholder="Type to search place..."
+        placeholder="Search Place"
         value={placeinput}
         onChange={(e) => handlePlaceChange(e.target.value)}
       />
       <input
-        placeholder="Type to search services..."
+        placeholder="Search Service"
         value={serviceinput}
         onChange={(e) => handleServiceChange(e.target.value)}
       />
