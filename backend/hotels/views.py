@@ -298,7 +298,8 @@ class Subscription(APIView):
     
 class ContributedAPIView(APIView):
     def get(self, request):
-        email = request.data.get('email')
-        hotels = Hotel.objects.filter(email=email)
+        user_id=request.user.id
+        print(user_id)
+        hotels = Hotel.objects.filter(owner=user_id)
         serializer = HotelSerializer(hotels, many=True)
         return Response(serializer.data)

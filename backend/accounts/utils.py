@@ -1,3 +1,5 @@
+from jwt.exceptions import ExpiredSignatureError
+from jwt import decode as jwt_decode
 from django.core.mail import EmailMessage
 import os
 from jwt.exceptions import ExpiredSignatureError
@@ -15,9 +17,7 @@ class Util:
       to=[data['to_email']]
     )
     email.send()
-
-from jwt.exceptions import ExpiredSignatureError
-from jwt import decode as jwt_decode
+      
 
 def jwt_decode_handler(token):
     # Add your own implementation of token decoding based on the JWT library you are using
@@ -35,3 +35,4 @@ def jwt_expired_handler():
     # Handle the case when the JWT token has expired
     # You can return a custom response or raise an appropriate exception based on your requirements
     return Response({'error': 'Token has expired'}, status=status.HTTP_401_UNAUTHORIZED)
+
