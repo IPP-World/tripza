@@ -120,8 +120,9 @@ class BookingResponseApiView(APIView):
 
             booker_data={'email_body':mail, 'to_email': booker_email, 'email_subject': subject}
             Util.send_email(booker_data)
-
-            return Response(serializer.data)
+            serializer_data = serializer.data
+            serializer_data['booker_name'] = booker_name
+            return Response(serializer_data)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
