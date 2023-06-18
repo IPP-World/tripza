@@ -262,10 +262,11 @@ useEffect(() => {
                   return (
                     <div
                       key={service.id}
-                      onClick={() => handleBookingClick(service.slug)}
+                     
                     >
-                      <span className="your-image-span">
-                        {service.images &&
+                      <span className="your-image-span"
+                       onClick={() => handleBookingClick(service.slug)}>
+                        {/* {service.images &&
                           service.images.map((img, index) => (
                             <img
                               key={index}
@@ -273,10 +274,16 @@ useEffect(() => {
                               alt="hotel"
                               className="your--hotels--image"
                             />
-                          ))}
+                          ))} */}
+                           {service.images &&
+                            <img
+                              src={`http://localhost:8000${service.images[0].image}`}
+                              alt="hotel"
+                              className="your--hotels--image"
+                            />
+                           }
                       </span>
                      
-                        <span className="booking--req--span">Booking Requests: </span>
                     
                       <h5 className="your-nameee">
                         {service.name}
@@ -284,6 +291,7 @@ useEffect(() => {
                       <p className="your--checkin">
                         {service.location}
                       </p>
+                     <span className="booking--req--span">Booking Requests: </span>
                     </div>
                   );
                 })}
@@ -329,7 +337,7 @@ useEffect(() => {
                   allContributors?.map((c) => (
                     <li key={c.id} onClick={() => handleRecentClick(c.slug)}>
                       <div className="image-span">
-                        {c.images &&
+                        {/* {c.images &&
                           c.images.map((img, index) => (
                             <img
                               key={index}
@@ -337,7 +345,13 @@ useEffect(() => {
                               alt="hotel"
                               className="hotels--image"
                             />
-                          ))}
+                          ))} */}
+                           {c.images &&
+                            <img
+                              src={`http://localhost:8000${c.images[0].image}`}
+                              alt="hotel"
+                              className="hotels--image"
+                            />} 
                       </div>
                       
                       <div className="content-span">
