@@ -103,22 +103,25 @@ class BookingResponseApiView(APIView):
             status=booking.status
             hotel_name=booking.h_name
             book_id=booking.id
-            #booker_name=booking.h_name
-            #booker_email=booking.h_name
+            user=User.objects.get(email=booking.user)
+            booker_name= user.fname + " " + user.lname
+            booker_email=user
+            # booker_name=booking.h_name
+            # booker_email=booking.h_name
             check_in=booking.check_in_date
             check_out=booking.check_out_date
             status=booking.h_name
-            if status=="approved":
-                subject="Booking approved..."
-                mail=f"Your booking for {hotel_name} has been approved.\n Booking detail:\nBooking ID: {book_id}\nName: {booker_name}\nCheck in Date: {check_in}\n Check out Date: {check_out}\nBooking Status: {status}\n\t THANK YOU"
-            else:
+            if status=="reject":
                 subject="Booking rejected..."
                 mail=f"Your booking for {hotel_name} has been rejected.\nWe are really sorry for the inconvenience.\n\tTHANK YOU"
+            else:
+                subject="Booking approved..."
+                mail=f"Your booking for {hotel_name} has been approved.\n\n Booking Detail:\n -> Booking ID: {book_id}\n -> Name: {booker_name}\n -> Check in Date: {check_in}\n -> Check out Date: {check_out}\n -> Booking Status: {status}\n\n THANK YOU"
 
             booker_data={'email_body':mail, 'to_email': booker_email, 'email_subject': subject}
             Util.send_email(booker_data)
 
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
