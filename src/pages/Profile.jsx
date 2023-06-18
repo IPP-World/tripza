@@ -256,7 +256,7 @@ useEffect(() => {
           </div>
         </div>
         <div className="profile--middlepart">
-          <div className="your-hotel">Your Services</div>
+          <div className="your--hotel">Your Services</div>
           <div className="your-container">
                 {myservices.map((service) => {
                   return (
@@ -299,7 +299,7 @@ useEffect(() => {
               </div>
               <div className="profile--thirdpart">
           <h5 className="recent-text-booking">Booking List</h5>
-          <div className="profile-book--glass"></div>
+          {/* <div className="profile-book--glass"></div> */}
           <div className="profile--booking--list">
          
             <div className="booking--lists">
@@ -328,9 +328,10 @@ useEffect(() => {
           </div>
         </div>
         <div className="profile--rightpart">
+        <h5 className="recent-text">Recent Contributions</h5>
           <div className="profile--contribution">
-          <div className="profile-contr--glass"></div>
-            <h5 className="recent-text">Recent Contributions</h5>
+          {/* <div className="profile-contr--glass"></div> */}
+            
             <div className="profile--contribution--list">
               <ul>
                 {allContributors?.length &&
