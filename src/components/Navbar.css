@@ -42,18 +42,9 @@
   font-weight: 500;
   text-shadow: 0 0 5px #edf4f5;
 }
-.nav--search {
-  font-family:Poppins;
-  font-weight: 400;
-  font-size: 15px;
-  color: #0F4C5C;
-  border: none;
-  border-radius: 10px;
-  background-color: #F1F1F1;
+/* .nav--search {
   padding: 0.5rem 1rem;
-  width: 400px;
-  transition: all 0.3s ease;
-}
+} */
 
 .nav--search:focus {
   outline: none;
@@ -93,3 +84,6 @@
   padding: 0;
 
 }
+/* .search---result{
+  top: 40%;
+} */

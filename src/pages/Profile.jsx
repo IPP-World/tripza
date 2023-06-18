@@ -256,35 +256,40 @@ useEffect(() => {
           </div>
         </div>
         <div className="profile--middlepart">
-          <div className="your-hotel">Subscribe to add a service</div>
-          <div className="booking-container">
+          <div className="your-hotel">Your Services</div>
+          <div className="your-container">
                 {myservices.map((service) => {
                   return (
                     <div
                       key={service.id}
                       onClick={() => handleBookingClick(service.slug)}
                     >
-                      <span className="image-span">
+                      <span className="your-image-span">
                         {service.images &&
                           service.images.map((img, index) => (
                             <img
                               key={index}
                               src={`http://localhost:8000${img.image}`}
                               alt="hotel"
-                              className="hotels--image"
+                              className="your--hotels--image"
                             />
                           ))}
                       </span>
-                      <h2 className="profile--checkin-nameee">
+                     
+                        <span className="booking--req--span">Booking Requests: </span>
+                    
+                      <h5 className="your-nameee">
                         {service.name}
-                      </h2>
-                      <h2 className="profile--checkin">
+                      </h5>
+                      <p className="your--checkin">
                         {service.location}
-                      </h2>
+                      </p>
                     </div>
                   );
                 })}
               </div>
+              </div>
+              <div className="profile--thirdpart">
           <h5 className="recent-text-booking">Booking List</h5>
           <div className="profile-book--glass"></div>
           <div className="profile--booking--list">
@@ -334,6 +339,7 @@ useEffect(() => {
                             />
                           ))}
                       </div>
+                      
                       <div className="content-span">
                         <p className="cont--name">{c.name || "Title here"}</p>
                         <br />
