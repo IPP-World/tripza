@@ -12,56 +12,11 @@ export default function AddServices() {
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
   const [positionMarked, setPositionMarked] = useState(false);
-  // const [photolat, setPhotolat] = useState(0);
-  // const [photolon, setPhotolon] = useState(0);
   const [maplat, setMaplat] = useState(null);
   const [maplon, setMaplon] = useState(null);
-  // const[offerlist,setOfferList]= useState({})
-  // const [offers, setOffers] = useState({});
   const [ratingValue, setRatingValue] = useState(null);
-
-  // const handleOfferChange = (value) => {
-  //   const {offers} = value.target;
-  //   const stringOffers = value.split('\n')
-  //   set
-  // };
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/hotel/my-hotels/",
-          {
-            headers: {
-              "Content-Type": "application/form-data",
-              Authorization: `Bearer ${localStorage.getItem("access")}`,
-            },
-          }
-        );
-        const Mydata = response.data;
-        console.log("mydata:", Mydata);
-        const myslug = Mydata.map((item) => item.slug);
-        console.log("myslug", myslug);
-        let flag = false;
-        for (let i = 0; i < myslug.length; i++) {
-          if (myslug[i] === slug) {
-            flag = true;
-            break;
-          }
-        }
-        console.log(flag);
-        setContributorFlag(flag);
-        console.log("contributorflag:", contributorflag);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData().catch((error) => console.error(error));
-  }, []);
-
 
   const handleInputChange = (event) => {
     setSelectedOption(event.target.value);

@@ -6,27 +6,71 @@ import MapSection from "../components/maps";
 import exifr from "exifr";
 import axios from "axios";
 import "./Addservices.css";
+import { useParams } from "react-router-dom";
 
-export default function AddServices() {
+export default function EditService() {
+  const [imageAdded, setImageAdded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [legitChecked, setLegitChecked] = useState(false);
   const [images, setImages] = useState([]);
   const [positionMarked, setPositionMarked] = useState(false);
-  // const [photolat, setPhotolat] = useState(0);
-  // const [photolon, setPhotolon] = useState(0);
   const [maplat, setMaplat] = useState(null);
   const [maplon, setMaplon] = useState(null);
-  // const[offerlist,setOfferList]= useState({})
-  // const [offers, setOffers] = useState({});
   const [ratingValue, setRatingValue] = useState(null);
-
-  // const handleOfferChange = (value) => {
-  //   const {offers} = value.target;
-  //   const stringOffers = value.split('\n')
-  //   set
-  // };
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const { slug } = useParams();
+
+  useEffect(() => {
+    const fetchImage = async (imageURL) => {
+      try {
+        const response = await fetch(imageURL);
+        const blob = await response.blob();
+        const file = new File([blob], "image.jpg", { type: blob.type });
+        return file;
+      } catch (error) {
+        console.error("Error fetching image:", error);
+        return null;
+      }
+    };
+
+    const fetchServiceData = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/hotel/${slug}`);
+        const data = await response.json();
+        console.log("data:", data);
+
+        const imagesData = await Promise.all(
+          data.images.map(async (image) => {
+            const file = await fetchImage(
+              `http://localhost:8000${image.image}`
+            );
+            return {
+              id: image.id,
+              file,
+              imageData: URL.createObjectURL(file),
+            };
+          })
+        );
+
+        setImages(imagesData);
+        setImageAdded(true);
+        setMaplat(data.latitude);
+        setMaplon(data.longitude);
+        setServicedesc({
+            placeName: data.name,
+            placeDescription: data.description,
+            location: data.location,
+            price:data.price,
+            review:data.c_review
+        });
+        setSelectedOption(data.category);
+      } catch (error) {
+        console.error("Error fetching place data:", error);
+      }
+    };
+    fetchServiceData();
+  }, [slug]);
 
   const handleInputChange = (event) => {
     setSelectedOption(event.target.value);
@@ -134,7 +178,7 @@ export default function AddServices() {
       alert("Please confirm that the information you submitted is legit");
       return;
     }
-    if (!images) {
+    if (!imageAdded) {
       alert("Please select one or more images");
     }
     if (!ratingValue) {
@@ -214,7 +258,7 @@ export default function AddServices() {
             <AiOutlineClose />
           </div>
           <p className="reward--text1">Congratulations</p>
-          <p className="reward--text2">You successfully added a service</p>
+          <p className="reward--text2">You successfully edited your service</p>
         </div>
       </>
     );

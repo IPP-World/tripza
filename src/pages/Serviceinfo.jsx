@@ -77,7 +77,46 @@ function Serviceinfo(props) {
   const [curlat,setCurlat]=useState(null);
   const [curlon,setCurlon]=useState(null);
   const [showMap, setShowMap] = useState(false);
-  const {slug} = useParams()
+  const {slug} = useParams();
+
+  const [myserviceflag,setMyserviceFlag] = useState(false);
+  const [ownername,setOwnerName] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/hotel/my-hotels/",
+          {
+            headers: {
+              "Content-Type": "application/form-data",
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          }
+        );
+        const Mydata = response.data;
+        console.log("mydata:", Mydata);
+        const myslug = Mydata.map((item) => item.slug);
+        console.log("myslug", myslug);
+        let flag = false;
+        for (let i = 0; i < myslug.length; i++) {
+          if (myslug[i] === slug) {
+            flag = true;
+            break;
+          }
+        }
+        console.log(flag);
+        setMyserviceFlag(flag);
+        console.log("serviceownerflag:", myserviceflag);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData().catch((error) => console.error(error));
+  }, []);
+
+
 
   
   useEffect(() => {
@@ -125,6 +164,7 @@ function Serviceinfo(props) {
       console.log(data);
 
       const extractedData = data;
+      setOwnerName(extractedData.owner_name);
       const lat=Number(data.latitude);
       const lon=Number(data.longitude);
       console.log('datalatlon:',lat);
@@ -199,6 +239,9 @@ function Serviceinfo(props) {
       </div>
     </>
   );
+  const handleEditClick = () => {
+    navigate(`/editservice/${slug}`);
+  };
 
   return (
     <div className="service--info">
@@ -306,6 +349,15 @@ function Serviceinfo(props) {
               </div>
             </div>
           </div>
+          <div className="contributor-name">
+                  Added by <span></span>
+                  {ownername}
+                </div>
+                {myserviceflag && (
+                  <div className="edit-place">
+                    <button className="editPlace--btn" onClick={handleEditClick}>Edit Service Info</button>
+                  </div>
+                )}
         </div>
       </div>
     </div>
