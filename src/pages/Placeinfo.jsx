@@ -81,8 +81,9 @@ function PlaceInfo() {
   const [curlat, setCurlat] = useState(null);
   const [curlon, setCurlon] = useState(null);
   const [showMap, setShowMap] = useState(false);
-  const [contributorname, setContributorName] = useState(false);
+  const [contributorname, setContributorName] = useState('');
   const [contributorflag, setContributorFlag] = useState(false);
+  const [servicecount,setServiceCount] =useState(0);
 
 
   const { slug } = useParams();
@@ -119,6 +120,31 @@ function PlaceInfo() {
     };
 
     fetchData().catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    const ServicesCount = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/hotel/my-hotels/",
+          {
+            headers: {
+              "Content-Type": "application/form-data",
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          }
+        );
+        const Mydata = response.data;
+        console.log('subscriber data:',Mydata);
+        console.log('mydata length:',Mydata.length);
+        setServiceCount(Mydata.length);
+        console.log('servicecount:',servicecount);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    ServicesCount().catch((error) => console.error(error));
   }, []);
 
   useEffect(() => {
@@ -219,10 +245,10 @@ function PlaceInfo() {
 
       const subscribedata = data;
       console.log("data", subscribedata);
-      if (subscribedata.is_subscribed == 0) {
-        alert("you are not subscribed");
-      } else {
+      if (subscribedata.is_subscribed > servicecount) {
         navigate("/addservices");
+      } else {
+        alert("you don't have enough subscription");
       }
     } catch (error) {
       console.log(error);

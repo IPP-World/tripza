@@ -170,7 +170,7 @@ export default function AddServices() {
     formData.append("latitude", maplat);
     formData.append("longitude", maplon);
     formData.append("rating", ratingValue);
-    formData.append("review",servicedesc.review);
+    formData.append("c_review",servicedesc.review);
     formData.append("price",servicedesc.price);
     formData.append("category",selectedOption);
 
@@ -254,7 +254,8 @@ export default function AddServices() {
 
         <div className="maps-container">
           <p className="contribute--addmap">Add place on map</p>
-          <MapSection onLocationSelect={handleLocationSelect} />
+          <MapSection onLocationSelect={handleLocationSelect} 
+            />
         </div>
       </div>
       <div className="right-part">

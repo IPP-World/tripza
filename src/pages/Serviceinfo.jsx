@@ -7,7 +7,7 @@ import Book from "./Book";
 import "./Serviceinfo.css";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { useParams } from 'react-router-dom'; 
+import { useParams,useNavigate } from 'react-router-dom'; 
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, useMap,LayersControl} from 'react-leaflet';
 import L from 'leaflet';
@@ -78,7 +78,7 @@ function Serviceinfo(props) {
   const [curlon,setCurlon]=useState(null);
   const [showMap, setShowMap] = useState(false);
   const {slug} = useParams();
-
+  const navigate=useNavigate();
   const [myserviceflag,setMyserviceFlag] = useState(false);
   const [ownername,setOwnerName] = useState();
 

@@ -189,12 +189,6 @@ export default function EditService() {
       alert("Please point location in the map");
       return;
     }
-    // setShowModal(true);
-
-    // console.log("selectedcategory:", selectedCategory);
-    // console.log("description:", placedesc);
-    // handleOffersSelected;
-
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -202,21 +196,6 @@ export default function EditService() {
       },
     };
 
-    // const body = JSON.stringify({
-    //   name: servicedesc.placeName,
-    //   location: servicedesc.location,
-    //   description: servicedesc.placeDescription,
-    //   review: servicedesc.review,
-    //   price:servicedesc.price,
-    //   latitude: maplat,
-    //   longitude: maplon,
-    //   category: selectedOption,
-    //   rating: ratingValue
-
-    //   // metalongitude: photolon,
-    //   // metalatitude: photolat,
-    //   // rating: ratingValue
-    // });
     const formData = new FormData();
     formData.append("name", servicedesc.placeName);
     formData.append("location", servicedesc.location);
@@ -224,7 +203,7 @@ export default function EditService() {
     formData.append("latitude", maplat);
     formData.append("longitude", maplon);
     formData.append("rating", ratingValue);
-    formData.append("review",servicedesc.review);
+    formData.append("c_review",servicedesc.review);
     formData.append("price",servicedesc.price);
     formData.append("category",selectedOption);
 
@@ -235,7 +214,7 @@ export default function EditService() {
 
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/hotel/`, formData, config)
+      .put(`${process.env.REACT_APP_API_URL}/api/hotel/${slug}/`, formData, config)
       .then((res) => {
         console.log(res);
         setShowModal(true);
@@ -268,7 +247,7 @@ export default function EditService() {
     <div className="contribute-container">
       <div className="left-part">
         <div className="contribute-text">
-          <h4>Add a service</h4>
+          <h4>Edit your service</h4>
         </div>
         <div className="contribute--add">
           <p>Add images</p>
@@ -308,7 +287,9 @@ export default function EditService() {
 
         <div className="maps-container">
           <p className="contribute--addmap">Add place on map</p>
-          <MapSection onLocationSelect={handleLocationSelect} />
+          <MapSection onLocationSelect={handleLocationSelect}
+           initialLatitude={maplat} 
+           initialLongitude={maplon} />
         </div>
       </div>
       <div className="right-part">

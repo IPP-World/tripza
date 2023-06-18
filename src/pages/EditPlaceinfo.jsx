@@ -209,7 +209,7 @@ const EditPlace = () => {
       <div className="contribute-container">
         <div className="left-part">
           <div className="contribute-text">
-            <h4>Contribute a place</h4>
+            <h4>Edit your place</h4>
           </div>
           <div className="contribute--add">
             <p>Add images</p>
@@ -246,8 +246,8 @@ const EditPlace = () => {
             <MapSection
               className="contribute--map"
               onLocationSelect={handleLocationSelect}
-              initialLatitude={maplat} // Add initial latitude
-              initialLongitude={maplon} // Add initial longitude
+              initialLatitude={maplat} 
+              initialLongitude={maplon} 
             />
           </div>
         </div>
